@@ -24,6 +24,10 @@ python -m venv .venv
 HEADLESS=0 .venv/Scripts/pytest -m ui             # visible browser (demo)
 SCREENSHOTS=all .venv/Scripts/pytest --html=reports/report.html --self-contained-html
 ```
+PowerShell sets the variables first: `$env:HEADLESS="0"; .venv\Scripts\pytest -m ui`.
+
+Known defects of Gitea are reported as `xfail` (DEF-01, DEF-02 – see `docs/defects.md`), so a
+complete run ends with `36 passed, 2 xfailed`.
 
 ## Layout
 | Directory | Contents |
@@ -47,8 +51,11 @@ Rubric (8 dimensions, 1–5 scale): [llm_judge/prompts/judge_rubric.md](llm_judg
 Results: `llm_judge/results/<view>.json` and `llm_judge/results/summary.md`.
 
 ### LLM-as-a-Judge – configuration
-1. Copy `.env.example` to `.env` (git-ignored) and set `ANTHROPIC_API_KEY=...`.
-2. Run `python -m llm_judge.judge`.
+No configuration is needed when Claude Code is installed and logged in (the `cli` backend).
+Optionally copy `.env.example` to `.env` (git-ignored) and set one of:
+- `ANTHROPIC_API_KEY=sk-ant-api...` – an Anthropic API key, uses the `api` backend,
+- `CLAUDE_CODE_OAUTH_TOKEN=sk-ant-oat...` – a token from `claude setup-token`, for the `cli`
+  backend on a machine where Claude Code is not logged in.
 
 Backend selection (`--backend` or `JUDGE_BACKEND`): `auto` (default) uses `api` (Anthropic SDK)
 when `ANTHROPIC_API_KEY` is set, otherwise `cli` – headless Claude Code (`claude -p`) with the
@@ -63,5 +70,14 @@ logged-in Claude Code account. `CLAUDE_BIN` points to the executable if it is no
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts\demo.ps1            # Gitea + 4 Selenium tests (visible browser) + judge of one view
 powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -SkipJudge
+powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -Distro Ubuntu    # Docker in another WSL distro
 ```
-The demo writes to `reports/demo.html` and `reports/demo_judge/` and never touches the committed results.
+Docker reachable from Windows (Docker Desktop) is used directly; otherwise Gitea runs in Docker
+inside the WSL distro (`-Distro`, default `Debian`). WSL shuts an idle distro down, which stops
+Gitea – keep a `wsl -d <distro>` terminal open during the demo. The demo writes to
+`reports/demo.html` and `reports/demo_judge/` and never touches the committed results.
+
+## Submission package
+```bash
+git archive --format=zip -o selenium_project.zip HEAD   # source code (D2) incl. LLM judge (D3)
+```
