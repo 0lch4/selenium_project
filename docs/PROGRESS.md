@@ -8,3 +8,4 @@
 - [x] LLM-as-a-Judge: capture 4 widoków, rubryka 8 wymiarów, judge (dry-run OK; ocena wymaga ANTHROPIC_API_KEY)
 - [x] CI/CD: GitHub Actions (funkcjonalne zielone; NF z continue-on-error przez DEF-02)
 - [x] Wykonanie: 38 wykonań – 36 passed, 1 failed (DEF-02), 1 xfail (DEF-01); zrzuty do raportu w docs/report/img
+- [x] Dokumentacja: funkcje MoSCoW, 22 przypadki testowe wg szablonu, macierz śledzenia
