@@ -21,7 +21,7 @@ class BasePage:
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
-        # Gitea przeładowuje stronę po akcjach fetch - elementy mogą chwilowo stać się nieaktualne
+        # Gitea reloads the page after fetch actions - elements may briefly become stale
         self.wait = WebDriverWait(driver, config.DEFAULT_TIMEOUT,
                                   ignored_exceptions=(StaleElementReferenceException,))
 

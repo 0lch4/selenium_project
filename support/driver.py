@@ -18,7 +18,7 @@ def make_driver(browser: str | None = None, headless: bool | None = None) -> web
         opts = webdriver.FirefoxOptions()
         factory = webdriver.Firefox
     else:
-        raise ValueError(f"Nieobsługiwana przeglądarka: {browser}")
+        raise ValueError(f"Unsupported browser: {browser}")
 
     if headless:
         opts.add_argument("--headless=new" if browser != "firefox" else "-headless")

@@ -1,7 +1,8 @@
-"""Konwertuje dokumenty projektu testów (Markdown) na fragmenty LaTeX dołączane do raportu.
+"""Converts the test design documents (Markdown) into LaTeX fragments included by the report.
 
-Obsługiwany podzbiór: nagłówki ##/###, tabele, akapity, **pogrubienie**, `kod`, [link](url).
-Uruchomienie:  python scripts/md_to_tex.py   ->  docs/report/generated/*.tex
+Supported subset: ##/### headings, tables, paragraphs, **bold**, `code`, [link](url).
+The generated text stays in Polish - the report is written for a Polish course.
+Usage:  python scripts/md_to_tex.py   ->  docs/report/generated/*.tex
 """
 import json
 import re
@@ -39,7 +40,7 @@ def inline(text: str) -> str:
 
 
 def table(rows: list[list[str]], small: bool = False, widths: list[float] | None = None) -> str:
-    """Tabela longtable; `widths` to udziały szerokości kolumn (sumują się do 1)."""
+    """A longtable; `widths` are column width fractions (summing to 1)."""
     header, body = rows[0], rows[1:]
     n = len(header)
     if widths is None:
@@ -51,7 +52,7 @@ def table(rows: list[list[str]], small: bool = False, widths: list[float] | None
             widths = [0.13] + [0.87 / (n - 1)] * (n - 1)
         else:
             widths = [1 / n] * n
-    # szerokość kolumny pomniejszona o odstępy międzykolumnowe, żeby tabela mieściła się w marginesach
+    # column width minus the inter-column padding so the table fits within the margins
     spec = "".join(rf"p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}" for w in widths)
     size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n > 8 else r"\small"
     lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
@@ -100,7 +101,7 @@ def convert(md: str, skip_until: str | None = None, stop_at: str | None = None,
 
 
 def llm_results() -> str:
-    """Tabela median z wyników LLM-as-a-Judge i rekomendacje o wysokim priorytecie."""
+    """Table of medians from the LLM-as-a-Judge results and the high-priority recommendations."""
     res = ROOT / "llm_judge" / "results"
     order = [v["id"] for v in json.loads((res / "input" / "views.json").read_text(encoding="utf-8"))]
     data = {v: json.loads((res / f"{v}.json").read_text(encoding="utf-8")) for v in order}
