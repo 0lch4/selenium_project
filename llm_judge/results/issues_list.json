@@ -1,0 +1,342 @@
+{
+  "aggregate": {
+    "view": "issues_list",
+    "backend": "cli",
+    "model": "claude-opus-5-5",
+    "runs": 3,
+    "dimensions": {
+      "visual_hierarchy": {
+        "scores": [
+          4,
+          4,
+          4
+        ],
+        "median": 4,
+        "spread": 0
+      },
+      "consistency": {
+        "scores": [
+          5,
+          5,
+          5
+        ],
+        "median": 5,
+        "spread": 0
+      },
+      "system_status": {
+        "scores": [
+          4,
+          4,
+          4
+        ],
+        "median": 4,
+        "spread": 0
+      },
+      "language_clarity": {
+        "scores": [
+          4,
+          4,
+          4
+        ],
+        "median": 4,
+        "spread": 0
+      },
+      "error_prevention": {
+        "scores": [
+          4,
+          4,
+          4
+        ],
+        "median": 4,
+        "spread": 0
+      },
+      "efficiency": {
+        "scores": [
+          4,
+          3,
+          4
+        ],
+        "median": 4,
+        "spread": 1
+      },
+      "minimalism": {
+        "scores": [
+          4,
+          4,
+          4
+        ],
+        "median": 4,
+        "spread": 0
+      },
+      "accessibility": {
+        "scores": [
+          3,
+          3,
+          3
+        ],
+        "median": 3,
+        "spread": 0
+      }
+    },
+    "mean": 4,
+    "max_spread": 1,
+    "verdict": "PASS"
+  },
+  "runs": [
+    {
+      "view": "issues_list",
+      "dimensions": [
+        {
+          "id": "visual_hierarchy",
+          "score": 4,
+          "evidence": "Clear top-down structure: repo header, tab bar with active 'Issues 4', a search/action row with the blue 'New Issue' as the only filled button, then the Open/Closed toggle and the filter row, then the issue list. Issue titles are bold and the label badges sit next to them. Rows are separated by thin dividers with even spacing.",
+          "justification": "The primary content (the issue list) and the primary action stand out, and grouping follows Gestalt proximity. Minor flaw: the filter dropdowns are pushed to the far right, away from the Open/Closed toggle, so the eye travels a long way across the 1440px width. Below the 4 issues there is a large empty area."
+        },
+        {
+          "id": "consistency",
+          "score": 5,
+          "evidence": "Tabs use icons and counters (Issues 4, Watching 1, Star 0, Fork 0). The green open-circle issue icon appears on every row. Labels are coloured pills. The filter dropdowns (Label, Milestone, Project, Author, Assignee, Type, Sort) all use the same caret style. The layout matches GitHub/GitLab conventions.",
+          "justification": "Components, icons and naming are consistent within the view and follow Git platform conventions closely, so users of other platforms will feel at home."
+        },
+        {
+          "id": "system_status",
+          "score": 4,
+          "evidence": "The 'Issues' tab is underlined and shows the counter 4. The '4 Open' toggle is highlighted against '1 Closed'. Each row shows a status icon, a number (#5, #3…) and 'opened now by judge-demo'. The breadcrumb 'judge-demo / web-shop' is visible. The 'Milestone' and 'Project' filters are greyed out.",
+          "justification": "Location and object state are clear. However, the greyed-out Milestone/Project filters give no reason for being disabled (probably none exist), and once a label filter is applied there is no visible chip showing it in this state. The selected state of '4 Open' is only a subtle background difference."
+        },
+        {
+          "id": "language_clarity",
+          "score": 4,
+          "evidence": "Labels are short and familiar: 'Search...', 'Labels', 'Milestones', 'New Issue', '4 Open', '1 Closed', 'Label', 'Author', 'Assignee', 'Type', 'Sort'. Badges read 'bug' and 'enhancement'. The footer includes technical info: 'Page: 7ms Template: 2ms'.",
+          "justification": "Labels are understandable to the target audience. Minor problems: 'Labels' (a button to manage labels) sits right next to the 'Label' filter, which can confuse. The search placeholder 'Search...' does not say what is searched or hint at syntax. Developer timing data in the footer is jargon for end users. The issue content is Polish but the UI is English, which is a configuration choice."
+        },
+        {
+          "id": "error_prevention",
+          "score": 4,
+          "evidence": "Row checkboxes and the select-all checkbox are visible, but no destructive bulk actions are shown until something is selected. Filters are dropdowns (recognition, not free input). Disabled filters (Milestone, Project) prevent choosing empty options.",
+          "justification": "There are few chances for error in a list view. Picking from dropdowns prevents typos. A minor gap is that the select-all checkbox is placed close to the Open/Closed toggle, which makes accidental selection possible. Bulk actions were not visible, so this cannot be fully assessed."
+        },
+        {
+          "id": "efficiency",
+          "score": 4,
+          "evidence": "For the task 'find open bugs': the list already defaults to '4 Open', and the red 'bug' badges on #3 and #1 can be spotted at a glance. The 'Label' dropdown filter is one click away. A search box with a button is available. There are 7 filter dropdowns plus Sort.",
+          "justification": "The task takes 1–2 steps (Label → bug), and the colour-coded badges support recognition over recall. Small improvement: there are no saved or quick filters, and the label badges in rows do not visibly act as filters (whether they are clickable can't be seen)."
+        },
+        {
+          "id": "minimalism",
+          "score": 4,
+          "evidence": "Dark theme with restrained decoration. Each row holds only the title, label, number, time and author. The header has RSS, Watching, Star and Fork buttons. The tab bar has 9 tabs plus Settings. The footer shows version and render times.",
+          "justification": "The view is clean overall and density suits a short list. Secondary elements (RSS icon, 9 repo tabs including likely empty Packages/Projects/Wiki, footer timings) add slight noise but don't compete with the list."
+        },
+        {
+          "id": "accessibility",
+          "score": 3,
+          "evidence": "Grey metadata text ('#5 opened now by judge-demo') and the disabled 'Milestone'/'Project' filters have low contrast on the dark background. Label pills use small (~11px) white text on bright green/red. Issue state is shown by a small green circle icon. Row checkboxes are about 13px. Counter badges ('4', '1', '0') are tiny.",
+          "justification": "Main text is legible, but several elements appear close to or below WCAG 1.4.3 contrast (white on #21ba45-like green is about 2.5:1) and the 2.5.8 target size (24px for checkboxes). Labels do carry text, so meaning doesn't rely on colour alone. Focus visibility can't be judged from a static screenshot."
+        }
+      ],
+      "strengths": [
+        "Follows Git platform conventions closely: Open/Closed toggle with counters, a filter bar and colour-coded label pills make the view instantly familiar",
+        "The task is quick to do: the list defaults to open issues, 'bug' badges are visible at a glance and the Label filter is one click away",
+        "Clear navigation status: active Issues tab with a counter, the repo breadcrumb and a highlighted Open state"
+      ],
+      "recommendations": [
+        {
+          "priority": "high",
+          "dimension": "accessibility",
+          "recommendation": "Raise the contrast of the metadata text, disabled filters and label pills (for example, darken the green 'enhancement' background or use dark text) to reach at least 4.5:1. Enlarge row checkboxes and their click areas to at least 24×24 px."
+        },
+        {
+          "priority": "medium",
+          "dimension": "system_status",
+          "recommendation": "When filters are applied, show active filter chips (e.g. 'label: bug ×') above the list. Add a tooltip to the disabled Milestone/Project filters explaining why they are unavailable (e.g. 'No milestones in this repository')."
+        },
+        {
+          "priority": "medium",
+          "dimension": "language_clarity",
+          "recommendation": "Tell apart the 'Labels' management button and the 'Label' filter, for example by renaming the button to 'Manage labels' or using an icon. Make the search placeholder more specific, e.g. 'Search issues by title, #number…'."
+        },
+        {
+          "priority": "low",
+          "dimension": "efficiency",
+          "recommendation": "Make label badges in rows act as clickable filters, with a visible cue. Consider saved or quick filters (e.g. 'Open bugs') for frequent queries."
+        },
+        {
+          "priority": "low",
+          "dimension": "minimalism",
+          "recommendation": "Hide the developer render timings in the footer and the repository tabs that have no content (Packages, Projects, Wiki) to cut visual noise."
+        }
+      ]
+    },
+    {
+      "view": "issues_list",
+      "dimensions": [
+        {
+          "id": "visual_hierarchy",
+          "score": 4,
+          "evidence": "The issue titles are bold and left-aligned, with metadata ('#3 opened now by judge-demo') in smaller grey text under each one. The filter bar (Label, Milestone, Project, Author, Assignee, Type, Sort) sits on the right, on the same row as the '4 Open / 1 Closed' toggle. 'New Issue' is the only filled blue button. More than half of the viewport below the 4 issues is empty.",
+          "justification": "The F-pattern scan works and the issues are clearly grouped. The filters are pushed to the far right, away from the list and the search box, so the eye has to jump across the page. That is a minor flaw."
+        },
+        {
+          "id": "consistency",
+          "score": 5,
+          "evidence": "Open/Closed state icons, the repo tabs with counters (Issues 4), and the Watch/Star/Fork buttons with counts all follow GitHub/Gitea conventions. Labels use the same pill component on every row: green for enhancement, red for bug. All dropdowns use the same caret style.",
+          "justification": "Components, icons and naming are consistent with each other and with Git platform conventions."
+        },
+        {
+          "id": "system_status",
+          "score": 4,
+          "evidence": "The 'Issues' tab is active, with an underline and the counter 4. The breadcrumb 'judge-demo / web-shop' is shown. The '4 Open' toggle is highlighted against '1 Closed'. Each row has a green open-state icon. The Label dropdown does not show whether any label filter is active.",
+          "justification": "Location and object states are clear. The difference between the active and inactive Open/Closed segments is subtle (a slightly lighter grey background), and from the filter bar alone it is hard to tell whether any filter is applied."
+        },
+        {
+          "id": "language_clarity",
+          "score": 4,
+          "evidence": "Labels are short and conventional: 'New Issue', 'Labels', 'Milestones', 'Author', 'Assignee', 'Sort'. 'opened now by judge-demo' reads clearly. The search placeholder is just 'Search...' and doesn't say what can be searched or that filter syntax is supported.",
+          "justification": "The wording is clear overall. The search placeholder is vague, and the UI is English while the issue content is Polish, which is a small mix of languages."
+        },
+        {
+          "id": "error_prevention",
+          "score": 4,
+          "evidence": "Milestone and Project are greyed out because none exist, which prevents empty filter choices. Selecting issues with the row checkboxes shows no destructive actions in this state.",
+          "justification": "There are few chances for error in a read/filter view. Disabling irrelevant filters is good practice. The disabled state is shown only by reduced contrast and gives no explanation."
+        },
+        {
+          "id": "efficiency",
+          "score": 3,
+          "evidence": "Finding open bugs means opening the 'Label' dropdown and choosing 'bug'. The 'bug' pills on #3 and #1 look like they can be clicked, but nothing shows that they act as filters. There are no quick filters or saved queries such as 'Open bugs', and the search box gives no hint about filter syntax.",
+          "justification": "The task takes 2–3 steps and the default Open state helps. Users have to find the Label dropdown among 7 grey text dropdowns that look the same. Recommendation: make label pills visibly clickable as filters and show active filters as removable chips."
+        },
+        {
+          "id": "minimalism",
+          "score": 4,
+          "evidence": "The dark theme is clean and has no decoration. The metadata line is concise. The filter row shows 7 dropdowns even though two are disabled. The footer shows technical data ('Page: 7ms Template: 2ms').",
+          "justification": "The design is minimal overall. The disabled filters and the render-time stats in the footer are small bits of noise."
+        },
+        {
+          "id": "accessibility",
+          "score": 3,
+          "evidence": "The disabled 'Milestone' and 'Project' items are dark grey on near-black and have very low contrast. The grey metadata text ('#5 opened now by judge-demo') is moderately low in contrast. The white 'enhancement' text on green is small, about 11px. The row checkboxes are small, roughly 13px, which is close to the WCAG 2.5.8 minimum of 24px. Issue state is shown with both an icon and the counter, not colour alone.",
+          "justification": "The main text is legible, but several secondary elements and the small label pills risk failing WCAG 1.4.3. The small checkbox targets also make clicking harder. Fix: increase the contrast of secondary text and pills, and enlarge the checkbox hit areas."
+        }
+      ],
+      "strengths": [
+        "Clear state visibility: the active Issues tab with its counter, the '4 Open / 1 Closed' toggle and open-state icons on each row",
+        "Follows Git platform conventions (GitHub-like layout, label pills, Watch/Star/Fork), so it feels familiar",
+        "Clean, scannable list where the coloured 'bug' labels stand out next to the titles"
+      ],
+      "recommendations": [
+        {
+          "priority": "high",
+          "dimension": "accessibility",
+          "recommendation": "Increase the contrast of disabled filters, grey metadata text and small label pill text to at least 4.5:1. Enlarge the row checkbox hit areas to 24×24px."
+        },
+        {
+          "priority": "medium",
+          "dimension": "efficiency",
+          "recommendation": "Make label pills clickable as filters, with a visible affordance or tooltip. Show active filters as removable chips above the list, and consider quick filters such as 'Open bugs'."
+        },
+        {
+          "priority": "medium",
+          "dimension": "visual_hierarchy",
+          "recommendation": "Move the filter dropdowns closer to the search bar or the start of the list, and make the active Open/Closed segment stand out more clearly."
+        },
+        {
+          "priority": "low",
+          "dimension": "language_clarity",
+          "recommendation": "Make the search placeholder more specific, e.g. 'Search issues by title, label, author…'."
+        },
+        {
+          "priority": "low",
+          "dimension": "minimalism",
+          "recommendation": "Hide filters that don't apply (no milestones or projects), or explain them with a tooltip, and move the render-time stats out of the footer."
+        }
+      ]
+    },
+    {
+      "view": "issues_list",
+      "dimensions": [
+        {
+          "id": "visual_hierarchy",
+          "score": 4,
+          "evidence": "The issue titles are bold and left-aligned with the meta line '#5 opened now by judge-demo' under each one. The filter bar (Label, Milestone, Project, Author, Assignee, Type, Sort) is right-aligned on the same row as the '4 Open / 1 Closed' toggle. 'New Issue' is the only filled blue button.",
+          "justification": "The F-pattern scanning works and the rows are clearly separated by dividers. The list fills only the upper ~55% of the screen and leaves a large empty area below it. The filter dropdowns sit far from the list's left edge, so a user scanning down the left side may not notice them right away."
+        },
+        {
+          "id": "consistency",
+          "score": 5,
+          "evidence": "The repo tabs (Code, Issues 4, Pull Requests…) carry icons. The open-issue icons are green circles. Labels are coloured pills ('bug' red, 'enhancement' green). The Open/Closed toggle follows the GitHub convention.",
+          "justification": "All components, icons and colours follow one style throughout and match the conventions of established Git platforms (GitHub/GitLab), so users can rely on what they already know."
+        },
+        {
+          "id": "system_status",
+          "score": 4,
+          "evidence": "The 'Issues' tab is underlined and shows the counter 4. The breadcrumb 'judge-demo / web-shop' is visible. The '4 Open' segment is highlighted next to '1 Closed'.",
+          "justification": "It is clear where the user is and how many issues are open or closed. However, the Label dropdown gives no sign of whether a label filter is active. The 'Milestone' and 'Project' filters are greyed out without any explanation, which may suggest an error."
+        },
+        {
+          "id": "language_clarity",
+          "score": 4,
+          "evidence": "Labels: 'Labels', 'Milestones', 'New Issue', '4 Open', '1 Closed', 'Sort'. The meta line reads 'opened now by judge-demo'. The search placeholder is just 'Search...'.",
+          "justification": "The labels are short and standard. Two small flaws: the 'Search...' placeholder does not say what is searched or that a syntax is available, and the issue content is in Polish while the UI is in English."
+        },
+        {
+          "id": "error_prevention",
+          "score": 4,
+          "evidence": "The view contains no destructive actions. Each row has a checkbox, plus a 'select all' checkbox at the top left. The inactive filters (Milestone, Project) are disabled.",
+          "justification": "This is a read-only browsing view with little risk of error. Disabling filters that would return nothing prevents empty results. No bulk-action controls are visible, so the risk from selecting items cannot be assessed."
+        },
+        {
+          "id": "efficiency",
+          "score": 4,
+          "evidence": "The default view shows open issues. The 'Label' dropdown sits in the filter bar. The 'bug' labels are visible directly in the list.",
+          "justification": "With 4 issues, a user can find the bugs by eye. Filtering takes two clicks (Label → bug). However, the labels in the list do not appear to be clickable shortcuts to a filter, and the screenshot shows no saved filters or 'bug' quick filter."
+        },
+        {
+          "id": "minimalism",
+          "score": 4,
+          "evidence": "Each row has only the title, label, number and author. The footer shows 'Page: 7ms Template: 2ms' and 'Powered by Gitea Version: 28.3.0'.",
+          "justification": "The layout is clean and has no clutter. The technical timing data in the footer is developer noise that means nothing to the user. The density is appropriate for the task."
+        },
+        {
+          "id": "accessibility",
+          "score": 3,
+          "evidence": "The meta text '#5 opened now by judge-demo' and the disabled filters 'Milestone' and 'Project' are grey on a dark background. The 'bug' label has white text on a red background. The row checkboxes are small (~14 px). The open status is signalled mainly by a green icon.",
+          "justification": "The grey secondary text and disabled filters probably have contrast near or below 4.5:1. The checkboxes are close to the minimum target size (WCAG 2.5.8). The labels are readable because they include text, so they do not rely on colour alone. Open status is backed up by the text in the '4 Open' toggle but not in each row. Focus visibility cannot be assessed from a static screenshot."
+        }
+      ],
+      "strengths": [
+        "Follows Git platform conventions (Open/Closed toggle, coloured labels, tabs with counters), so it is easy to learn quickly",
+        "Coloured, text-labelled labels ('bug', 'enhancement') next to the titles let users spot bugs quickly without filtering",
+        "Clear, sparse list layout with a well-highlighted primary action, 'New Issue'"
+      ],
+      "recommendations": [
+        {
+          "priority": "high",
+          "dimension": "accessibility",
+          "recommendation": "Raise the contrast of the secondary text (the issue meta line) and the disabled filters to at least 4.5:1. Enlarge the row checkboxes' click area to at least 24×24 px."
+        },
+        {
+          "priority": "medium",
+          "dimension": "efficiency",
+          "recommendation": "Make the label pills in the list clickable so they apply a filter (e.g. clicking 'bug' filters by that label). Consider adding quick filters for frequently used labels."
+        },
+        {
+          "priority": "medium",
+          "dimension": "system_status",
+          "recommendation": "Show active filters as removable chips above the list. Add a tooltip to the disabled Milestone/Project filters explaining why they are inactive (e.g. 'No milestones in this repository')."
+        },
+        {
+          "priority": "low",
+          "dimension": "language_clarity",
+          "recommendation": "Make the search placeholder more specific, e.g. 'Search issues by title or content…', and link to a hint about the query syntax."
+        },
+        {
+          "priority": "low",
+          "dimension": "minimalism",
+          "recommendation": "Hide the technical timing data ('Page: 7ms Template: 2ms') in the footer from regular users."
+        }
+      ]
+    }
+  ]
+}
