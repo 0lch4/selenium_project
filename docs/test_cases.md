@@ -407,7 +407,7 @@ Warunki końcowe: wyniki w `reports/page_load.json`.
 | 3 | Zapisz podsumowanie do `reports/axe.json` | Plik zawiera id, wpływ i liczbę węzłów |
 | 4 | Sprawdź naruszenia o wpływie `critical` | Brak naruszeń krytycznych |
 
-Warunki końcowe: raport dostępności zapisany. **Wynik: niezaliczony – DEF-02.**
+Warunki końcowe: raport dostępności zapisany. **Wynik: niezaliczony – DEF-02** (w automatyzacji oznaczony jako znany defekt, `xfail`).
 
 ### TC-NF04 – Podstawowe zabezpieczenia aplikacji webowej
 | Pole | Wartość |
@@ -505,6 +505,6 @@ Pokrycie funkcji: 11/14 (79%); Must 7/7 (100%), Should 3/3 (100%), Could 1/3, Wo
 | TC-F17 | Token API | Średni | Klasy równoważności | Systemowy / API | F12 | requests | Zaliczony |
 | TC-NF01 | Czas odpowiedzi pod obciążeniem | Wysoki | Test obciążeniowy | Systemowy | F04, F05, F10 | Locust | Zaliczony |
 | TC-NF02 | Czas ładowania stron | Średni | Pomiar Navigation Timing | Systemowy / UI | F02, F04, F05, F10 | Selenium | Zaliczony |
-| TC-NF03 | WCAG 2.1 AA | Średni | Lista kontrolna (axe) | Systemowy / UI | F01, F02, F04, F05 | Selenium + axe | **Niezaliczony (DEF-02)** |
+| TC-NF03 | WCAG 2.1 AA | Średni | Lista kontrolna (axe) | Systemowy / UI | F01, F02, F04, F05 | Selenium + axe | **Niezaliczony (DEF-02, xfail)** |
 | TC-NF04 | Zabezpieczenia aplikacji | Wysoki | Lista kontrolna (ASVS) | Systemowy | F02, F07 | requests | Zaliczony (DEF-01 xfail) |
 | TC-NF05 | Kompatybilność przeglądarek | Średni | Test sparametryzowany | Systemowy / UI | F02, F03 | Selenium | Zaliczony |

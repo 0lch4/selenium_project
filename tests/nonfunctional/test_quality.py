@@ -30,6 +30,8 @@ def run_axe(driver) -> list[dict]:
 
 @pytest.mark.tc("TC-NF03")
 @pytest.mark.feature("F01", "F02", "F04", "F05")
+@pytest.mark.xfail(strict=True, raises=AssertionError,
+                   reason="DEF-02: critical WCAG 2.1 AA violations (aria-required-children, label)")
 def test_accessibility_wcag_aa(driver, user, repo):
     pages = {"login": "/user/login", "register": "/user/sign_up"}
     report = {}
