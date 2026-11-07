@@ -1,0 +1,462 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{img/}{../../llm_judge/results/input/}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{3em}
+
+\definecolor{codebg}{RGB}{246,246,246}
+\lstset{
+  basicstyle=\ttfamily\footnotesize, backgroundcolor=\color{codebg}, frame=single,
+  rulecolor=\color{gray!40}, breaklines=true, columns=fullflexible, keepspaces=true,
+  showstringspaces=false, keywordstyle=\color{blue!60!black}\bfseries,
+  commentstyle=\color{green!40!black}\itshape, stringstyle=\color{red!50!black},
+  literate={ą}{{\k{a}}}1 {ć}{{\'c}}1 {ę}{{\k{e}}}1 {ł}{{\l{}}}1 {ń}{{\'n}}1 {ó}{{\'o}}1
+           {ś}{{\'s}}1 {ź}{{\'z}}1 {ż}{{\.z}}1 {Ą}{{\k{A}}}1 {Ć}{{\'C}}1 {Ę}{{\k{E}}}1
+           {Ł}{{\L{}}}1 {Ń}{{\'N}}1 {Ó}{{\'O}}1 {Ś}{{\'S}}1 {Ź}{{\'Z}}1 {Ż}{{\.Z}}1
+           {–}{{--}}1 {≥}{{$\geq$}}1 {×}{{$\times$}}1
+}
+
+\begin{document}
+
+% ------------------------------------------------------------------ strona tytułowa
+\begin{titlepage}
+\centering
+{\large Politechnika Wrocławska\par}
+\vspace{0.5cm}
+{\large Testowanie i jakość oprogramowania (04TIN2-25S302O05245G)\par}
+\vspace{3cm}
+{\Huge\bfseries Projekt 1: Selenium\par}
+\vspace{0.6cm}
+{\LARGE Strategia testów i kampania testowa aplikacji Gitea 28.3.0\par}
+\vspace{0.6cm}
+{\large Raport z testów\par}
+\vfill
+{\large
+\begin{tabular}{l}
+\textbf{Zespół:} \\
+{[Imię Nazwisko, nr albumu]} \\
+{[Imię Nazwisko, nr albumu]} \\
+{[Imię Nazwisko, nr albumu]} \\
+{[Imię Nazwisko, nr albumu]} \\[1em]
+\textbf{Prowadzący:} [tytuł, imię i nazwisko] \\
+\textbf{Termin zajęć:} [dzień, godzina]
+\end{tabular}\par}
+\vspace{2cm}
+{\large Wrocław, rok akademicki 2026/2027\par}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------ 1
+\section{Wprowadzenie i cel projektu}
+
+\subsection{Kontekst i przedmiot testów}
+\textbf{Przedmiotem testów} jest \textbf{Gitea 28.3.0} -- otwartoźródłowa (licencja MIT),
+samodzielnie hostowana platforma do współpracy nad kodem: repozytoria Git, zgłoszenia (issues),
+pull requesty, wiki, zarządzanie uprawnieniami oraz pełne REST API. Aplikacja jest napisana
+w Go, ma warstwę webową (szablony + komponenty Vue) i bazę danych, a więc zawiera rozbudowaną
+logikę aplikacyjną, a nie tylko statyczne strony. Gitea jest szeroko wykorzystywana przez firmy,
+uczelnie i projekty open source jako lekka alternatywa dla GitHub/GitLab, dlatego jej poprawność,
+bezpieczeństwo kontroli dostępu i użyteczność mają realne znaczenie dla użytkowników.
+
+Wersja jest przypięta do obrazu \texttt{gitea/gitea:28.3.0} (repozytorium źródłowe:
+\url{https://github.com/go-gitea/gitea}), uruchamianego lokalnie przez Docker Compose
+(baza SQLite). Dzięki temu \textbf{środowisko testowe} jest powtarzalne lokalnie i w CI.
+
+\subsection{Cel projektu}
+Celem projektu jest opracowanie \textbf{strategii testów} oraz realizacja kampanii testowej:
+analiza produktu, projekt i automatyzacja przypadków testowych funkcjonalnych
+i niefunkcjonalnych, ich wykonanie, ocena UI/UX metodą \emph{LLM-as-a-Judge} oraz
+raportowanie wyników zgodnie z nomenklaturą ISTQB CTFL 4.0.
+
+\subsection{Cele testowania}
+\begin{itemize}
+  \item weryfikacja, czy funkcje o priorytecie \emph{Must} i \emph{Should} działają zgodnie
+        z oczekiwaniami (podstawą testów jest dokumentacja Gitea i specyfikacja REST API),
+  \item wykrycie defektów w obszarach o najwyższym ryzyku produktowym: uwierzytelnianie,
+        kontrola dostępu do repozytoriów prywatnych, przepływ issue/pull request,
+  \item ocena wybranych charakterystyk jakości wg ISO/IEC 25010: wydajności, bezpieczeństwa,
+        zdolności do interakcji (dostępności) i kompatybilności,
+  \item dostarczenie informacji interesariuszom (raport, rejestr defektów) i zbudowanie
+        powtarzalnego zestawu testów regresji uruchamianego w CI.
+\end{itemize}
+
+\subsection{Zakres prac}
+\textbf{W zakresie:} funkcje F01--F10 i F12 (zob. rozdz.~\ref{sec:analiza}); testowanie systemowe
+przez interfejs przeglądarki (Selenium WebDriver) i REST API; testy niefunkcjonalne;
+LLM-as-a-Judge dla 4 widoków; pipeline CI w GitHub Actions.
+
+\textbf{Poza zakresem:} Gitea Actions (F14), organizacje i wiki (F11, F13 -- świadomie
+niepokryte, ryzyko rezydualne), operacje Git przez SSH/HTTP (klient \texttt{git}),
+migracje danych, testy pielęgnowalności kodu źródłowego Gitei, testy na urządzeniach mobilnych.
+
+\subsection{Podejście (strategia testów)}
+Zastosowano \textbf{testowanie oparte na ryzyku}: priorytet przypadku wynika z priorytetu
+MoSCoW funkcji. Przypadki zaprojektowano technikami czarnoskrzynkowymi (podział na klasy
+równoważności, analiza wartości brzegowych, tablica decyzyjna, testowanie przejść między
+stanami), technikami opartymi na doświadczeniu (zgadywanie błędów, listy kontrolne) oraz
+testowaniem opartym na kryteriach akceptacji. Wszystkie testy są na \textbf{poziomie testów
+systemowych}; stan systemu przygotowywany jest przez API (szybkie i stabilne warunki wstępne),
+a weryfikacja odbywa się w UI i dodatkowo przez API (podwójna wyrocznia testowa).
+\textbf{Kryteria wyjścia:} 100\% przypadków wykonanych, wszystkie przypadki o priorytecie
+wysokim zaliczone lub z zarejestrowanym defektem, brak otwartych defektów krytycznych
+w funkcjach \emph{Must}.
+
+% ------------------------------------------------------------------ 2
+\section{Analiza produktu}\label{sec:analiza}
+Funkcje zidentyfikowano na podstawie dokumentacji, interfejsu aplikacji i specyfikacji
+REST API (\texttt{/api/swagger}). Priorytety nadano metodą \textbf{MoSCoW}
+(\emph{Must have}, \emph{Should have}, \emph{Could have}, \emph{Won't have}).
+
+\input{generated/features}
+
+% ------------------------------------------------------------------ 3
+\section{Macierz śledzenia}
+Macierz śledzenia przedstawia dwukierunkowe powiązanie między funkcjami (elementami
+podstawy testów) a przypadkami testowymi. W kodzie powiązanie jest utrzymywane markerami
+\texttt{@pytest.mark.tc("TC-...")} i \texttt{@pytest.mark.feature("F..")}, więc każdy wynik
+wykonania można przypisać do funkcji.
+
+\input{generated/traceability}
+
+% ------------------------------------------------------------------ 4
+\section{Przypadki testowe}
+Poniżej znajduje się 17 przypadków funkcjonalnych (12 realizowanych przez UI z Selenium,
+5 przez REST API) i 5 niefunkcjonalnych (w tym 2 wydajnościowe) w ustalonym szablonie.
+Źródło: \texttt{docs/test\_cases.md}.
+
+\input{generated/test_cases}
+
+% ------------------------------------------------------------------ 5
+\section{Implementacja automatyzacji}
+
+\subsection{Środowisko i narzędzia}
+\begin{longtable}{p{0.3\linewidth}p{0.63\linewidth}}
+\toprule \textbf{Element} & \textbf{Wybór} \\ \midrule \endhead
+Język & Python 3.11 \\
+Framework testowy & pytest 8.3 (fixtures, parametryzacja, markery) \\
+Automatyzacja UI & Selenium WebDriver 4.50 (Chrome 157, Edge; tryb headless), Selenium Manager \\
+Testy API & \texttt{requests} 2.32 \\
+Wydajność & Locust 2.32 (obciążenie), Navigation Timing API (czas ładowania) \\
+Dostępność & axe-core 4.10.2 wstrzykiwany przez Selenium \\
+Raportowanie & pytest-html 4.1 (z zrzutami ekranu), JUnit XML \\
+LLM-as-a-Judge & Claude Opus 5.5 (\texttt{claude-opus-5-5}): Anthropic SDK lub Claude Code CLI; pydantic 2 \\
+Przedmiot testów & Gitea 28.3.0 w Docker Compose (WSL2 lokalnie, Ubuntu w CI) \\
+CI/CD & GitHub Actions (2 joby, artefakty z raportami) \\
+\bottomrule
+\end{longtable}
+
+\subsection{Architektura rozwiązania}
+\begin{itemize}
+  \item \texttt{support/} -- konfiguracja (zmienne środowiskowe), fabryka WebDrivera,
+        cienki klient REST API wykorzystywany do przygotowania danych i w testach API;
+  \item \texttt{pages/} -- \textbf{Page Object Model}: każdy widok ma klasę z lokatorami
+        i akcjami biznesowymi, testy nie zawierają selektorów;
+  \item \texttt{conftest.py} -- fixtures: administrator API, użytkownik testowy (sesja),
+        świeży użytkownik, repozytorium, zalogowana przeglądarka; hook dołączający zrzuty
+        ekranu do raportu;
+  \item \texttt{tests/ui}, \texttt{tests/api}, \texttt{tests/nonfunctional} -- skrypty testowe;
+  \item \texttt{perf/locustfile.py} -- profil obciążenia; \texttt{llm\_judge/} -- moduł oceny UI/UX;
+  \item \texttt{.github/workflows/tests.yml} -- pipeline CI.
+\end{itemize}
+
+\subsection{Najważniejsze fragmenty implementacji}
+\textbf{Bazowy Page Object} -- jawne oczekiwania (\emph{explicit waits}) odporne na przeładowania
+strony wykonywane przez Gitea po akcjach \texttt{fetch}:
+\begin{lstlisting}[language=Python]
+class BasePage:
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, config.DEFAULT_TIMEOUT,
+                                  ignored_exceptions=(StaleElementReferenceException,))
+    def click(self, loc):
+        self.wait.until(EC.element_to_be_clickable(loc)).click()
+    def error_text(self) -> str:
+        return self.visible(self.FLASH_ERROR).text
+\end{lstlisting}
+
+\textbf{Przygotowanie danych przez API i sprzątanie} (fixtures z \texttt{yield}):
+\begin{lstlisting}[language=Python]
+@pytest.fixture(scope="session")
+def user(admin_api):
+    u = admin_api.create_user()          # POST /api/v1/admin/users
+    yield u
+    admin_api.delete_user(u["username"]) # purge=true
+
+@pytest.fixture
+def logged_in(driver, user):
+    page = LoginPage(driver).open().login(user["username"], user["password"])
+    page.visible(page.NAV_AVATAR)
+    return driver
+\end{lstlisting}
+
+\textbf{Test UI z podwójną wyrocznią} (TC-F08, przejścia między stanami):
+\begin{lstlisting}[language=Python]
+page.toggle_status(comment="Naprawione")
+assert user_api.get(f"/repos/{full}/issues/{number}").json()["state"] == "closed"
+assert page.status_button_text() == "Reopen Issue"
+\end{lstlisting}
+
+\textbf{Tablica decyzyjna jako parametryzacja} (TC-F14):
+\begin{lstlisting}[language=Python]
+ACCESS_TABLE = [("public", "owner", 200), ("public", "other", 200),
+                ("public", "anonymous", 200), ("private", "owner", 200),
+                ("private", "other", 404), ("private", "anonymous", 404)]
+
+@pytest.mark.parametrize("visibility, role, expected", ACCESS_TABLE)
+def test_repository_visibility_decision_table(user_api, fresh_user, visibility, role, expected):
+    ...
+\end{lstlisting}
+
+\textbf{Dostępność} -- wstrzyknięcie axe-core i asynchroniczne wywołanie w przeglądarce:
+\begin{lstlisting}[language=Python]
+driver.execute_script(AXE)
+violations = driver.execute_async_script(
+    "const done = arguments[arguments.length - 1];"
+    "axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a','wcag2aa','wcag21aa']}})"
+    ".then(r => done(r.violations));")
+\end{lstlisting}
+
+\textbf{Wydajność} -- profil operacyjny w Locust i kryteria akceptacji w teście:
+\begin{lstlisting}[language=Python]
+class GiteaReader(HttpUser):
+    wait_time = between(0.5, 1.5)
+    @task(3)
+    def api_repo(self):
+        self.client.get(f"/api/v1/repos/{REPO}", name="API repo")
+# test: 20 użytkowników, narastanie 5/s, 30 s; p95 < 500 ms, 0% błędów, >= 10 req/s
+\end{lstlisting}
+
+\textbf{CI} -- ten sam skrypt uruchamia przedmiot testów lokalnie i w GitHub Actions:
+\begin{lstlisting}
+- name: Uruchom Gitea (przedmiot testów)
+  run: bash scripts/bootstrap.sh
+- run: pytest -m "not nonfunctional" --junitxml=reports/junit-functional.xml
+         --html=reports/functional.html --self-contained-html
+\end{lstlisting}
+
+% ------------------------------------------------------------------ 6
+\section{Wyniki wykonania testów automatycznych}
+Testy wykonano 2026-11-07 lokalnie (Windows 11, Chrome 157 headless, Edge) oraz w GitHub
+Actions (Ubuntu, Chrome). Zrzut ekranu stanu końcowego każdego testu UI zapisywany jest przy
+\texttt{SCREENSHOTS=all} i dołączany do raportu pytest-html.
+
+\input{generated/results}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\linewidth]{pytest_html_report.png}
+\caption{Raport pytest-html z pełnego przebiegu (38 wykonań).}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.85\linewidth]{github_actions_run.png}
+\caption{Przebieg GitHub Actions: job funkcjonalny zaliczony; job niefunkcjonalny niezaliczony
+przez TC-NF03 (DEF-02) -- oznaczony \texttt{continue-on-error}, więc przebieg ma status \emph{Success}.}
+\end{figure}
+
+\begin{figure}[H]\centering
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{tc_f04_login_error.png}
+\caption{TC-F04: komunikat po błędnym haśle.}
+\end{minipage}\hfill
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{tc_f02_password_7.png}
+\caption{TC-F02: hasło 7-znakowe odrzucone.}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]\centering
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{tc_f05_repo_readme.png}
+\caption{TC-F05: repozytorium z README.}
+\end{minipage}\hfill
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{tc_f07_issue_label.png}
+\caption{TC-F07: zgłoszenie z etykietą \texttt{bug}.}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[H]\centering
+\includegraphics[width=0.7\linewidth]{tc_f10_pr_merged.png}
+\caption{TC-F10: scalony pull request.}
+\end{figure}
+
+\subsection{Defekty i obserwacje}
+\input{generated/defects}
+
+% ------------------------------------------------------------------ 7
+\section{Wyniki LLM-as-a-Judge}
+
+\subsection{Architektura}
+Rozwiązanie jest powtarzalnym potokiem złożonym z dwóch etapów:
+\begin{enumerate}
+  \item \textbf{Capture} (\texttt{llm\_judge/capture.py}) -- przez API tworzony jest stały zestaw
+        danych demonstracyjnych (użytkownik, repozytorium ze strukturą plików, 5 zgłoszeń z etykietami),
+        następnie Selenium wykonuje zrzuty 4 widoków w stałej rozdzielczości 1440$\times$900 i zapisuje
+        kontekst każdego widoku (URL, cel, typowe zadanie użytkownika) do \texttt{views.json}.
+  \item \textbf{Judge} (\texttt{llm\_judge/judge.py}) -- dla każdego widoku model językowy otrzymuje
+        \emph{prompt systemowy z rubryką} (osobny plik \texttt{llm\_judge/prompts/judge\_rubric.md}),
+        zrzut ekranu i kontekst; odpowiedź jest wymuszona schematem JSON i walidowana modelem
+        \texttt{pydantic} (dokładnie 8 wymiarów, ocena całkowita 1--5, dowód i uzasadnienie);
+        każdy widok oceniany jest w \textbf{3 niezależnych przebiegach}, a wynik agregowany medianą
+        z miarą rozrzutu (max -- min).
+\end{enumerate}
+
+Zaimplementowano dwa wymienne \textbf{backendy} wywołania modelu (wybór \texttt{--backend},
+domyślnie \texttt{auto}):
+\begin{itemize}
+  \item \texttt{api} -- Anthropic SDK (\texttt{client.beta.messages.parse}) z obrazem w bloku
+        \texttt{image} (base64), \emph{structured outputs} na podstawie klasy pydantic, cache'owanym
+        promptem systemowym i serwerowym mechanizmem \emph{fallback} przy odmowie modelu;
+        wymaga klucza \texttt{ANTHROPIC\_API\_KEY} (plik \texttt{.env}),
+  \item \texttt{cli} -- bezgłowe wywołanie Claude Code (\texttt{claude -p --output-format json
+        --json-schema ... --tools Read}); model odczytuje plik PNG narzędziem \texttt{Read},
+        a wynik jest ograniczony tym samym schematem JSON i walidowany tym samym modelem pydantic.
+\end{itemize}
+W obu przypadkach sędzią jest ten sam model (\texttt{claude-opus-5-5}). Werdykt widoku:
+\textbf{PASS}, gdy średnia z median $\geq 3{,}5$ i żaden wymiar nie ma mediany $< 2$.
+
+\subsection{Rubryka oceny i skala}
+Rubryka obejmuje 8 wymiarów opartych o \textbf{heurystyki użyteczności Nielsena} (H1--H10)
+oraz kryteria sukcesu \textbf{WCAG 2.2}; prompt i wyniki są w języku angielskim.
+
+\begin{longtable}{p{0.2\linewidth}p{0.2\linewidth}p{0.52\linewidth}}
+\toprule \textbf{Wymiar (id)} & \textbf{Podstawa} & \textbf{Co oceniano} \\ \midrule \endhead
+\texttt{visual\_hierarchy} & Gestalt, wzorzec F & dominacja głównej akcji, grupowanie, wyrównanie, odstępy \\
+\texttt{consistency} & Nielsen H4 & spójność komponentów, ikon, kolorów i nazewnictwa z konwencjami platform Git \\
+\texttt{system\_status} & Nielsen H1 & widoczność położenia użytkownika i stanu obiektów (open/closed, liczniki) \\
+\texttt{language\_clarity} & Nielsen H2, WCAG 3.3.2 & zrozumiałość etykiet, przycisków, komunikatów \\
+\texttt{error\_prevention} & Nielsen H5, H9 & oznaczenie pól wymaganych, podpowiedzi, ostrożność przy akcjach nieodwracalnych \\
+\texttt{efficiency} & Nielsen H6, H7 & liczba kroków, skróty i filtry, rozpoznawanie zamiast przypominania \\
+\texttt{minimalism} & Nielsen H8 & brak zbędnych elementów, adekwatna gęstość informacji \\
+\texttt{accessibility} & WCAG 1.4.3, 1.4.11, 2.4.7, 2.5.8 & kontrast, rozmiar celów, czytelność, nieopieranie się na kolorze \\
+\bottomrule
+\end{longtable}
+
+\begin{longtable}{p{0.15\linewidth}p{0.77\linewidth}}
+\toprule \textbf{Ocena} & \textbf{Kotwica} \\ \midrule \endhead
+5 -- wzorcowo & brak uwag; przykład dobrej praktyki \\
+4 -- dobrze & drobne niedociągnięcia kosmetyczne, bez wpływu na zadanie \\
+3 -- akceptowalnie & zauważalne problemy spowalniające część użytkowników; zadanie wykonalne \\
+2 -- słabo & poważne problemy; użytkownik prawdopodobnie popełni błąd \\
+1 -- krytycznie & problem blokujący zadanie lub wykluczający grupę użytkowników \\
+\bottomrule
+\end{longtable}
+
+Reguły w prompcie ograniczają typowe błędy sędziów LLM: każda ocena musi mieć dowód widoczny na
+zrzucie, ocena $\leq 3$ wymaga wskazania problemu i rekomendacji, zakaz zawyżania ocen i ocenianie
+wymiarów niezależnie (przeciwdziałanie efektowi aureoli).
+
+\subsection{Oceniane widoki}
+\begin{figure}[H]\centering
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{login.png}
+\caption{\texttt{login} -- logowanie.}
+\end{minipage}\hfill
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{repo_home.png}
+\caption{\texttt{repo\_home} -- strona repozytorium.}
+\end{minipage}
+\end{figure}
+\begin{figure}[H]\centering
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{issues_list.png}
+\caption{\texttt{issues\_list} -- lista zgłoszeń.}
+\end{minipage}\hfill
+\begin{minipage}{0.49\linewidth}\centering
+\includegraphics[width=\linewidth]{new_issue.png}
+\caption{\texttt{new\_issue} -- formularz nowego zgłoszenia.}
+\end{minipage}
+\end{figure}
+
+\subsection{Wyniki i werdykt}
+\input{generated/llm_results}
+
+\textbf{Interpretacja.} Wszystkie 4 widoki otrzymały werdykt \textbf{PASS} (średnie median
+3,75--4,0); żaden wymiar nie spadł poniżej 3. Najsłabszym wymiarem jest \texttt{accessibility}
+-- mediana 3 na każdym widoku, przy zerowym rozrzucie między przebiegami. Sędzia wskazywał
+niski kontrast tekstu drugorzędnego w motywie ciemnym oraz zbyt małe cele klikalne
+(np.~pola wyboru wierszy), co jest zgodne z wynikiem obiektywnego testu TC-NF03
+(axe-core: \texttt{color-contrast}, DEF-02/OBS-02). Drugi powtarzający się obszar to
+\texttt{error\_prevention} i \texttt{language\_clarity} w formularzach: brak oznaczenia
+wymaganego pola tytułu i mylący placeholder ,,Leave a comment'' w formularzu nowego zgłoszenia
+oraz niespójne oznaczenie pól wymaganych na stronie logowania. Najwyżej oceniono
+\texttt{efficiency} i \texttt{consistency} (konwencje znane z platform Git, liczniki, filtry).
+Rozrzut ocen wynosił co najwyżej 1 punkt, a w 25 z 32 komórek był zerowy, co wskazuje na
+dobrą powtarzalność sędziego przy wymuszonym schemacie odpowiedzi.
+
+\textbf{Rekomendacje UI/UX} (zbiorczo): zwiększyć kontrast tekstu pomocniczego i obramowań pól
+do co najmniej 4,5:1 / 3:1, powiększyć cele klikalne do 24$\times$24~px, oznaczyć pola wymagane
+i walidować je inline, zastąpić ogólne placeholdery opisowymi etykietami, ukryć metryki
+renderowania w stopce przed niezalogowanymi użytkownikami.
+
+\subsection{Ograniczenia}
+Sędzia LLM nie zastępuje testów z udziałem użytkowników: ocenia statyczny zrzut (bez interakcji,
+stanów hover i fokusu), a jego oceny nie zostały skalibrowane względem ocen ekspertów.
+Powtarzalność ograniczono przez stały zestaw danych i rozdzielczość, wymuszony schemat odpowiedzi
+oraz agregację 3 przebiegów; rozrzut ocen raportowany jest jawnie. Wyniki LLM-as-a-Judge są spójne
+z obiektywnym testem TC-NF03 (axe-core) -- oba wskazują obszar dostępności jako najsłabszy.
+
+% ------------------------------------------------------------------ 8
+\section{Podsumowanie i wnioski}
+
+\subsection{Podsumowanie}
+Zaprojektowano 22 przypadki testowe (17 funkcjonalnych, 5 niefunkcjonalnych) i wszystkie
+zautomatyzowano; 12 przypadków wykorzystuje Selenium WebDriver. Wykonano 38 testów
+(parametryzacja): 36 zaliczonych, 1 niezaliczony (TC-NF03, DEF-02) i 1 oczekiwane niepowodzenie
+(DEF-01). Pełny przebieg trwa około 110~s, a pipeline CI uruchamia testy przy każdym pull requeście.
+
+\subsection{Pokrycie}
+\begin{itemize}
+  \item pokrycie funkcji: 11 z 14 (79\%); \emph{Must} 7/7, \emph{Should} 3/3, \emph{Could} 1/3,
+        \emph{Won't} 0/1 (poza zakresem),
+  \item pokrycie tablicy decyzyjnej TC-F14: 6/6 reguł (100\%); wartości brzegowe TC-F02: 2/2,
+  \item charakterystyki ISO/IEC 25010: wydajność, bezpieczeństwo, zdolność do interakcji,
+        kompatybilność (4 z 9).
+\end{itemize}
+
+\subsection{Ocena kryteriów wyjścia}
+Wszystkie przypadki zostały wykonane, wszystkie przypadki o priorytecie wysokim zaliczono.
+Wykryte defekty dotyczą dostępności (średnia ważność) i login CSRF (niska), więc nie ma otwartych
+defektów krytycznych w funkcjach \emph{Must}. Kryteria wyjścia uznano za spełnione, a defekty
+DEF-01 i DEF-02 zarejestrowano jako znane ryzyko do zgłoszenia twórcom Gitei.
+
+\subsection{Rekomendacje}
+\begin{itemize}
+  \item poprawić role ARIA menu (\texttt{aria-required-children}) i etykiety pól formularza
+        nowego repozytorium (DEF-02) oraz kontrast tekstu pomocniczego (OBS-02),
+  \item objąć formularz logowania tą samą ochroną cross-origin co pozostałe akcje (DEF-01),
+  \item rozważyć nagłówek \texttt{Content-Security-Policy} (OBS-01),
+  \item rozszerzyć zakres o organizacje i wiki (ryzyko rezydualne) oraz testy obciążeniowe
+        operacji zapisu i większej liczby użytkowników.
+\end{itemize}
+
+\subsection{Napotkane trudności}
+\begin{itemize}
+  \item Gitea 28 zrezygnowała z tokenu \texttt{\_csrf} w formularzach na rzecz weryfikacji
+        nagłówków \texttt{Origin} i \texttt{Sec-Fetch-Site} -- wymagało to dostosowania klienta HTTP
+        i zainspirowało przypadki bezpieczeństwa w TC-NF04,
+  \item formularz scalania PR jest renderowany przez Vue, a wiele akcji wysyła \texttt{fetch}
+        i przeładowuje stronę -- prowadziło to do niestabilnego testu TC-F08
+        (\texttt{StaleElementReferenceException}); naprawiono to w warstwie Page Object,
+  \item Selenium 4.27 nie pobierał sterownika Edge (wycofany adres serwera) -- rozwiązane aktualizacją do 4.50,
+  \item brak lokalnej instalacji LaTeX -- PDF raportu kompilowany jest w GitHub Actions.
+\end{itemize}
+
+\end{document}

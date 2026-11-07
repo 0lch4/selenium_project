@@ -1,0 +1,84 @@
+\subsection{Podsumowanie}
+{\small
+\begin{longtable}{p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Grupa} & \textbf{Wykonania} & \textbf{Zaliczone} & \textbf{Niezaliczone} & \textbf{Oczekiwane niepowodzenie (xfail)} & \textbf{Czas [s]} \\
+\midrule
+\endhead
+Testy dymne & 2 & 2 & 0 & 0 & 3,3 \\
+UI Selenium (TC-F01–F12) & 13 & 13 & 0 & 0 & 52,3 \\
+API (TC-F13–F17) & 13 & 13 & 0 & 0 & 4,2 \\
+Niefunkcjonalne (TC-NF01–NF05) & 10 & 8 & 1 & 1 & 49,2 \\
+\textbf{Razem} & \textbf{38} & \textbf{36} & \textbf{1} & \textbf{1} & \textbf{109,9} \\
+\bottomrule
+\end{longtable}
+}
+Wykonania > przypadków testowych, bo część przypadków jest sparametryzowana
+
+(TC-F02: 2 wartości brzegowe, TC-F14: 6 reguł tablicy decyzyjnej, TC-F17: 4 warianty tokena,
+
+TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
+
+\subsection{Wyniki per przypadek testowy}
+{\small
+\begin{longtable}{p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{ID} & \textbf{Wynik} & \textbf{Czas [s]} & \textbf{Uwagi} \\
+\midrule
+\endhead
+TC-F01 & Zaliczony & 3,45 &  \\
+TC-F02 & Zaliczony (2/2) & 7,02 & 7 znaków odrzucone, 8 zaakceptowane \\
+TC-F03 & Zaliczony & 3,33 &  \\
+TC-F04 & Zaliczony & 3,31 &  \\
+TC-F05 & Zaliczony & 3,82 &  \\
+TC-F06 & Zaliczony & 3,70 &  \\
+TC-F07 & Zaliczony & 4,54 &  \\
+TC-F08 & Zaliczony & 5,68 & wcześniej niestabilny – poprawiony w kodzie testu (StaleElementReference) \\
+TC-F09 & Zaliczony & 5,00 &  \\
+TC-F10 & Zaliczony & 5,13 &  \\
+TC-F11 & Zaliczony & 3,91 &  \\
+TC-F12 & Zaliczony & 3,39 &  \\
+TC-F13 & Zaliczony & 0,42 &  \\
+TC-F14 & Zaliczony (6/6) & 2,38 &  \\
+TC-F15 & Zaliczony & 0,52 &  \\
+TC-F16 & Zaliczony & 0,54 &  \\
+TC-F17 & Zaliczony (4/4) & 0,34 &  \\
+TC-NF01 & Zaliczony & 32,00 & p95 zagregowane 32 ms (limit 500 ms), 19,0 żądań/s, 0\% błędów \\
+TC-NF02 & Zaliczony & 4,17 & mediany 23–40 ms (limit 2000 ms) \\
+TC-NF03 & \textbf{Niezaliczony} & 4,32 & DEF-02 – krytyczne naruszenia WCAG na 5/5 widokach \\
+TC-NF04 & Zaliczony (4/4) + 1 xfail & 0,49 & DEF-01 – login CSRF (znany defekt) \\
+TC-NF05 & Zaliczony (2/2) & 8,25 & Chrome, Edge \\
+\bottomrule
+\end{longtable}
+}
+\subsection{Wydajność – TC-NF01 (Locust, 20 użytkowników, narastanie 5/s, 30 s)}
+{\small
+\begin{longtable}{p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Żądanie} & \textbf{p50 [ms]} & \textbf{p95 [ms]} & \textbf{żądania/s} \\
+\midrule
+\endhead
+API repo & 14 & 23 & 5,1 \\
+API issues & 23 & 31 & 4,9 \\
+API search & 15 & 22 & 2,8 \\
+WEB /\{owner\}/\{repo\} & 22 & 42 & 4,0 \\
+WEB /explore/repos & 3 & 6 & 2,2 \\
+\textbf{Zagregowane} & \textbf{20} & \textbf{32} & \textbf{19,0} \\
+\bottomrule
+\end{longtable}
+}
+\subsection{Czas ładowania stron – TC-NF02 (mediana z 3 pomiarów, \texttt{loadEventEnd})}
+{\small
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Strona} & \textbf{Czas [ms]} \\
+\midrule
+\endhead
+\texttt{/} & 24,6 \\
+\texttt{/explore/repos} & 22,9 \\
+\texttt{/\{owner\}/\{repo\}} & 40,4 \\
+\texttt{/\{owner\}/\{repo\}/issues} & 35,1 \\
+\texttt{/user/settings} & 23,9 \\
+\bottomrule
+\end{longtable}
+}
