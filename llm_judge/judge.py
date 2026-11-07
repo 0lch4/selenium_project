@@ -158,7 +158,8 @@ def aggregate(view_id: str, runs: list[JudgeVerdict], backend: str) -> dict:
             "max_spread": max(d["spread"] for d in per_dim.values()), "verdict": verdict}
 
 
-def write_summary(aggregates: list[dict], details: dict[str, list[JudgeVerdict]], backend: str) -> None:
+def write_summary(aggregates: list[dict], details: dict[str, list[JudgeVerdict]], backend: str,
+                  out_dir: Path) -> None:
     lines = ["# LLM-as-a-Judge results\n",
              f"Backend: `{backend}`, model: `{MODEL}`, runs per view: {aggregates[0]['runs']}, "
              f"date: {datetime.now(timezone.utc):%Y-%m-%d %H:%M} UTC\n",
@@ -177,7 +178,7 @@ def write_summary(aggregates: list[dict], details: dict[str, list[JudgeVerdict]]
         lines += [f"- strength: {s}" for s in first.strengths]
         lines += [f"- [{r.priority}] ({r.dimension}) {r.recommendation}" for r in first.recommendations]
         lines.append("")
-    (RESULTS / "summary.md").write_text("\n".join(lines), encoding="utf-8")
+    (out_dir / "summary.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def resolve_backend(choice: str) -> str:
@@ -191,6 +192,7 @@ def main(argv=None) -> int:
     ap.add_argument("--view", action="append", help="view id (repeatable)")
     ap.add_argument("--runs", type=int, default=RUNS)
     ap.add_argument("--backend", choices=["auto", "api", "cli"], default=os.getenv("JUDGE_BACKEND") or "auto")
+    ap.add_argument("--results-dir", type=Path, default=RESULTS, help="where to write JSON and summary.md")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args(argv)
 
@@ -220,7 +222,8 @@ def main(argv=None) -> int:
         claude = find_claude()
         judge = lambda v: judge_once_cli(claude, system, v)  # noqa: E731
 
-    RESULTS.mkdir(exist_ok=True)
+    out_dir = args.results_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
     aggregates, details = [], {}
     for v in views:
         runs = []
@@ -230,11 +233,11 @@ def main(argv=None) -> int:
         details[v["id"]] = runs
         agg = aggregate(v["id"], runs, backend)
         aggregates.append(agg)
-        (RESULTS / f"{v['id']}.json").write_text(json.dumps(
+        (out_dir / f"{v['id']}.json").write_text(json.dumps(
             {"aggregate": agg, "runs": [r.model_dump() for r in runs]}, indent=2, ensure_ascii=False),
             encoding="utf-8")
         print(f"{v['id']}: mean {agg['mean']}, verdict {agg['verdict']}", flush=True)
-    write_summary(aggregates, details, backend)
+    write_summary(aggregates, details, backend, out_dir)
     return 0 if all(a["verdict"] == "PASS" for a in aggregates) else 1
 
 

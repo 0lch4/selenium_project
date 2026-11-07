@@ -11,3 +11,4 @@
 - [x] Dokumentacja: funkcje MoSCoW, 22 przypadki testowe wg szablonu, macierz śledzenia
 - [x] LLM-as-a-Judge: cli backend (Claude Code) + .env config; real evaluation of 4 views x 3 runs – all PASS (3.75–4.0)
 - [x] Report: LaTeX (sections 1–8) compiled by GitHub Actions, artifact raport-pdf
+- [x] Demo: scripts/demo.ps1 (Gitea, 4 UI tests in a visible browser, judge of one view)
