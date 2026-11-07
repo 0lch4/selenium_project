@@ -1,0 +1,30 @@
+name: Report PDF
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "llm_judge/results/**", "scripts/md_to_tex.py", ".github/workflows/report.yml"]
+  pull_request:
+    paths: ["docs/**", "llm_judge/results/**", "scripts/md_to_tex.py", ".github/workflows/report.yml"]
+  workflow_dispatch:
+
+jobs:
+  latex:
+    name: Build LaTeX report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Generate LaTeX fragments from docs
+        run: python scripts/md_to_tex.py
+      - name: Compile raport.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: raport.tex
+          working_directory: docs/report
+      - uses: actions/upload-artifact@v4
+        with:
+          name: raport-pdf
+          path: docs/report/raport.pdf
