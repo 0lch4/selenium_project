@@ -1,6 +1,6 @@
 \needspace{8\baselineskip}\subsection{Podsumowanie}
 {\small
-\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.300\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.210\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.150\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.210\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Grupa} & \textbf{Wykonania} & \textbf{Zaliczone} & \textbf{Niezaliczone} & \textbf{Oczekiwane niepowodzenie (xfail)} & \textbf{Czas [s]} \\
 \midrule
@@ -12,23 +12,13 @@ Niefunkcjonalne (TC-NF01–NF05) & 10 & 8 & 0 & 2 & 49,2 \\
 \bottomrule
 \end{tabular}\par\smallskip
 }
-Wykonania > przypadków testowych, bo część przypadków jest sparametryzowana
+Wykonania > przypadków testowych, bo część przypadków jest sparametryzowana (TC-F02: 2 wartości brzegowe, TC-F14: 6 reguł tablicy decyzyjnej, TC-F17: 4 warianty tokena, TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
 
-(TC-F02: 2 wartości brzegowe, TC-F14: 6 reguł tablicy decyzyjnej, TC-F17: 4 warianty tokena,
-
-TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
-
-Oba wykonania oznaczone jako *xfail* to potwierdzone defekty przedmiotu testów (DEF-01, DEF-02):
-
-przypadek testowy nie spełnia oczekiwanego rezultatu, a automat raportuje to jako znany defekt
-
-(\texttt{xfail(strict=True)}). Po naprawie defektu test zmieni wynik na *XPASS* i przebieg zakończy się
-
-niepowodzeniem, co sygnalizuje konieczność aktualizacji oczekiwań i retestu.
+Oba wykonania oznaczone jako \emph{xfail} to potwierdzone defekty przedmiotu testów (DEF-01, DEF-02): przypadek testowy nie spełnia oczekiwanego rezultatu, a automat raportuje to jako znany defekt (\texttt{xfail(strict=True)}). Po naprawie defektu test zmieni wynik na \emph{XPASS} i przebieg zakończy się niepowodzeniem, co sygnalizuje konieczność aktualizacji oczekiwań i retestu.
 
 \needspace{8\baselineskip}\subsection{Wyniki per przypadek testowy}
 {\small
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.240\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.090\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.570\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.230\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.090\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.560\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{ID} & \textbf{Wynik} & \textbf{Czas [s]} & \textbf{Uwagi} \\
 \midrule

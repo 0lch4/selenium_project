@@ -1,5 +1,5 @@
 {\small
-\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.090\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.450\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.410\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.110\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{ID} & \textbf{Tytuł} & \textbf{Wykryty przez} & \textbf{Ważność} & \textbf{Priorytet} & \textbf{Status} \\
 \midrule
@@ -11,15 +11,13 @@ OBS-02 & Niewystarczający kontrast tekstu (axe \texttt{color-contrast}, serious
 \end{tabular}\par\smallskip
 }
 \needspace{8\baselineskip}\subsubsection{DEF-01 – login CSRF}
-- \textbf{Kroki:} \texttt{POST /\allowbreak{}user/\allowbreak{}login} z nagłówkami \texttt{Origin: http:/\allowbreak{}/\allowbreak{}evil.example}, \texttt{Sec-Fetch-Site: cross-site} i poprawnymi danymi.
-
-- \textbf{Oczekiwany rezultat:} odrzucenie żądania (403), tak jak dla innych akcji zmieniających stan (\texttt{/\allowbreak{}repo/\allowbreak{}create} zwraca 403).
-
-- \textbf{Rzeczywisty rezultat:} \texttt{303 -> /\allowbreak{}}, ustawiona sesja zalogowanego użytkownika.
-
-- \textbf{Wpływ:} atakujący może zalogować ofiarę na swoje konto (session fixation / login CSRF).
-
-- \textbf{Automatyzacja:} \texttt{tests/\allowbreak{}nonfunctional/\allowbreak{}test\_quality.py::TestSecurity::test\_cross\_origin\_login\_is\_rejected} (\texttt{xfail strict}).
+\begin{itemize}
+\item \textbf{Kroki:} \texttt{POST /\allowbreak{}user/\allowbreak{}login} z nagłówkami \texttt{Origin: http:/\allowbreak{}/\allowbreak{}evil.example}, \texttt{Sec-Fetch-Site: cross-site} i poprawnymi danymi.
+\item \textbf{Oczekiwany rezultat:} odrzucenie żądania (403), tak jak dla innych akcji zmieniających stan (\texttt{/\allowbreak{}repo/\allowbreak{}create} zwraca 403).
+\item \textbf{Rzeczywisty rezultat:} \texttt{303 -> /\allowbreak{}}, ustawiona sesja zalogowanego użytkownika.
+\item \textbf{Wpływ:} atakujący może zalogować ofiarę na swoje konto (session fixation / login CSRF).
+\item \textbf{Automatyzacja:} \texttt{tests/\allowbreak{}nonfunctional/\allowbreak{}test\_\allowbreak{}quality.py::\allowbreak{}TestSecurity::\allowbreak{}test\_\allowbreak{}cross\_\allowbreak{}origin\_\allowbreak{}login\_\allowbreak{}is\_\allowbreak{}rejected} (\texttt{xfail strict}).
+\end{itemize}
 
 \needspace{8\baselineskip}\subsubsection{DEF-02 – dostępność (axe-core 4.10.2, reguły wcag2a/wcag2aa/wcag21aa)}
 {\small
@@ -28,16 +26,16 @@ OBS-02 & Niewystarczający kontrast tekstu (axe \texttt{color-contrast}, serious
 \textbf{Widok} & \textbf{Krytyczne} & \textbf{Poważne (serious)} \\
 \midrule
 \texttt{/\allowbreak{}user/\allowbreak{}login} & aria-required-children (2) & color-contrast (4) \\
-\texttt{/\allowbreak{}user/\allowbreak{}sign\_up} & aria-required-children (2) & color-contrast (4) \\
+\texttt{/\allowbreak{}user/\allowbreak{}sign\_\allowbreak{}up} & aria-required-children (2) & color-contrast (4) \\
 \texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}} & aria-required-children (3), button-name (1) & aria-prohibited-attr, color-contrast, link-name \\
 \texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}/\allowbreak{}issues} & aria-required-children (4) & aria-prohibited-attr, color-contrast (8) \\
 \texttt{/\allowbreak{}repo/\allowbreak{}create} & aria-required-children (2), label (4) & aria-input-field-name (3), color-contrast, link-in-text-block \\
 \bottomrule
 \end{tabular}\par\smallskip
 }
-- \textbf{Oczekiwany rezultat (kryterium TC-NF03):} brak naruszeń o wpływie \texttt{critical}.
-
-- \textbf{Wpływ:} użytkownicy czytników ekranu nie otrzymują poprawnej struktury menu (role \texttt{menu} bez wymaganych dzieci), pola formularza nowego repo bez etykiet, przycisk bez nazwy dostępnej.
-
-- Pełne dane: \texttt{reports/\allowbreak{}axe.json} (generowany przy każdym przebiegu).
+\begin{itemize}
+\item \textbf{Oczekiwany rezultat (kryterium TC-NF03):} brak naruszeń o wpływie \texttt{critical}.
+\item \textbf{Wpływ:} użytkownicy czytników ekranu nie otrzymują poprawnej struktury menu (role \texttt{menu} bez wymaganych dzieci), pola formularza nowego repo bez etykiet, przycisk bez nazwy dostępnej.
+\item Pełne dane: \texttt{reports/\allowbreak{}axe.json} (generowany przy każdym przebiegu).
+\end{itemize}
 

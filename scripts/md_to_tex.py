@@ -35,11 +35,12 @@ def inline(text: str) -> str:
     res = []
     for p in parts:
         if p.startswith("`") and p.endswith("`"):
-            # allow line breaks after slashes so long paths fit in narrow table cells
-            res.append(r"\texttt{" + escape(p[1:-1]).replace("/", r"/\allowbreak{}") + "}")
+            # allow line breaks after slashes, underscores and :: so long paths and test ids fit
+            code = escape(p[1:-1]).replace("/", r"/\allowbreak{}").replace(r"\_", r"\_\allowbreak{}")
+            res.append(r"\texttt{" + code.replace("::", r"::\allowbreak{}") + "}")
         else:
             p = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", p)
-            res.append(escape(p))
+            res.append(re.sub(r"\*([^*\s][^*]*?)\*", r"\\emph{\1}", escape(p)))
     return "".join(res).replace(BOLD_ON, r"\textbf{").replace(BOLD_OFF, "}")
 
 
@@ -48,10 +49,10 @@ WIDTHS = {
     ("ID", "Funkcja", "Opis", "MoSCoW", "Uzasadnienie"): [0.07, 0.19, 0.34, 0.11, 0.29],
     ("ID", "Tytuł", "Priorytet", "Technika", "Poziom", "Funkcje", "Automatyzacja", "Wynik"):
         [0.08, 0.18, 0.09, 0.15, 0.11, 0.11, 0.14, 0.14],
-    ("ID", "Tytuł", "Wykryty przez", "Ważność", "Priorytet", "Status"): [0.09, 0.45, 0.13, 0.1, 0.1, 0.13],
-    ("ID", "Wynik", "Czas [s]", "Uwagi"): [0.1, 0.24, 0.09, 0.57],
+    ("ID", "Tytuł", "Wykryty przez", "Ważność", "Priorytet", "Status"): [0.1, 0.41, 0.13, 0.11, 0.12, 0.13],
+    ("ID", "Wynik", "Czas [s]", "Uwagi"): [0.12, 0.23, 0.09, 0.56],
     ("Grupa", "Wykonania", "Zaliczone", "Niezaliczone", "Oczekiwane niepowodzenie (xfail)", "Czas [s]"):
-        [0.3, 0.12, 0.12, 0.13, 0.21, 0.12],
+        [0.25, 0.13, 0.13, 0.15, 0.21, 0.13],
 }
 SHORT_TABLE = 12  # rows; longer tables use longtable and may break across pages
 
@@ -93,38 +94,59 @@ def convert(md: str, skip_until: str | None = None, stop_at: str | None = None,
     lines = md.splitlines()
     if skip_until:
         lines = lines[next(i for i, l in enumerate(lines) if l.startswith(skip_until)):]
-    out, rows, para = [], [], []
+    out, rows, para, items = [], [], [], []
 
     def flush():
-        nonlocal rows, para
+        nonlocal rows, para, items
         if rows:
             out.append(table([r for r in rows if not re.fullmatch(r"[\s|:-]+", "|".join(r))]))
             rows = []
         if para:
             out.append(inline(" ".join(para)) + "\n")
             para = []
+        if items:
+            out.append("\\begin{itemize}\n" + "\n".join(r"\item " + inline(i) for i in items) +
+                       "\n\\end{itemize}\n")
+            items = []
 
     for line in lines:
         if stop_at and line.startswith(stop_at):
             break
         if line.startswith("|"):
-            if para:
+            if para or items:
                 flush()
             rows.append([c.strip() for c in line.strip().strip("|").split("|")])
             continue
-        flush()
+        if rows:
+            flush()
+        bullet = re.match(r"^\s*[-*] (.*)", line)
+        if bullet:
+            if para:
+                flush()
+            items.append(bullet.group(1).strip())
+            continue
+        if items and line.startswith("  ") and line.strip():
+            items[-1] += " " + line.strip()  # continuation line of a list item
+            continue
         m = re.match(r"^(#+) (.*)", line)
+        if m or not line.strip() or line.strip() == "---":
+            flush()
         if m:
             depth = len(m.group(1)) + level_offset
             title = inline(m.group(2))
             cmd = {2: r"\subsection", 3: r"\subsubsection"}.get(depth)
             # keep a heading together with the start of its content; deeper levels become a bold
             # line of their own (\paragraph is run-in and a following longtable jumps ahead of it)
+            # a heading directly after another one: reserve room for both so neither is orphaned
+            if out and out[-1].startswith(r"\needspace{8"):
+                out[-1] = out[-1].replace(r"\needspace{8", r"\needspace{16", 1)
             out.append(r"\needspace{8\baselineskip}" +
                        (cmd + "{" + title + "}" if cmd else r"\par\medskip\noindent\textbf{" + title + r"}\par"))
         elif line.strip() in ("", "---"):
             continue
         else:
+            if items:
+                flush()
             para.append(line.strip())
     flush()
     return "\n".join(out) + "\n"

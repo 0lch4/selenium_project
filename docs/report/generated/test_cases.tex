@@ -1,4 +1,4 @@
-\needspace{8\baselineskip}\subsection{Przypadki funkcjonalne}
+\needspace{16\baselineskip}\subsection{Przypadki funkcjonalne}
 \needspace{8\baselineskip}\subsubsection{TC-F01 – Rejestracja konta poprawnymi danymi}
 {\small
 \par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
@@ -19,7 +19,7 @@ Powiązane funkcje & F01 \\
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
-1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_up} & Widoczny formularz z polami: nazwa, e-mail, hasło, powtórz hasło \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_\allowbreak{}up} & Widoczny formularz z polami: nazwa, e-mail, hasło, powtórz hasło \\
 2 & Wypełnij pola danymi testowymi & Pola przyjmują wartości, brak komunikatów walidacji \\
 3 & Kliknij „Register Account” & Przekierowanie na stronę główną; w nawigacji awatar z nazwą nowego użytkownika \\
 4 & Sprawdź \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}users/\allowbreak{}<nazwa>} & HTTP 200 \\
@@ -35,7 +35,7 @@ Warunki końcowe: konto istnieje i jest aktywne, użytkownik zalogowany; po teś
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
 Priorytet & Wysoki \\
-Technika & Analiza wartości brzegowych (dwupunktowa: 7 i 8 znaków; granica \texttt{MIN\_PASSWORD\_LENGTH = 8}) \\
+Technika & Analiza wartości brzegowych (dwupunktowa: 7 i 8 znaków; granica \texttt{MIN\_\allowbreak{}PASSWORD\_\allowbreak{}LENGTH = 8}) \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium) \\
 Warunki wstępne / dane & Użytkownik niezalogowany; hasło \texttt{Ab1!Ab1} (7 zn.) oraz \texttt{Ab1!Ab1!} (8 zn.) \\
@@ -48,7 +48,7 @@ Powiązane funkcje & F01 \\
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
-1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_up}, wypełnij formularz hasłem 7-znakowym, wyślij & Komunikat „Password length cannot be less than 8 characters.”; brak przekierowania \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_\allowbreak{}up}, wypełnij formularz hasłem 7-znakowym, wyślij & Komunikat „Password length cannot be less than 8 characters.”; brak przekierowania \\
 2 & Sprawdź \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}users/\allowbreak{}<nazwa>} & HTTP 404 – konto nie powstało \\
 3 & Powtórz krok 1 z hasłem 8-znakowym (nowa nazwa) & Konto utworzone, użytkownik zalogowany (awatar w nawigacji) \\
 \bottomrule
@@ -250,7 +250,7 @@ Powiązane funkcje & F08, F04 \\
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
-1 & Otwórz \texttt{/\allowbreak{}<repo>/\allowbreak{}\_edit/\allowbreak{}main/\allowbreak{}README.md} & Edytor kodu z bieżącą treścią pliku \\
+1 & Otwórz \texttt{/\allowbreak{}<repo>/\allowbreak{}\_\allowbreak{}edit/\allowbreak{}main/\allowbreak{}README.md} & Edytor kodu z bieżącą treścią pliku \\
 2 & Zaznacz całą treść i zastąp nową & Edytor zawiera wyłącznie nową treść \\
 3 & Wpisz opis commita, wybierz „Commit directly”, kliknij „Commit Changes” & Przekierowanie do widoku pliku \texttt{/\allowbreak{}src/\allowbreak{}branch/\allowbreak{}main/\allowbreak{}...} \\
 4 & \texttt{GET .../\allowbreak{}contents/\allowbreak{}README.md} & Zdekodowana treść = nowa treść \\
@@ -339,7 +339,7 @@ Powiązane funkcje & F02, F07 \\
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 1 & Otwórz menu awatara, kliknij „Sign Out” & W nawigacji link „Sign In”, brak awatara \\
-2 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}settings} & Przekierowanie na \texttt{/\allowbreak{}user/\allowbreak{}login?redirect\_to=\%2Fuser\%2Fsettings} \\
+2 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}settings} & Przekierowanie na \texttt{/\allowbreak{}user/\allowbreak{}login?redirect\_\allowbreak{}to=\%2Fuser\%2Fsettings} \\
 \bottomrule
 \end{tabular}\par\smallskip
 }
@@ -365,9 +365,9 @@ Powiązane funkcje & F03 \\
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
-1 & \texttt{POST /\allowbreak{}user/\allowbreak{}repos} z opisem „v1” & 201; \texttt{full\_name} = \texttt{<user>/\allowbreak{}<nazwa>} \\
+1 & \texttt{POST /\allowbreak{}user/\allowbreak{}repos} z opisem „v1” & 201; \texttt{full\_\allowbreak{}name} = \texttt{<user>/\allowbreak{}<nazwa>} \\
 2 & \texttt{GET /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 200; \texttt{description} = „v1” \\
-3 & \texttt{PATCH} z \texttt{description} „v2”, \texttt{has\_wiki} false & 200; pola zaktualizowane \\
+3 & \texttt{PATCH} z \texttt{description} „v2”, \texttt{has\_\allowbreak{}wiki} false & 200; pola zaktualizowane \\
 4 & \texttt{DELETE /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 204 \\
 5 & \texttt{GET /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 404 \\
 \bottomrule
@@ -466,9 +466,9 @@ Powiązane funkcje & F09, F05 \\
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 1 & Utwórz milestone i 2 zgłoszenia z \texttt{milestone} & 201 dla każdego \\
-2 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_issues} = 2, \texttt{closed\_issues} = 0 \\
+2 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_\allowbreak{}issues} = 2, \texttt{closed\_\allowbreak{}issues} = 0 \\
 3 & Zamknij jedno zgłoszenie (\texttt{PATCH state=closed}) & 201 \\
-4 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_issues} = 1, \texttt{closed\_issues} = 1 \\
+4 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_\allowbreak{}issues} = 1, \texttt{closed\_\allowbreak{}issues} = 1 \\
 \bottomrule
 \end{tabular}\par\smallskip
 }
@@ -504,7 +504,7 @@ Powiązane funkcje & F12 \\
 }
 Warunki końcowe: token usunięty.
 
-\needspace{8\baselineskip}\subsection{Przypadki niefunkcjonalne (ISO/IEC 25010:2023)}
+\needspace{16\baselineskip}\subsection{Przypadki niefunkcjonalne (ISO/IEC 25010:2023)}
 \needspace{8\baselineskip}\subsubsection{TC-NF01 – Czas odpowiedzi pod obciążeniem}
 {\small
 \par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
@@ -527,7 +527,7 @@ Powiązane funkcje & F04, F05, F10 \\
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 1 & Przygotuj dane testowe przez API & Repo i 20 zgłoszeń utworzone \\
-2 & Uruchom Locust w trybie headless z profilem \texttt{perf/\allowbreak{}locustfile.py} & Wygenerowany \texttt{reports/\allowbreak{}perf/\allowbreak{}locust\_stats.csv} \\
+2 & Uruchom Locust w trybie headless z profilem \texttt{perf/\allowbreak{}locustfile.py} & Wygenerowany \texttt{reports/\allowbreak{}perf/\allowbreak{}locust\_\allowbreak{}stats.csv} \\
 3 & Odczytaj statystyki zagregowane & Odsetek błędów = 0\% \\
 4 & Odczytaj przepustowość & $\geq$ 10 żądań/s \\
 5 & Odczytaj 95. percentyl każdego typu żądania & p95 < 500 ms dla każdego \\
@@ -563,7 +563,7 @@ Powiązane funkcje & F02, F04, F05, F10 \\
 \bottomrule
 \end{tabular}\par\smallskip
 }
-Warunki końcowe: wyniki w \texttt{reports/\allowbreak{}page\_load.json}.
+Warunki końcowe: wyniki w \texttt{reports/\allowbreak{}page\_\allowbreak{}load.json}.
 
 \needspace{8\baselineskip}\subsubsection{TC-NF03 – Zgodność kluczowych widoków z WCAG 2.1 AA}
 {\small
