@@ -37,6 +37,14 @@ HEADLESS=0 .venv/Scripts/pytest -m ui             # przeglądarka widoczna (demo
 .venv/Scripts/python -m llm_judge.judge --dry-run  # walidacja wejścia bez wywołań API
 .venv/Scripts/python -m llm_judge.judge            # ocena: 3 przebiegi na widok, claude-opus-5-5
 ```
-Wymaga klucza `ANTHROPIC_API_KEY` (PowerShell: `$env:ANTHROPIC_API_KEY="sk-ant-..."`).
 Rubryka (8 wymiarów, skala 1–5): [llm_judge/prompts/judge_rubric.md](llm_judge/prompts/judge_rubric.md).
 Wyniki: `llm_judge/results/<widok>.json` i `llm_judge/results/summary.md`.
+
+### LLM-as-a-Judge – configuration
+1. Copy `.env.example` to `.env` (git-ignored) and set `ANTHROPIC_API_KEY=...`.
+2. Run `python -m llm_judge.judge`.
+
+Backend selection (`--backend` or `JUDGE_BACKEND`): `auto` (default) uses `api` (Anthropic SDK)
+when `ANTHROPIC_API_KEY` is set, otherwise `cli` – headless Claude Code (`claude -p`) with the
+logged-in Claude Code account. `CLAUDE_BIN` points to the executable if it is not on `PATH`
+(the VS Code extension binary is detected automatically). `JUDGE_MODEL` overrides the model.
