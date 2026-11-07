@@ -17,6 +17,7 @@
 \graphicspath{{img/}{../../llm_judge/results/input/}}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.5em}
+\setlength{\emergencystretch}{3em}
 
 \definecolor{codebg}{RGB}{246,246,246}
 \lstset{
@@ -449,7 +450,7 @@ DEF-01 i DEF-02 zarejestrowano jako znane ryzyko do zgłoszenia twórcom Gitei.
 \subsection{Napotkane trudności}
 \begin{itemize}
   \item Gitea 28 zrezygnowała z tokenu \texttt{\_csrf} w formularzach na rzecz weryfikacji
-        nagłówków \texttt{Origin}/\texttt{Sec-Fetch-Site} -- wymagało to dostosowania klienta HTTP
+        nagłówków \texttt{Origin} i \texttt{Sec-Fetch-Site} -- wymagało to dostosowania klienta HTTP
         i zainspirowało przypadki bezpieczeństwa w TC-NF04,
   \item formularz scalania PR jest renderowany przez Vue, a wiele akcji wysyła \texttt{fetch}
         i przeładowuje stronę -- prowadziło to do niestabilnego testu TC-F08
