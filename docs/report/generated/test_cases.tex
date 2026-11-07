@@ -1,7 +1,7 @@
 \subsection{Przypadki funkcjonalne}
 \subsubsection{TC-F01 – Rejestracja konta poprawnymi danymi}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -16,7 +16,7 @@ Powiązane funkcje & F01 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -32,7 +32,7 @@ Warunki końcowe: konto istnieje i jest aktywne, użytkownik zalogowany; po teś
 
 \subsubsection{TC-F02 – Walidacja minimalnej długości hasła przy rejestracji}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -47,7 +47,7 @@ Powiązane funkcje & F01 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -62,7 +62,7 @@ Warunki końcowe: istnieje wyłącznie konto z hasłem 8-znakowym; usunięte po 
 
 \subsubsection{TC-F03 – Logowanie poprawnymi danymi}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -77,7 +77,7 @@ Powiązane funkcje & F02 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -92,7 +92,7 @@ Warunki końcowe: aktywna sesja użytkownika testowego.
 
 \subsubsection{TC-F04 – Odrzucenie logowania z błędnym hasłem}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -107,7 +107,7 @@ Powiązane funkcje & F02 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -122,7 +122,7 @@ Warunki końcowe: brak sesji; konto nie zostało zablokowane.
 
 \subsubsection{TC-F05 – Utworzenie repozytorium z plikiem README}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -137,7 +137,7 @@ Powiązane funkcje & F03, F04 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -154,7 +154,7 @@ Warunki końcowe: repozytorium istnieje z jednym commitem; usunięte po teście.
 
 \subsubsection{TC-F06 – Odrzucenie duplikatu nazwy repozytorium}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -169,7 +169,7 @@ Powiązane funkcje & F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -184,7 +184,7 @@ Warunki końcowe: stan repozytoriów użytkownika bez zmian.
 
 \subsubsection{TC-F07 – Utworzenie zgłoszenia z etykietą}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -199,7 +199,7 @@ Powiązane funkcje & F05, F09 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -216,7 +216,7 @@ Warunki końcowe: w repo istnieje 1 otwarte zgłoszenie z etykietą \texttt{bug}
 
 \subsubsection{TC-F08 – Komentarz, zamknięcie i ponowne otwarcie zgłoszenia}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -231,7 +231,7 @@ Powiązane funkcje & F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -248,7 +248,7 @@ Warunki końcowe: zgłoszenie otwarte, 2 komentarze, 2 zdarzenia zmiany stanu na
 
 \subsubsection{TC-F09 – Edycja pliku w edytorze przeglądarkowym i commit}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -263,7 +263,7 @@ Powiązane funkcje & F08, F04 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -280,7 +280,7 @@ Warunki końcowe: gałąź \texttt{main} ma nowy commit ze zmienionym README.
 
 \subsubsection{TC-F10 – Utworzenie i scalenie pull requesta}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -295,7 +295,7 @@ Powiązane funkcje & F06 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -312,7 +312,7 @@ Warunki końcowe: PR scalony i zamknięty, \texttt{main} zawiera \texttt{feature
 
 \subsubsection{TC-F11 – Wyszukiwanie repozytorium po nazwie}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -327,7 +327,7 @@ Powiązane funkcje & F10 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -342,7 +342,7 @@ Warunki końcowe: brak zmian danych (oba repo usunięte po teście).
 
 \subsubsection{TC-F12 – Wylogowanie blokuje dostęp do ustawień konta}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -357,7 +357,7 @@ Powiązane funkcje & F02, F07 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -371,7 +371,7 @@ Warunki końcowe: brak aktywnej sesji.
 
 \subsubsection{TC-F13 – CRUD repozytorium przez REST API}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -386,7 +386,7 @@ Powiązane funkcje & F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -403,7 +403,7 @@ Warunki końcowe: repozytorium nie istnieje.
 
 \subsubsection{TC-F14 – Widoczność repozytorium wg roli (tablica decyzyjna)}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -420,7 +420,7 @@ Powiązane funkcje & F07 \\
 Tablica decyzyjna (6 reguł, każda to osobne wykonanie):
 
 {\small
-\begin{longtable}{p{0.134\linewidth}p{0.134\linewidth}p{0.134\linewidth}p{0.134\linewidth}p{0.134\linewidth}p{0.134\linewidth}p{0.134\linewidth}}
+\begin{longtable}{p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Reguła} & \textbf{R1} & \textbf{R2} & \textbf{R3} & \textbf{R4} & \textbf{R5} & \textbf{R6} \\
 \midrule
@@ -432,7 +432,7 @@ Rola & właściciel & inny & anonim & właściciel & inny & anonim \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -446,7 +446,7 @@ Warunki końcowe: repozytorium usunięte; repo prywatne nie ujawniło swojego is
 
 \subsubsection{TC-F15 – Nadanie i odebranie dostępu kolaboratorowi}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -461,7 +461,7 @@ Powiązane funkcje & F07 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -478,7 +478,7 @@ Warunki końcowe: drugi użytkownik nie ma dostępu; repo usunięte.
 
 \subsubsection{TC-F16 – Licznik postępu kamienia milowego}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -493,7 +493,7 @@ Powiązane funkcje & F09, F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -509,7 +509,7 @@ Warunki końcowe: milestone z postępem 50\%.
 
 \subsubsection{TC-F17 – Uwierzytelnianie tokenem API}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -524,7 +524,7 @@ Powiązane funkcje & F12 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -542,7 +542,7 @@ Warunki końcowe: token usunięty.
 \subsection{Przypadki niefunkcjonalne (ISO/IEC 25010:2023)}
 \subsubsection{TC-NF01 – Czas odpowiedzi pod obciążeniem}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -558,7 +558,7 @@ Powiązane funkcje & F04, F05, F10 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -575,7 +575,7 @@ Warunki końcowe: dane wydajnościowe zapisane w \texttt{reports/perf/summary.js
 
 \subsubsection{TC-NF02 – Czas ładowania kluczowych stron}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -591,7 +591,7 @@ Powiązane funkcje & F02, F04, F05, F10 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -606,7 +606,7 @@ Warunki końcowe: wyniki w \texttt{reports/page\_load.json}.
 
 \subsubsection{TC-NF03 – Zgodność kluczowych widoków z WCAG 2.1 AA}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -622,7 +622,7 @@ Powiązane funkcje & F01, F02, F04, F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -638,7 +638,7 @@ Warunki końcowe: raport dostępności zapisany. \textbf{Wynik: niezaliczony –
 
 \subsubsection{TC-NF04 – Podstawowe zabezpieczenia aplikacji webowej}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -654,7 +654,7 @@ Powiązane funkcje & F02, F07 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -671,7 +671,7 @@ Warunki końcowe: brak utworzonych zasobów.
 
 \subsubsection{TC-NF05 – Kompatybilność przeglądarek}
 {\small
-\begin{longtable}{p{0.25\linewidth}p{0.69\linewidth}}
+\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -687,7 +687,7 @@ Powiązane funkcje & F02, F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}}
+\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule

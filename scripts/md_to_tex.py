@@ -38,17 +38,22 @@ def inline(text: str) -> str:
     return "".join(res)
 
 
-def table(rows: list[list[str]], small: bool = False) -> str:
+def table(rows: list[list[str]], small: bool = False, widths: list[float] | None = None) -> str:
+    """Tabela longtable; `widths` to udziały szerokości kolumn (sumują się do 1)."""
     header, body = rows[0], rows[1:]
     n = len(header)
-    if n == 2:
-        spec = r"p{0.25\linewidth}p{0.69\linewidth}"
-    elif n == 3 and header[0].strip() == "#":
-        spec = r"p{0.03\linewidth}p{0.45\linewidth}p{0.44\linewidth}"
-    else:
-        width = 0.94 / n
-        spec = "".join(rf"p{{{width:.3f}\linewidth}}" for _ in range(n))
-    size = r"\scriptsize" if small or n > 8 else r"\small"
+    if widths is None:
+        if n == 2:
+            widths = [0.27, 0.73]
+        elif n == 3 and header[0].strip() == "#":
+            widths = [0.05, 0.48, 0.47]
+        elif n > 8:
+            widths = [0.13] + [0.87 / (n - 1)] * (n - 1)
+        else:
+            widths = [1 / n] * n
+    # szerokość kolumny pomniejszona o odstępy międzykolumnowe, żeby tabela mieściła się w marginesach
+    spec = "".join(rf"p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}" for w in widths)
+    size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n > 8 else r"\small"
     lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
              " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\", r"\midrule", r"\endhead"]
     lines += [" & ".join(inline(c) for c in r) + r" \\" for r in body]
@@ -114,8 +119,7 @@ def llm_results() -> str:
             if r["priority"] == "high":
                 rec.append([v, f"`{r['dimension']}`", r["recommendation"]])
     out.append(r"{\renewcommand{\arraystretch}{1.2}")
-    out.append(table(rec).replace(r"p{0.313\linewidth}p{0.313\linewidth}p{0.313\linewidth}",
-                                  r"p{0.13\linewidth}p{0.17\linewidth}p{0.62\linewidth}") + "}")
+    out.append(table(rec, widths=[0.15, 0.2, 0.65]) + "}")
     return "\n".join(out) + "\n"
 
 
