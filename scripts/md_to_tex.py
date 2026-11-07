@@ -74,7 +74,7 @@ def table(rows: list[list[str]], small: bool = False, widths: list[float] | None
     # ragged-right cells: justified text in narrow columns leaves wide gaps between words
     spec = "".join(rf">{{\raggedright\arraybackslash}}p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}"
                    for w in widths)
-    size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n > 8 else r"\small"
+    size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n >= 8 else r"\small"
     lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
              " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\", r"\midrule", r"\endhead"]
     lines += [" & ".join(inline(c) for c in r) + r" \\" for r in body]
@@ -110,9 +110,12 @@ def convert(md: str, skip_until: str | None = None, stop_at: str | None = None,
         m = re.match(r"^(#+) (.*)", line)
         if m:
             depth = len(m.group(1)) + level_offset
-            cmd = {2: r"\subsection", 3: r"\subsubsection", 4: r"\paragraph"}.get(depth, r"\paragraph")
-            # keep a heading together with the start of its content
-            out.append(r"\needspace{8\baselineskip}" + cmd + "{" + inline(m.group(2)) + "}")
+            title = inline(m.group(2))
+            cmd = {2: r"\subsection", 3: r"\subsubsection"}.get(depth)
+            # keep a heading together with the start of its content; deeper levels become a bold
+            # line of their own (\paragraph is run-in and a following longtable jumps ahead of it)
+            out.append(r"\needspace{8\baselineskip}" +
+                       (cmd + "{" + title + "}" if cmd else r"\par\medskip\noindent\textbf{" + title + r"}\par"))
         elif line.strip() in ("", "---"):
             continue
         else:
