@@ -1,3 +1,4 @@
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -20,7 +21,9 @@ class BasePage:
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
-        self.wait = WebDriverWait(driver, config.DEFAULT_TIMEOUT)
+        # Gitea przeładowuje stronę po akcjach fetch - elementy mogą chwilowo stać się nieaktualne
+        self.wait = WebDriverWait(driver, config.DEFAULT_TIMEOUT,
+                                  ignored_exceptions=(StaleElementReferenceException,))
 
     def open(self, path: str | None = None):
         self.driver.get(config.BASE_URL + (path or self.path))
