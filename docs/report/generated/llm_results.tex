@@ -1,0 +1,35 @@
+Backend \texttt{cli}, model \texttt{claude-opus-5-5}, 3 przebiegi na widok. Komórki: mediana ($\pm$ rozrzut = max $-$ min z przebiegów).
+
+{\small
+\begin{longtable}{p{0.188\linewidth}p{0.188\linewidth}p{0.188\linewidth}p{0.188\linewidth}p{0.188\linewidth}}
+\toprule
+\textbf{Wymiar} & \textbf{login} & \textbf{repo\_home} & \textbf{issues\_list} & \textbf{new\_issue} \\
+\midrule
+\endhead
+\texttt{visual\_hierarchy} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) \\
+\texttt{consistency} & 3 ($\pm$1) & 4 ($\pm$1) & 5 ($\pm$0) & 5 ($\pm$0) \\
+\texttt{system\_status} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) \\
+\texttt{language\_clarity} & 4 ($\pm$1) & 3 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$1) \\
+\texttt{error\_prevention} & 3 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$0) \\
+\texttt{efficiency} & 5 ($\pm$1) & 5 ($\pm$0) & 4 ($\pm$1) & 4 ($\pm$1) \\
+\texttt{minimalism} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) \\
+\texttt{accessibility} & 3 ($\pm$0) & 3 ($\pm$0) & 3 ($\pm$0) & 3 ($\pm$0) \\
+\textbf{średnia median} & \textbf{3.75} & \textbf{3.88} & \textbf{4} & \textbf{3.75} \\
+\textbf{werdykt} & \textbf{PASS} & \textbf{PASS} & \textbf{PASS} & \textbf{PASS} \\
+\bottomrule
+\end{longtable}
+}
+{\renewcommand{\arraystretch}{1.2}
+{\small
+\begin{longtable}{p{0.13\linewidth}p{0.17\linewidth}p{0.62\linewidth}}
+\toprule
+\textbf{Widok} & \textbf{Wymiar} & \textbf{Rekomendacja (wysoki priorytet, przebieg 1)} \\
+\midrule
+\endhead
+login & \texttt{consistency} & Mark the Password field as required with the same red asterisk as the username field, or add a note that all fields are required. \\
+issues\_list & \texttt{accessibility} & Raise the contrast of the metadata text, disabled filters and label pills (for example, darken the green 'enhancement' background or use dark text) to reach at least 4.5:1. Enlarge row checkboxes and their click areas to at least 24$\times$24 px. \\
+new\_issue & \texttt{error\_prevention} & Mark the Title field as required (for example a visible label 'Title *'). Disable the 'Create Issue' button, or show a validation message inline, while the title is empty. \\
+new\_issue & \texttt{language\_clarity} & Change the body placeholder from 'Leave a comment' to 'Describe the issue (Markdown supported)'. Add persistent visible labels above the Title and Description fields. \\
+\bottomrule
+\end{longtable}
+}}
