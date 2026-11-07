@@ -69,7 +69,7 @@ def test_collaborator_gains_access_to_private_repo(user_api, fresh_user):
         assert r.status_code == 204
 
         assert other.get(f"/repos/{full}").status_code == 200
-        issue = other.post(f"/repos/{full}/issues", json={"title": "Od kolaboratora"})
+        issue = other.post(f"/repos/{full}/issues", json={"title": "From collaborator"})
         assert issue.status_code == 201
 
         user_api.delete(f"/repos/{full}/collaborators/{fresh_user['username']}")
@@ -84,7 +84,7 @@ def test_milestone_progress_follows_issue_state(user_api, repo):
     full = repo["full_name"]
     ms = user_api.post(f"/repos/{full}/milestones", json={"title": "v1.0"}).json()
     numbers = [
-        user_api.post(f"/repos/{full}/issues", json={"title": f"Zadanie {i}", "milestone": ms["id"]}).json()["number"]
+        user_api.post(f"/repos/{full}/issues", json={"title": f"Task {i}", "milestone": ms["id"]}).json()["number"]
         for i in range(2)
     ]
 

@@ -64,16 +64,16 @@ def test_login_with_wrong_password_is_rejected(driver, user):
 @pytest.mark.feature("F03", "F04")
 def test_create_repository_with_readme(logged_in, user, user_api):
     name = unique("ui-repo")
-    NewRepoPage(logged_in).open().create(name, description="Repo z testu Selenium")
+    NewRepoPage(logged_in).open().create(name, description="Repository from a Selenium test")
     full = f"{user['username']}/{name}"
     try:
         repo = RepoPage(logged_in, full)
         repo.wait_url_contains(f"/{full}")
         assert "README.md" in repo.file_names()
         readme = repo.visible(repo.README).text
-        assert name in readme and "Repo z testu Selenium" in readme
+        assert name in readme and "Repository from a Selenium test" in readme
         api_repo = user_api.get(f"/repos/{full}").json()
-        assert api_repo["description"] == "Repo z testu Selenium"
+        assert api_repo["description"] == "Repository from a Selenium test"
         assert api_repo["private"] is False
     finally:
         user_api.delete(f"/repos/{full}")

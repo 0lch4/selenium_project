@@ -17,10 +17,10 @@
       "consistency": {
         "scores": [
           3,
-          3,
+          4,
           4
         ],
-        "median": 3,
+        "median": 4,
         "spread": 1
       },
       "system_status": {
@@ -34,12 +34,12 @@
       },
       "language_clarity": {
         "scores": [
-          5,
+          4,
           4,
           4
         ],
         "median": 4,
-        "spread": 1
+        "spread": 0
       },
       "error_prevention": {
         "scores": [
@@ -52,11 +52,11 @@
       },
       "efficiency": {
         "scores": [
-          5,
           4,
-          5
+          5,
+          4
         ],
-        "median": 5,
+        "median": 4,
         "spread": 1
       },
       "minimalism": {
@@ -89,82 +89,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The centred 'Sign In' card holds the form in a clear top-to-bottom order: username, password, a 'Remember This Device' checkbox and a full-width blue 'Sign In' button. A separate card below holds the alternatives ('Sign in with a passkey', 'Register now.'). The form sits near the top of the page, and the area below y≈440 is empty.",
-          "justification": "The main action stands out and the groups are easy to tell apart. One small flaw: the form is pushed to the top, leaving a lot of empty space below, and the 'Sign In' card heading is small and doesn't carry much weight."
+          "evidence": "A single centred card titled 'Sign In' holds the fields in reading order: username, password, 'Remember This Device' and a full-width blue 'Sign In' button. A separate card below holds 'Sign in with a passkey' and 'Need an account? Register now.'",
+          "justification": "The primary action stands out and the grouping is logical. The form sits near the top of the page with a large empty area below it, which leaves the layout a little top-heavy. The card header 'Sign In' is quite small for a page title."
         },
         {
           "id": "consistency",
           "score": 3,
-          "evidence": "'Username or Email Address' has a red asterisk, but 'Password' has none, even though both fields are required. Otherwise the page matches Git platform conventions: Register/Sign In in the top right, 'Forgot password?' next to the password label, and the same link colour throughout.",
-          "justification": "Overall it follows common login patterns. However, only one of the two required fields is marked, which is a visible inconsistency and may suggest the password is optional."
+          "evidence": "'Username or Email Address' is bold and has a red asterisk, but 'Password' is regular weight with no asterisk, even though both are required. Capitalisation is mixed: 'Remember This Device' and 'Sign In' use Title Case, while 'Forgot password?' and 'Sign in with a passkey' use sentence case.",
+          "justification": "The patterns follow common Git-platform login conventions (forgot password link next to the password field, register link). However, the two required fields are styled differently and the capitalisation is mixed. These are noticeable inconsistencies."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The 'Sign In' button in the header is highlighted with a grey background, which shows the active page. The card title reads 'Sign In', and the username field shows a focus ring and cursor.",
-          "justification": "It is clear where the user is and which field has focus. There are no breadcrumbs, but a login page doesn't really need them. Error states can't be seen in this screenshot."
+          "evidence": "The 'Sign In' button in the top-right navigation is highlighted as the active page. The card header says 'Sign In'. The username field shows a blue focus ring with the cursor in it.",
+          "justification": "It is clear where the user is and which field has focus. Loading and error states cannot be seen in a static screenshot."
         },
         {
           "id": "language_clarity",
-          "score": 5,
-          "evidence": "Labels read 'Username or Email Address', 'Password', 'Forgot password?', 'Remember This Device' and 'Need an account? Register now.'",
-          "justification": "The labels are short and clear, and they tell the user that either a username or an email address is accepted. The only possibly unfamiliar term is 'passkey', which is now widely recognised."
+          "score": 4,
+          "evidence": "The labels 'Username or Email Address', 'Password', 'Forgot password?', 'Remember This Device' and 'Need an account? Register now.' are all used.",
+          "justification": "The labels are plain and tell users they can use either a username or an email. 'Sign in with a passkey' may be unfamiliar to some users, but it is an industry term. The footer text 'Page: 4ms Template: 4ms' is developer jargon that means nothing to end users."
         },
         {
           "id": "error_prevention",
           "score": 3,
-          "evidence": "Only the username field has a required marker (*). The password field has no show/hide toggle. There is no hint about what 'Remember This Device' means on a shared computer.",
-          "justification": "The basics are in place: a password recovery link and focus that starts in the first field. Still, the inconsistent required markers and the missing option to reveal the password make input mistakes more likely."
+          "evidence": "Only the username field has a required asterisk. The password field has no 'show password' toggle. 'Remember This Device' has no hint about the risk on shared computers.",
+          "justification": "A 'Forgot password?' recovery path is offered and is easy to see. However, the required-field markers are incomplete and there is no way to check what was typed in the password field, which makes typing errors more likely."
         },
         {
           "id": "efficiency",
-          "score": 5,
-          "evidence": "The username field is focused automatically, there are only two fields and one button, and 'Forgot password?', 'Sign in with a passkey' and 'Register now.' are one click away.",
-          "justification": "The task takes as few steps as possible, and the alternative ways in are easy to find without adding clutter."
+          "score": 4,
+          "evidence": "Focus is already in the username field. There are only two fields and one button. Passkey sign-in and registration are reachable with one click. 'Remember This Device' cuts down on future sign-ins.",
+          "justification": "The path to sign in is short. Keyboard and autofill behaviour cannot be checked, so the score is 4 rather than 5."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "Besides the form, the page shows only a header with Explore/Help and a footer. The footer includes developer details: 'Version: 28.3.0 Page: 1ms Template: 0ms'.",
-          "justification": "The page is very clean. The footer's version number and render times are unnecessary for end users, though they draw little attention."
+          "evidence": "The page holds only the form, a minimal top navigation (Explore, Help, Register, Sign In) and a footer with 'Version: 28.3.0 Page: 4ms Template: 4ms'.",
+          "justification": "The page is clean and focused. The footer's version and render-time figures add clutter that does nothing for signing in."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "The page uses a dark theme with light grey labels. The blue 'Sign In' button has white text, which looks like borderline contrast of about 4:1. The input borders are a low-contrast grey on a near-black background. The 'Remember This Device' checkbox is small, roughly 14px. Footer text is small and grey. Required fields are marked only with a small red asterisk.",
-          "justification": "Fonts are readable and the controls are large enough, but the input borders likely fall below the 3:1 non-text contrast requirement (WCAG 1.4.11). The button text contrast is close to the threshold, and the checkbox target is small, though a clickable label may help."
+          "evidence": "The unfocused input borders (password field) are dark grey on a near-black background. The 'Sign In' button has white text on a medium blue (about #4183c4). The blue links ('Forgot password?', 'Register now.') and the grey footer text are on a dark background. The checkbox is small (about 13 px).",
+          "justification": "The input borders look like they fall below the 3:1 non-text contrast required by WCAG 1.4.11. The button text contrast looks borderline (about 4:1), and the checkbox target is small, although its label is probably clickable. The focus ring is visible and the font is legible."
         }
       ],
       "strengths": [
-        "A short, focused form with autofocus and one clear main 'Sign In' button",
-        "Recovery, passkey and registration links sit right where users expect them",
-        "Clear labels that state either a username or an email address is accepted"
+        "The login form is focused and centred, with a clear full-width primary 'Sign In' button.",
+        "The username field gets focus automatically and shows a visible focus ring, so the user can start typing straight away.",
+        "Recovery and other paths ('Forgot password?', passkey, 'Register now.') are easy to find and placed in the expected spots."
       ],
       "recommendations": [
         {
           "priority": "high",
-          "dimension": "consistency",
-          "recommendation": "Mark the Password field as required with the same red asterisk as the username field, or add a note that all fields are required."
+          "dimension": "accessibility",
+          "recommendation": "Make unfocused input borders lighter so they reach at least 3:1 against the dark background. Darken the button blue, or check that its white text reaches 4.5:1."
         },
         {
           "priority": "medium",
-          "dimension": "accessibility",
-          "recommendation": "Make the input borders and checkbox outline in the dark theme at least 3:1 against the background, and make sure the white text on the blue Sign In button reaches 4.5:1 by darkening the blue."
+          "dimension": "consistency",
+          "recommendation": "Style the 'Password' label the same way as the username label (bold, with a required asterisk). Use one capitalisation style everywhere, for example 'Remember this device' and 'Sign in'."
         },
         {
           "priority": "medium",
           "dimension": "error_prevention",
-          "recommendation": "Add a show/hide password toggle, and a short hint next to 'Remember This Device' saying not to use it on shared computers."
+          "recommendation": "Add a show/hide toggle to the password field so users can check what they typed."
         },
         {
           "priority": "low",
           "dimension": "minimalism",
-          "recommendation": "Hide the page and template render times and the version number from users who aren't logged in."
+          "recommendation": "Hide the page and template render times (and possibly the version) from anonymous users in the footer."
         },
         {
           "priority": "low",
-          "dimension": "accessibility",
-          "recommendation": "Enlarge the 'Remember This Device' checkbox's clickable area to at least 24×24 px, for example by making the whole label clickable with padding."
+          "dimension": "visual_hierarchy",
+          "recommendation": "Make the 'Sign In' heading larger, or centre the card vertically a little more, to balance the empty space below the form."
         }
       ]
     },
@@ -174,167 +174,167 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The form sits in one centered card with the 'Sign In' header. Fields are stacked vertically and the full-width blue 'Sign In' button is the strongest element. Alternative actions ('Sign in with a passkey', 'Register now.') are in a separate card below. The lower ~55% of the viewport is empty.",
-          "justification": "The primary action dominates and the grouping is clear: credentials in one card, alternatives in another. Two small issues: the form sits high, leaving a large empty area below it, and the second card puts two unrelated actions (passkey and registration) together in centered text with no separation."
-        },
-        {
-          "id": "consistency",
-          "score": 3,
-          "evidence": "'Username or Email Address' has a red asterisk but 'Password' has none, though both are required. 'Remember This Device' uses Title Case while 'Forgot password?' uses sentence case. The top bar has both 'Register' and 'Sign In', and the card repeats 'Sign In' and 'Register now.'.",
-          "justification": "Components follow standard Git-platform login conventions (GitHub and GitLab use a similar layout). However, required fields are marked inconsistently and label capitalisation varies. Users may wonder whether the password is optional."
-        },
-        {
-          "id": "system_status",
-          "score": 4,
-          "evidence": "The card header says 'Sign In'. The top-right 'Sign In' button has a highlighted background, showing the current page. The username field has a visible blue focus border and a caret.",
-          "justification": "It is clear where the user is and which field is active. Nothing else needs signalling before submission. Error and loading states cannot be seen in this static screenshot."
-        },
-        {
-          "id": "language_clarity",
-          "score": 4,
-          "evidence": "Labels read 'Username or Email Address', 'Password', 'Forgot password?', 'Remember This Device', 'Need an account? Register now.' and 'Sign in with a passkey'.",
-          "justification": "The labels are plain and familiar. 'Passkey' may be unfamiliar to some users and has no explanation. The footer shows developer-oriented text ('Page: 1ms Template: 0ms') that means nothing to end users."
-        },
-        {
-          "id": "error_prevention",
-          "score": 3,
-          "evidence": "Only the username field has a required marker. The password field has no show/hide toggle. There is no hint about using either a username or an email beyond the label. No caps-lock warning is visible.",
-          "justification": "Login is low-risk, but the missing password visibility toggle and the inconsistent required marking make typing errors and failed attempts more likely. A fix would be to add an eye toggle to the password field and mark both fields as required."
-        },
-        {
-          "id": "efficiency",
-          "score": 4,
-          "evidence": "The username field is auto-focused (caret visible). 'Remember This Device' is offered. 'Forgot password?' sits next to the Password label. A passkey alternative is available.",
-          "justification": "The task takes the minimum number of steps: type, tab, type, Enter. Recovery and alternative sign-in options are close at hand. Only minor improvements remain, such as placing the passkey option more prominently for users who have one."
-        },
-        {
-          "id": "minimalism",
-          "score": 4,
-          "evidence": "The form has only the essentials. The footer shows 'Version: 28.3.0 Page: 1ms Template: 0ms'. 'Sign In' and 'Register' appear twice each (top bar and card).",
-          "justification": "The design is clean overall. The debug timing data in the footer and the duplicated Sign In/Register links are small pieces of noise on a page that is otherwise focused."
-        },
-        {
-          "id": "accessibility",
-          "score": 3,
-          "evidence": "The primary button shows white text on medium blue (~#4183c4), which is close to the 4.5:1 threshold. The password input border is dark grey on a near-black background, with low non-text contrast. The checkbox is small (~14px). Field labels are small (~13px).",
-          "justification": "The focus indicator is visible and the text is mostly legible. However, the input borders likely fall below the 3:1 non-text contrast required by WCAG 1.4.11. The button text contrast is marginal, and the checkbox target is small, though its label is probably clickable. Fixes: lighten the input borders, darken the button blue or use a bolder font, and enlarge the checkbox."
-        }
-      ],
-      "strengths": [
-        "The single clear primary action (the full-width 'Sign In' button) and the auto-focused username field make the main task very fast.",
-        "The layout follows established Git-platform login conventions, with 'Forgot password?' next to the password label.",
-        "Alternative paths (passkey, registration) are in a separate card, apart from the main form."
-      ],
-      "recommendations": [
-        {
-          "priority": "high",
-          "dimension": "accessibility",
-          "recommendation": "Raise the input border contrast to at least 3:1 against the dark background, and check that the white-on-blue 'Sign In' button text reaches 4.5:1 (darken the blue if needed)."
-        },
-        {
-          "priority": "medium",
-          "dimension": "consistency",
-          "recommendation": "Mark the Password field as required with the same red asterisk as the username field (or remove the markers from both), and use one capitalisation style for all labels (e.g. 'Remember this device')."
-        },
-        {
-          "priority": "medium",
-          "dimension": "error_prevention",
-          "recommendation": "Add a show/hide password toggle and a caps-lock warning to the password field to reduce failed login attempts."
-        },
-        {
-          "priority": "low",
-          "dimension": "minimalism",
-          "recommendation": "Hide the 'Page: 1ms Template: 0ms' debug timings in the footer for anonymous users, and drop the duplicated Register/Sign In links from either the top bar or the card."
-        },
-        {
-          "priority": "low",
-          "dimension": "visual_hierarchy",
-          "recommendation": "Center the form more vertically, or balance the empty space below it, and split 'Sign in with a passkey' and 'Register now' into separate rows, e.g. a divider labelled 'or' before the passkey button."
-        }
-      ]
-    },
-    {
-      "view": "login",
-      "dimensions": [
-        {
-          "id": "visual_hierarchy",
-          "score": 4,
-          "evidence": "The centred card holds the fields in a logical top-to-bottom order: Username or Email, then Password, then Remember This Device, then a full-width blue 'Sign In' button. Alternative options sit in a separate card below. The card title 'Sign In' is small and in a regular weight, about the same size as the field labels.",
-          "justification": "The layout is clear, and the primary button stands out as the main action. The heading is weak, though, and the form sits high in the viewport with a large empty dark area below it, so the page looks a little top-heavy."
+          "evidence": "A single centred card titled 'Sign In' holds the username and password fields, the 'Remember This Device' checkbox and a full-width blue 'Sign In' button. A second card below holds the passkey and 'Register now.' links. The page is mostly empty dark space below y≈440.",
+          "justification": "The main action clearly stands out and the fields follow a clear top-to-bottom order. Grouping is logical: the main form is in one card and the alternative actions are in another. One small flaw: the form sits high on the page with a large empty area below, and the card header 'Sign In' is fairly weak typographically."
         },
         {
           "id": "consistency",
           "score": 4,
-          "evidence": "'Sign In' appears in the top navigation, in the card title and on the button. The links 'Forgot password?' and 'Register now.' both use the same blue. The Username label has a red asterisk, but the Password label does not, even though the password is also required.",
-          "justification": "Components and wording follow common Git platform login patterns, like GitHub's and GitLab's. The only inconsistency is that only one of the two required fields is marked."
+          "evidence": "Labels sit above the fields and 'Forgot password?' is right-aligned on the password label row, which is a common pattern (GitHub/GitLab). Links use one consistent blue. 'Username or Email Address' has a red asterisk but 'Password' does not, even though both are required. Capitalisation varies: 'Remember This Device' is in Title Case while 'Forgot password?' and 'Sign in with a passkey' are in sentence case.",
+          "justification": "The page follows Git platform login conventions and Gitea's component styling. There are small inconsistencies in the required-field markers and in capitalisation."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The top-right 'Sign In' button is highlighted with a grey background to show the current page. The Username field is focused, with a blue border and a visible cursor. The card title says 'Sign In'.",
-          "justification": "It is clear where the user is and that they are not logged in. The focused first field signals that the form is ready for input. Error and loading states cannot be seen in a static screenshot."
+          "evidence": "The 'Sign In' button in the top-right of the header is highlighted with a grey background, the card title reads 'Sign In', and the username field has focus (blue border, visible caret).",
+          "justification": "It is clear where the user is, and the focused first field shows the starting point. There are no breadcrumbs, but a login page does not need them. No error or loading state is visible, so feedback could not be assessed."
         },
         {
           "id": "language_clarity",
           "score": 4,
-          "evidence": "The labels 'Username or Email Address', 'Password', 'Remember This Device' and 'Forgot password?' are clear. The phrase 'Sign in with a passkey' may be unfamiliar to some users. Capitalisation varies: 'Remember This Device' is in title case while 'Forgot password?' is in sentence case.",
-          "justification": "The labels are short and understandable and state which identifiers are accepted. The minor issues are the passkey wording, which some users may not know, and the mixed capitalisation."
+          "evidence": "The labels 'Username or Email Address', 'Password', 'Forgot password?', 'Remember This Device', 'Need an account? Register now.' and 'Sign in with a passkey'.",
+          "justification": "The labels are short and clear and tell the user that either a username or an email is accepted. 'Passkey' may be unfamiliar to some users, and nothing on the page explains it."
         },
         {
           "id": "error_prevention",
           "score": 3,
-          "evidence": "The Username field is marked with a red asterisk, but Password is not. There is no button to show or hide the password and no hint about Caps Lock. 'Remember This Device' has no warning about using it on shared computers.",
-          "justification": "The basic safeguards are there: the required-field marker, the account-recovery link and the identifier hint. However, the required fields are marked inconsistently, and nothing helps users avoid password typing mistakes. Fix: add an asterisk to Password and add a show/hide password toggle."
+          "evidence": "Only the username field has the red '*' marker; the password field is unmarked. There is no show/hide toggle for the password, no Caps Lock warning, and no hint about what 'Remember This Device' means on shared computers.",
+          "justification": "Little is done to prevent typos in the password, which is a common cause of failed logins. The required-field marking is incomplete. Recovery through 'Forgot password?' is easy to find, which helps."
         },
         {
           "id": "efficiency",
           "score": 5,
-          "evidence": "The first field is focused automatically. Only two fields are needed. 'Forgot password?' sits right next to the Password label. Passkey sign-in and registration are offered directly below the form.",
-          "justification": "The task takes the fewest possible steps: type, Tab, type, Enter. Alternative paths are visible without getting in the way."
+          "evidence": "The username field has autofocus. There are only two fields and one button. Alternatives (passkey, register, forgot password) are one click away. 'Remember This Device' saves future logins.",
+          "justification": "The task needs the fewest possible steps, and recovery and alternative paths are all visible without any searching."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The form contains only what it needs. The footer shows technical details, 'Version: 28.3.0  Page: 1ms  Template: 0ms', which mean nothing to end users. 'Register' appears both in the top navigation and in the bottom card.",
-          "justification": "The form itself is clean. The developer metrics in the footer are unnecessary noise, and showing the version number on a public login page also reveals information an attacker could use."
+          "evidence": "The footer shows 'Version: 28.3.0  Page: 4ms  Template: 4ms', plus links for Licenses, API, theme 'Auto' and 'English'. The header also has a 'Register' link, which repeats 'Register now.' in the card.",
+          "justification": "The form itself is minimal. The footer shows technical timing and version details that mean nothing to someone signing in, which adds a little noise (and reveals the version number)."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "Labels are visible above each field, and the focus ring on the Username field is visible. White text on the medium-blue 'Sign In' button has a borderline contrast ratio, around 4:1. The Password field's border is dark grey on a near-black background, which is low contrast for a control boundary (WCAG 1.4.11). The 'Remember This Device' checkbox is small, about 14 px, though its label may be clickable.",
-          "justification": "The labels and font size are legible, and controls have proper labels. The problems are the low contrast of input borders and the checkbox in the dark theme, and the borderline contrast of the button text. Fix: lighten the input borders to at least 3:1 contrast and darken the button's blue."
+          "evidence": "The white 'Sign In' label on the mid-blue (#4183c4-like) button has roughly 4:1 contrast, which is borderline for small text. The grey field borders on the near-black background are faint, and so is the small 'Remember This Device' checkbox (about 14px). The footer has small grey and blue text on a dark background. Required status is shown only by a small red asterisk.",
+          "justification": "Most text is readable and the focus state on the username field is visible. However, the main button's contrast is close to the AA limit, the borders of inactive fields may not reach the 3:1 non-text contrast required by WCAG 1.4.11, and the checkbox is a small click target unless its label is clickable (this cannot be checked from the screenshot)."
         }
       ],
       "strengths": [
-        "A minimal, focused login form: the first field is focused automatically, and the full-width primary button makes the task quick",
-        "'Forgot password?' sits right next to the Password label, and passkey sign-in and registration are easy to find",
-        "Labels are clear and visible above each field, and the Username label says that an email address also works"
+        "The form is minimal and well focused: two fields, autofocus on the username and one dominant full-width 'Sign In' button",
+        "Recovery and alternatives ('Forgot password?', passkey, 'Register now.') are visible and sit in logical places",
+        "The layout follows familiar Git platform login conventions, with a clear active state in the header"
       ],
       "recommendations": [
         {
           "priority": "high",
           "dimension": "accessibility",
-          "recommendation": "Lighten the input and checkbox borders in the dark theme to at least 3:1 contrast against the background. Darken the blue of the primary button so its white text reaches at least 4.5:1."
+          "recommendation": "Make the primary button's background darker (or its text bolder) so its contrast is at least 4.5:1. Make the input and checkbox borders brighter so they reach at least 3:1 against the dark background (WCAG 1.4.11)."
         },
         {
           "priority": "medium",
           "dimension": "error_prevention",
-          "recommendation": "Mark Password as required with an asterisk, the same way Username is marked. Add a show/hide password toggle to reduce typing mistakes."
-        },
-        {
-          "priority": "medium",
-          "dimension": "minimalism",
-          "recommendation": "Hide the version number and the page/template render timings in the footer for users who are not logged in. They are noise to end users and reveal information about the server."
+          "recommendation": "Add a show/hide toggle to the password field and a Caps Lock warning, and mark the password field as required, like the username field."
         },
         {
           "priority": "low",
-          "dimension": "visual_hierarchy",
-          "recommendation": "Make the card heading larger or bolder, and place the form a bit lower in the viewport to balance the page."
+          "dimension": "minimalism",
+          "recommendation": "Hide the page and template render times and the version number in the footer from users who are not signed in."
+        },
+        {
+          "priority": "low",
+          "dimension": "consistency",
+          "recommendation": "Use one capitalisation style for all labels, e.g. 'Remember this device' to match 'Forgot password?'."
         },
         {
           "priority": "low",
           "dimension": "language_clarity",
-          "recommendation": "Use one capitalisation style throughout, for example 'Remember this device'. Consider a short tooltip that explains what a passkey is."
+          "recommendation": "Add a short tooltip or helper text explaining what a passkey is next to 'Sign in with a passkey'."
+        }
+      ]
+    },
+    {
+      "view": "login",
+      "dimensions": [
+        {
+          "id": "visual_hierarchy",
+          "score": 4,
+          "evidence": "A single centred card titled 'Sign In' holds the fields in reading order: username, password, 'Remember This Device', then a full-width blue 'Sign In' button. Secondary options ('Sign in with a passkey', 'Register now.') sit in a separate card below.",
+          "justification": "The primary action stands out and the grouping is clear. Small flaws: the 'Username or Email Address' label is bold but 'Password' is regular weight, which breaks the visual rhythm. The form also sits at the top of a mostly empty dark screen, so the bottom half of the viewport is unused."
+        },
+        {
+          "id": "consistency",
+          "score": 4,
+          "evidence": "The page follows common Git-platform login conventions: 'Forgot password?' aligned right above the password field, 'Remember This Device', a register link and a passkey option. The 'Sign In' button and links use the app's standard styling. However, only the username field has a red asterisk, and the two labels use different font weights.",
+          "justification": "It matches GitHub/GitLab patterns well. The inconsistent required marker and label styling are minor flaws."
+        },
+        {
+          "id": "system_status",
+          "score": 4,
+          "evidence": "The 'Sign In' item in the top bar is highlighted as active, the card header says 'Sign In', the username field shows focus (blue border and cursor), and the footer shows 'Version: 28.3.0'.",
+          "justification": "It is clear where the user is and which field has focus. Error and loading states cannot be judged from a static screenshot."
+        },
+        {
+          "id": "language_clarity",
+          "score": 4,
+          "evidence": "The labels 'Username or Email Address', 'Password', 'Forgot password?', 'Remember This Device' and 'Need an account? Register now.' are plain and clear. 'Sign in with a passkey' may be unfamiliar to some users, and 'Page: 4ms Template: 4ms' in the footer is developer jargon.",
+          "justification": "The labels are clear overall and say that either a username or an email works. Minor jargon remains in secondary areas."
+        },
+        {
+          "id": "error_prevention",
+          "score": 3,
+          "evidence": "Username is marked required with an asterisk but Password is not, even though both are needed. There is no show/hide password toggle and no visible Caps Lock warning. 'Forgot password?' offers a recovery path.",
+          "justification": "The inconsistent required marking may confuse users. The lack of a password visibility toggle makes typing mistakes more likely and slower to fix."
+        },
+        {
+          "id": "efficiency",
+          "score": 4,
+          "evidence": "The username field is focused on load, the form is short (two fields), and 'Remember This Device' and passkey sign-in are offered. 'Register' and 'Sign In' links are in the top bar.",
+          "justification": "Signing in takes very few steps. The 'Register' entry is duplicated (top bar and bottom card), but this does no harm."
+        },
+        {
+          "id": "minimalism",
+          "score": 4,
+          "evidence": "The page holds only the essentials. The footer shows build and performance details ('Version: 28.3.0 Page: 4ms Template: 4ms'), and 'Licenses' and 'API' links are visible to users who are not logged in.",
+          "justification": "The design is clean. The developer-oriented footer metrics are unnecessary noise for end users."
+        },
+        {
+          "id": "accessibility",
+          "score": 3,
+          "evidence": "The 'Sign In' button has white text on a medium blue (about #4183C4), roughly 4:1 contrast, below the 4.5:1 needed for this small text. Input borders are thin dark grey on a near-black background, with low non-text contrast. The checkbox is small (about 13 px). Fields have visible text labels and a clear focus ring on the username field.",
+          "justification": "The labels and focus indicator are good. The button text contrast, faint field borders and small checkbox target may fall short of WCAG 1.4.3, 1.4.11 and 2.5.8 for users with low vision or limited motor control."
+        }
+      ],
+      "strengths": [
+        "Clear, conventional login layout with one dominant primary 'Sign In' button and the username field focused on load",
+        "Recovery and alternative paths are easy to find: 'Forgot password?', passkey sign-in and 'Register now.'",
+        "Clear labels; 'Username or Email Address' tells users both options are accepted"
+      ],
+      "recommendations": [
+        {
+          "priority": "high",
+          "dimension": "accessibility",
+          "recommendation": "Darken the primary button blue (or use darker text) so the 'Sign In' label reaches at least 4.5:1 contrast. Raise input border contrast to at least 3:1 against the dark background."
+        },
+        {
+          "priority": "medium",
+          "dimension": "error_prevention",
+          "recommendation": "Mark the Password field as required in the same way as the username field (or explain that all fields are required). Add a show/hide password toggle."
+        },
+        {
+          "priority": "medium",
+          "dimension": "consistency",
+          "recommendation": "Give the 'Password' label the same font weight as the 'Username or Email Address' label."
+        },
+        {
+          "priority": "low",
+          "dimension": "accessibility",
+          "recommendation": "Make the 'Remember This Device' checkbox at least 24×24 px, or make its whole label row clickable with sufficient padding."
+        },
+        {
+          "priority": "low",
+          "dimension": "minimalism",
+          "recommendation": "Hide the page and template render times (and possibly the version number) in the footer for users who are not logged in, to cut developer-oriented noise."
         }
       ]
     }

@@ -16,8 +16,8 @@ pytestmark = pytest.mark.ui
 def test_create_issue_with_label(logged_in, repo, user_api):
     full = repo["full_name"]
     user_api.create_label(*full.split("/"), "bug")
-    title = unique("Błąd logowania")
-    issue = NewIssuePage(logged_in, full).open().create(title, body="Kroki: 1. ...", label="bug")
+    title = unique("Login error")
+    issue = NewIssuePage(logged_in, full).open().create(title, body="Steps: 1. ...", label="bug")
     assert issue.title().startswith(title)
     assert "bug" in issue.labels()
     number = int(issue.url.rsplit("/", 1)[1])
@@ -30,20 +30,20 @@ def test_create_issue_with_label(logged_in, repo, user_api):
 @pytest.mark.feature("F05")
 def test_issue_comment_close_and_reopen(logged_in, repo, user_api):
     full = repo["full_name"]
-    number = user_api.create_issue(*full.split("/"), title="Do zamknięcia")["number"]
+    number = user_api.create_issue(*full.split("/"), title="To be closed")["number"]
     page = IssuePage(logged_in).open(f"/{full}/issues/{number}")
 
-    page.comment("Potwierdzam błąd")
+    page.comment("Bug confirmed")
     assert page.status_button_text() == "Close Issue"
 
-    page.toggle_status(comment="Naprawione")
+    page.toggle_status(comment="Fixed")
     assert user_api.get(f"/repos/{full}/issues/{number}").json()["state"] == "closed"
     assert page.status_button_text() == "Reopen Issue"
 
     page.toggle_status()
     assert user_api.get(f"/repos/{full}/issues/{number}").json()["state"] == "open"
     comments = [c["body"] for c in user_api.get(f"/repos/{full}/issues/{number}/comments").json()]
-    assert comments == ["Potwierdzam błąd", "Naprawione"]
+    assert comments == ["Bug confirmed", "Fixed"]
 
 
 @pytest.mark.tc("TC-F09")
@@ -51,13 +51,13 @@ def test_issue_comment_close_and_reopen(logged_in, repo, user_api):
 def test_edit_file_in_web_editor(logged_in, repo, user_api):
     full = repo["full_name"]
     editor = FileEditorPage(logged_in, full, "main", "README.md").open()
-    editor.replace_content("Treść zmieniona w edytorze")
-    editor.commit("Aktualizacja README z UI")
+    editor.replace_content("Content changed in the editor")
+    editor.commit("Update README from the UI")
 
     content = user_api.get(f"/repos/{full}/contents/README.md").json()["content"]
-    assert base64.b64decode(content).decode().strip() == "Treść zmieniona w edytorze"
+    assert base64.b64decode(content).decode().strip() == "Content changed in the editor"
     last = user_api.get(f"/repos/{full}/commits", params={"limit": 1}).json()[0]
-    assert last["commit"]["message"].strip() == "Aktualizacja README z UI"
+    assert last["commit"]["message"].strip() == "Update README from the UI"
 
 
 @pytest.mark.tc("TC-F10")
@@ -66,8 +66,8 @@ def test_create_and_merge_pull_request(logged_in, repo, user_api):
     full = repo["full_name"]
     owner, name = full.split("/")
     user_api.create_branch_with_change(owner, name, "feature-x", "feature.txt",
-                                       base64.b64encode(b"nowa funkcja\n").decode(), "Dodaj feature.txt")
-    ComparePage(logged_in, full, "main", "feature-x").open().create_pull("Dodaje feature.txt")
+                                       base64.b64encode(b"new feature\n").decode(), "Add feature.txt")
+    ComparePage(logged_in, full, "main", "feature-x").open().create_pull("Add feature.txt")
     pull = PullPage(logged_in)
     number = int(pull.url.rsplit("/", 1)[1])
     pull.merge()

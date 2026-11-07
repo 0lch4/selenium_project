@@ -95,7 +95,7 @@ Warunki końcowe: brak sesji; konto nie zostało zablokowane.
 | Technika | Podział na klasy równoważności (poprawna nazwa, repo publiczne, inicjalizacja włączona) |
 | Typ testu | Funkcjonalny |
 | Poziom testu | Testowanie systemowe (UI, Selenium + weryfikacja API) |
-| Warunki wstępne / dane | Zalogowany użytkownik testowy; nazwa `ui-repo-<losowy>`, opis „Repo z testu Selenium” |
+| Warunki wstępne / dane | Zalogowany użytkownik testowy; nazwa `ui-repo-<losowy>`, opis „Repository from a Selenium test” |
 | Powiązane funkcje | F03, F04 |
 
 | # | Krok | Oczekiwany rezultat |
@@ -133,7 +133,7 @@ Warunki końcowe: stan repozytoriów użytkownika bez zmian.
 | Technika | Testowanie oparte na kryteriach akceptacji |
 | Typ testu | Funkcjonalny |
 | Poziom testu | Testowanie systemowe (UI, Selenium + weryfikacja API) |
-| Warunki wstępne / dane | Zalogowany właściciel repozytorium; w repo istnieje etykieta `bug`; tytuł „Błąd logowania-<losowy>” |
+| Warunki wstępne / dane | Zalogowany właściciel repozytorium; w repo istnieje etykieta `bug`; tytuł „Login error-<losowy>” |
 | Powiązane funkcje | F05, F09 |
 
 | # | Krok | Oczekiwany rezultat |
@@ -153,16 +153,16 @@ Warunki końcowe: w repo istnieje 1 otwarte zgłoszenie z etykietą `bug`.
 | Technika | Testowanie przejść między stanami (open → closed → open; przejścia „zamknij z komentarzem”, „otwórz ponownie”) |
 | Typ testu | Funkcjonalny |
 | Poziom testu | Testowanie systemowe (UI, Selenium + weryfikacja API) |
-| Warunki wstępne / dane | Zalogowany właściciel; otwarte zgłoszenie „Do zamknięcia” utworzone przez API |
+| Warunki wstępne / dane | Zalogowany właściciel; otwarte zgłoszenie „To be closed” utworzone przez API |
 | Powiązane funkcje | F05 |
 
 | # | Krok | Oczekiwany rezultat |
 |---|---|---|
 | 1 | Otwórz stronę zgłoszenia | Przycisk statusu „Close Issue” |
-| 2 | Dodaj komentarz „Potwierdzam błąd” | Komentarz widoczny na osi czasu; stan nadal open |
-| 3 | Wpisz „Naprawione” i kliknij „Close with Comment” | Stan w API = closed; przycisk zmienia się na „Reopen Issue” |
+| 2 | Dodaj komentarz „Bug confirmed” | Komentarz widoczny na osi czasu; stan nadal open |
+| 3 | Wpisz „Fixed” i kliknij „Close with Comment” | Stan w API = closed; przycisk zmienia się na „Reopen Issue” |
 | 4 | Kliknij „Reopen Issue” | Stan w API = open |
-| 5 | `GET .../issues/<n>/comments` | Dokładnie 2 komentarze w kolejności: „Potwierdzam błąd”, „Naprawione” |
+| 5 | `GET .../issues/<n>/comments` | Dokładnie 2 komentarze w kolejności: „Bug confirmed”, „Fixed” |
 
 Warunki końcowe: zgłoszenie otwarte, 2 komentarze, 2 zdarzenia zmiany stanu na osi czasu.
 
@@ -173,7 +173,7 @@ Warunki końcowe: zgłoszenie otwarte, 2 komentarze, 2 zdarzenia zmiany stanu na
 | Technika | Testowanie oparte na kryteriach akceptacji |
 | Typ testu | Funkcjonalny |
 | Poziom testu | Testowanie systemowe (UI, Selenium + weryfikacja API) |
-| Warunki wstępne / dane | Zalogowany właściciel repo z `README.md`; nowa treść „Treść zmieniona w edytorze”; opis commita „Aktualizacja README z UI” |
+| Warunki wstępne / dane | Zalogowany właściciel repo z `README.md`; nowa treść „Content changed in the editor”; opis commita „Update README from the UI” |
 | Powiązane funkcje | F08, F04 |
 
 | # | Krok | Oczekiwany rezultat |
@@ -193,7 +193,7 @@ Warunki końcowe: gałąź `main` ma nowy commit ze zmienionym README.
 | Technika | Testowanie oparte na kryteriach akceptacji (przepływ end-to-end) |
 | Typ testu | Funkcjonalny |
 | Poziom testu | Testowanie systemowe (UI, Selenium + weryfikacja API) |
-| Warunki wstępne / dane | Zalogowany właściciel; gałąź `feature-x` z plikiem `feature.txt` (utworzona przez API); tytuł PR „Dodaje feature.txt” |
+| Warunki wstępne / dane | Zalogowany właściciel; gałąź `feature-x` z plikiem `feature.txt` (utworzona przez API); tytuł PR „Add feature.txt” |
 | Powiązane funkcje | F06 |
 
 | # | Krok | Oczekiwany rezultat |

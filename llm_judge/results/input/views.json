@@ -3,8 +3,8 @@
     "id": "login",
     "path": "/user/login",
     "auth": false,
-    "purpose": "Logowanie do aplikacji",
-    "task": "Zaloguj się nazwą użytkownika i hasłem",
+    "purpose": "Sign in to the application",
+    "task": "Sign in with a username and password",
     "url": "http://localhost:3000/user/login",
     "screenshot": "login.png",
     "viewport": [
@@ -16,8 +16,8 @@
     "id": "repo_home",
     "path": "/judge-demo/web-shop",
     "auth": true,
-    "purpose": "Strona główna repozytorium (pliki, README, nawigacja repo)",
-    "task": "Odnajdź plik docs/INSTALL.md i sprawdź ostatni commit",
+    "purpose": "Repository home page (files, README, repository navigation)",
+    "task": "Find the docs/INSTALL.md file and check the latest commit",
     "url": "http://localhost:3000/judge-demo/web-shop",
     "screenshot": "repo_home.png",
     "viewport": [
@@ -29,8 +29,8 @@
     "id": "issues_list",
     "path": "/judge-demo/web-shop/issues",
     "auth": true,
-    "purpose": "Lista zgłoszeń z filtrami i etykietami",
-    "task": "Znajdź otwarte zgłoszenia oznaczone jako bug",
+    "purpose": "Issue list with filters and labels",
+    "task": "Find open issues labelled bug",
     "url": "http://localhost:3000/judge-demo/web-shop/issues",
     "screenshot": "issues_list.png",
     "viewport": [
@@ -42,8 +42,8 @@
     "id": "new_issue",
     "path": "/judge-demo/web-shop/issues/new",
     "auth": true,
-    "purpose": "Formularz nowego zgłoszenia",
-    "task": "Utwórz zgłoszenie z tytułem, opisem i etykietą",
+    "purpose": "New issue form",
+    "task": "Create an issue with a title, description and label",
     "url": "http://localhost:3000/judge-demo/web-shop/issues/new",
     "screenshot": "new_issue.png",
     "viewport": [
