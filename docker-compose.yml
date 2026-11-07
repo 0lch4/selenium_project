@@ -1,0 +1,32 @@
+services:
+  gitea:
+    image: gitea/gitea:28.3.0
+    container_name: gitea-sut
+    environment:
+      USER_UID: "1000"
+      USER_GID: "1000"
+      GITEA__database__DB_TYPE: sqlite3
+      GITEA__security__INSTALL_LOCK: "true"
+      GITEA__server__DOMAIN: localhost
+      GITEA__server__ROOT_URL: http://localhost:3000/
+      GITEA__server__HTTP_PORT: "3000"
+      GITEA__server__SSH_PORT: "2222"
+      GITEA__service__DISABLE_REGISTRATION: "false"
+      GITEA__service__REQUIRE_SIGNIN_VIEW: "false"
+      GITEA__service__ENABLE_CAPTCHA: "false"
+      GITEA__service__REGISTER_EMAIL_CONFIRM: "false"
+      GITEA__mailer__ENABLED: "false"
+      GITEA__log__LEVEL: Warn
+    ports:
+      - "3000:3000"
+      - "2222:22"
+    volumes:
+      - gitea-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3000/api/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  gitea-data:
