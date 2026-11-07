@@ -30,3 +30,13 @@ HEADLESS=0 .venv/Scripts/pytest -m ui             # przeglądarka widoczna (demo
 | `tests/` | testy automatyczne (UI, API, niefunkcjonalne) |
 | `scripts/` | uruchomienie środowiska |
 | `reports/` | wyniki wykonania (generowane) |
+
+## LLM-as-a-Judge (ocena UI/UX)
+```bash
+.venv/Scripts/python -m llm_judge.capture          # zrzuty 4 widoków (1440x900) + views.json
+.venv/Scripts/python -m llm_judge.judge --dry-run  # walidacja wejścia bez wywołań API
+.venv/Scripts/python -m llm_judge.judge            # ocena: 3 przebiegi na widok, claude-opus-5-5
+```
+Wymaga klucza `ANTHROPIC_API_KEY` (PowerShell: `$env:ANTHROPIC_API_KEY="sk-ant-..."`).
+Rubryka (8 wymiarów, skala 1–5): [llm_judge/prompts/judge_rubric.md](llm_judge/prompts/judge_rubric.md).
+Wyniki: `llm_judge/results/<widok>.json` i `llm_judge/results/summary.md`.
