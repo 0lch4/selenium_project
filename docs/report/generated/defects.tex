@@ -1,0 +1,45 @@
+{\small
+\begin{longtable}{p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{ID} & \textbf{Tytuł} & \textbf{Wykryty przez} & \textbf{Ważność} & \textbf{Priorytet} & \textbf{Status} \\
+\midrule
+\endhead
+DEF-01 & Formularz logowania akceptuje żądania cross-site (login CSRF) & TC-NF04 & Niska & Niski & Otwarty \\
+DEF-02 & Krytyczne naruszenia WCAG 2.1 AA na kluczowych widokach & TC-NF03 & Średnia & Średni & Otwarty \\
+OBS-01 & Brak nagłówka \texttt{Content-Security-Policy} & TC-NF04 & – & – & Obserwacja \\
+OBS-02 & Niewystarczający kontrast tekstu (axe \texttt{color-contrast}, serious) & TC-NF03 & – & – & Obserwacja \\
+\bottomrule
+\end{longtable}
+}
+\subsubsection{DEF-01 – login CSRF}
+- \textbf{Kroki:} \texttt{POST /user/login} z nagłówkami \texttt{Origin: http://evil.example}, \texttt{Sec-Fetch-Site: cross-site} i poprawnymi danymi.
+
+- \textbf{Oczekiwany rezultat:} odrzucenie żądania (403), tak jak dla innych akcji zmieniających stan (\texttt{/repo/create} zwraca 403).
+
+- \textbf{Rzeczywisty rezultat:} \texttt{303 -> /}, ustawiona sesja zalogowanego użytkownika.
+
+- \textbf{Wpływ:} atakujący może zalogować ofiarę na swoje konto (session fixation / login CSRF).
+
+- \textbf{Automatyzacja:} \texttt{tests/nonfunctional/test\_quality.py::TestSecurity::test\_cross\_origin\_login\_is\_rejected} (\texttt{xfail strict}).
+
+\subsubsection{DEF-02 – dostępność (axe-core 4.10.2, reguły wcag2a/wcag2aa/wcag21aa)}
+{\small
+\begin{longtable}{p{\dimexpr 0.333\linewidth-2\tabcolsep\relax}p{\dimexpr 0.333\linewidth-2\tabcolsep\relax}p{\dimexpr 0.333\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Widok} & \textbf{Krytyczne} & \textbf{Poważne (serious)} \\
+\midrule
+\endhead
+\texttt{/user/login} & aria-required-children (2) & color-contrast (4) \\
+\texttt{/user/sign\_up} & aria-required-children (2) & color-contrast (4) \\
+\texttt{/\{owner\}/\{repo\}} & aria-required-children (3), button-name (1) & aria-prohibited-attr, color-contrast, link-name \\
+\texttt{/\{owner\}/\{repo\}/issues} & aria-required-children (4) & aria-prohibited-attr, color-contrast (8) \\
+\texttt{/repo/create} & aria-required-children (2), label (4) & aria-input-field-name (3), color-contrast, link-in-text-block \\
+\bottomrule
+\end{longtable}
+}
+- \textbf{Oczekiwany rezultat (kryterium TC-NF03):} brak naruszeń o wpływie \texttt{critical}.
+
+- \textbf{Wpływ:} użytkownicy czytników ekranu nie otrzymują poprawnej struktury menu (role \texttt{menu} bez wymaganych dzieci), pola formularza nowego repo bez etykiet, przycisk bez nazwy dostępnej.
+
+- Pełne dane: \texttt{reports/axe.json} (generowany przy każdym przebiegu).
+
