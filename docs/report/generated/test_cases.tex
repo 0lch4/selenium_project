@@ -131,7 +131,7 @@ Priorytet & Wysoki \\
 Technika & Podział na klasy równoważności (poprawna nazwa, repo publiczne, inicjalizacja włączona) \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium + weryfikacja API) \\
-Warunki wstępne / dane & Zalogowany użytkownik testowy; nazwa \texttt{ui-repo-<losowy>}, opis „Repo z testu Selenium” \\
+Warunki wstępne / dane & Zalogowany użytkownik testowy; nazwa \texttt{ui-repo-<losowy>}, opis „Repository from a Selenium test” \\
 Powiązane funkcje & F03, F04 \\
 \bottomrule
 \end{longtable}
@@ -193,7 +193,7 @@ Priorytet & Wysoki \\
 Technika & Testowanie oparte na kryteriach akceptacji \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium + weryfikacja API) \\
-Warunki wstępne / dane & Zalogowany właściciel repozytorium; w repo istnieje etykieta \texttt{bug}; tytuł „Błąd logowania-<losowy>” \\
+Warunki wstępne / dane & Zalogowany właściciel repozytorium; w repo istnieje etykieta \texttt{bug}; tytuł „Login error-<losowy>” \\
 Powiązane funkcje & F05, F09 \\
 \bottomrule
 \end{longtable}
@@ -225,7 +225,7 @@ Priorytet & Wysoki \\
 Technika & Testowanie przejść między stanami (open $\rightarrow$ closed $\rightarrow$ open; przejścia „zamknij z komentarzem”, „otwórz ponownie”) \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium + weryfikacja API) \\
-Warunki wstępne / dane & Zalogowany właściciel; otwarte zgłoszenie „Do zamknięcia” utworzone przez API \\
+Warunki wstępne / dane & Zalogowany właściciel; otwarte zgłoszenie „To be closed” utworzone przez API \\
 Powiązane funkcje & F05 \\
 \bottomrule
 \end{longtable}
@@ -237,10 +237,10 @@ Powiązane funkcje & F05 \\
 \midrule
 \endhead
 1 & Otwórz stronę zgłoszenia & Przycisk statusu „Close Issue” \\
-2 & Dodaj komentarz „Potwierdzam błąd” & Komentarz widoczny na osi czasu; stan nadal open \\
-3 & Wpisz „Naprawione” i kliknij „Close with Comment” & Stan w API = closed; przycisk zmienia się na „Reopen Issue” \\
+2 & Dodaj komentarz „Bug confirmed” & Komentarz widoczny na osi czasu; stan nadal open \\
+3 & Wpisz „Fixed” i kliknij „Close with Comment” & Stan w API = closed; przycisk zmienia się na „Reopen Issue” \\
 4 & Kliknij „Reopen Issue” & Stan w API = open \\
-5 & \texttt{GET .../issues/<n>/comments} & Dokładnie 2 komentarze w kolejności: „Potwierdzam błąd”, „Naprawione” \\
+5 & \texttt{GET .../issues/<n>/comments} & Dokładnie 2 komentarze w kolejności: „Bug confirmed”, „Fixed” \\
 \bottomrule
 \end{longtable}
 }
@@ -257,7 +257,7 @@ Priorytet & Średni \\
 Technika & Testowanie oparte na kryteriach akceptacji \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium + weryfikacja API) \\
-Warunki wstępne / dane & Zalogowany właściciel repo z \texttt{README.md}; nowa treść „Treść zmieniona w edytorze”; opis commita „Aktualizacja README z UI” \\
+Warunki wstępne / dane & Zalogowany właściciel repo z \texttt{README.md}; nowa treść „Content changed in the editor”; opis commita „Update README from the UI” \\
 Powiązane funkcje & F08, F04 \\
 \bottomrule
 \end{longtable}
@@ -289,7 +289,7 @@ Priorytet & Wysoki \\
 Technika & Testowanie oparte na kryteriach akceptacji (przepływ end-to-end) \\
 Typ testu & Funkcjonalny \\
 Poziom testu & Testowanie systemowe (UI, Selenium + weryfikacja API) \\
-Warunki wstępne / dane & Zalogowany właściciel; gałąź \texttt{feature-x} z plikiem \texttt{feature.txt} (utworzona przez API); tytuł PR „Dodaje feature.txt” \\
+Warunki wstępne / dane & Zalogowany właściciel; gałąź \texttt{feature-x} z plikiem \texttt{feature.txt} (utworzona przez API); tytuł PR „Add feature.txt” \\
 Powiązane funkcje & F06 \\
 \bottomrule
 \end{longtable}

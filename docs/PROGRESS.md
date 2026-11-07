@@ -13,3 +13,4 @@
 - [x] Report: LaTeX (sections 1–8) compiled by GitHub Actions, artifact `raport-pdf` (PR #22)
 - [x] Demo: scripts/demo.ps1 – Gitea, 4 UI tests in a visible browser, judge of one view (PR #23)
 - [x] Repository code and README translated to English (report materials in docs/ stay in Polish)
+- [x] Test data in English; screenshots and LLM judge results regenerated – all PASS, 3.62–4.12

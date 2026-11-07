@@ -16,47 +16,47 @@
       },
       "consistency": {
         "scores": [
-          5,
+          4,
           5,
           5
         ],
         "median": 5,
-        "spread": 0
+        "spread": 1
       },
       "system_status": {
         "scores": [
           4,
-          4,
-          4
+          3,
+          3
         ],
-        "median": 4,
-        "spread": 0
+        "median": 3,
+        "spread": 1
       },
       "language_clarity": {
         "scores": [
-          3,
+          4,
           3,
           4
         ],
-        "median": 3,
+        "median": 4,
         "spread": 1
       },
       "error_prevention": {
         "scores": [
           3,
-          3,
+          2,
           3
         ],
         "median": 3,
-        "spread": 0
+        "spread": 1
       },
       "efficiency": {
         "scores": [
           4,
           3,
-          4
+          3
         ],
-        "median": 4,
+        "median": 3,
         "spread": 1
       },
       "minimalism": {
@@ -78,7 +78,7 @@
         "spread": 0
       }
     },
-    "mean": 3.75,
+    "mean": 3.62,
     "max_spread": 1,
     "verdict": "PASS"
   },
@@ -89,82 +89,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The main form column (Title field, Write/Preview editor, 'Create Issue' button at the bottom right) sits on the left. A narrower sidebar on the right holds Labels, Milestone, Projects and Assignees, divided by separators. The blue 'Create Issue' button is the only filled primary button.",
-          "justification": "The two-column layout groups related things clearly and follows the F-pattern: title, then body, then submit. The 'Create Issue' button is fairly small and is the only strong accent. The sidebar's metadata sections have the same visual weight as each other, so 'Labels', which is needed for this task, does not stand out. Small flaw only."
+          "evidence": "The Title input sits at the top of a clear two-column layout: the form is on the left and the metadata sidebar (Labels, Milestone, Projects, Assignees) is on the right. The blue 'Create Issue' button is aligned bottom-right of the form. The sidebar sections are split by dividers.",
+          "justification": "The grouping and reading order are clear and the main action is easy to find. There is no page heading such as 'New Issue', though, and the Labels section in the sidebar is visually weak. Its only cue is a small gear icon, so the label step does not stand out."
         },
         {
           "id": "consistency",
-          "score": 5,
-          "evidence": "The repo tabs (Code, Issues 4, Pull Requests…) have consistent icons. The Labels, Milestone, Projects and Assignees sections all use the same gear-icon pattern. The Write/Preview tabs and markdown toolbar look like GitHub's and GitLab's.",
-          "justification": "Components and icons are used the same way throughout. The layout matches the standard Git-platform pattern for creating an issue, so users coming from GitHub will recognise it straight away."
+          "score": 4,
+          "evidence": "The Write/Preview tabs, markdown toolbar, sidebar with gear icons and 'Create Issue' button follow GitHub/Gitea conventions. Capitalisation is mixed: 'No Milestone' and 'No Assignees' versus 'No labels' and 'No projects'.",
+          "justification": "The layout matches what users expect from Git platforms. The only problem is the inconsistent capitalisation of the empty-state text."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The 'Issues' tab is underlined and bold, with the counter '4'. The breadcrumb 'judge-demo / web-shop' shows the repository. The sidebar shows the current state ('No labels', 'No Milestone', 'No Assignees').",
-          "justification": "The user's location is clear, and so is the state of the metadata. But the page has no heading such as 'New Issue', and the breadcrumb doesn't include an 'Issues > New' step. Users only know they're creating an issue from the form itself and the button label."
+          "evidence": "The repo breadcrumb 'judge-demo / web-shop' is shown, the Issues tab is active with the counter 4, and the Title input has a focus ring. The sidebar shows the current state of each field ('No labels', 'No Milestone').",
+          "justification": "Users can see where they are and what state the metadata is in. The page has no explicit 'New issue' title, so the user has to infer the context from the empty form."
         },
         {
           "id": "language_clarity",
-          "score": 3,
-          "evidence": "The title field shows only the placeholder 'Title', with no persistent label. The body says 'Leave a comment', which is wording for comments, not for an issue description. The text 'No Branch/Tag Specified' sits at the top of the sidebar without explanation. The mixed capitalisation in 'No labels' vs 'No Milestone' / 'No Assignees' is a separate consistency issue.",
-          "justification": "'Leave a comment' is the wrong wording for an issue description and may confuse new users. Placeholder-only labels disappear once the user starts typing (WCAG 3.3.2). The branch selector isn't explained, which is jargon for non-developers."
+          "score": 4,
+          "evidence": "Labels and button text are short and clear: 'Title', 'Leave a comment', 'Drop files here to upload', 'Create Issue'. 'No Branch/Tag Specified' is jargon and its purpose is unclear.",
+          "justification": "Most labels are plain. 'Leave a comment' is an odd placeholder for an issue description, and the branch/tag dropdown has no explanation."
         },
         {
           "id": "error_prevention",
           "score": 3,
-          "evidence": "The Title field has no required marker (*) and no hint. The 'Create Issue' button looks enabled even though the title is empty. Nothing tells the user which fields are optional.",
-          "justification": "Users can't see that the title is required until they try to submit. The Preview tab helps catch markdown mistakes. Creating an issue is reversible, so the risk is moderate."
+          "evidence": "The Title field is identified only by placeholder text that disappears when typing. It has no required marker. 'Create Issue' looks enabled while the title is empty, and there is no hint about required fields.",
+          "justification": "Users only find out the title is required when they try to submit. A placeholder used as the label also stops helping once text is entered."
         },
         {
           "id": "efficiency",
           "score": 4,
-          "evidence": "The Title field is focused automatically (blue outline, cursor visible). The markdown toolbar offers formatting, mentions (@) and references. A drag-and-drop upload area is provided. Labels can be set from the gear icon on the same page.",
-          "justification": "The whole task (title, description, label) can be done on one screen without leaving the page. One small issue: labels are reached only through a small gear icon rather than by clicking the 'Labels' header or the 'No labels' text, which takes a bit of searching."
+          "evidence": "The title field has focus on load. The markdown toolbar, @-mention and file drop zone are visible, and all metadata pickers are on the same page.",
+          "justification": "The whole task (title, description, label) can be done on one page. Adding a label requires finding the small gear icon instead of an obvious control, which is a small extra cost."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The form is clean, with plenty of whitespace. The sidebar has only four metadata sections plus the branch selector. The footer shows technical data ('Page: 10ms Template: 5ms').",
-          "justification": "Density suits the task. Small amounts of noise come from the footer's performance metrics and the branch/tag selector, which most issue-reporting tasks don't need."
+          "evidence": "The page is a clean dark theme with few elements. The toolbar has many icons and there is a large empty area below the form.",
+          "justification": "The density suits the task. Nothing unnecessary competes with the form."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "The placeholder text 'Title' and 'Leave a comment' is low-contrast grey on a dark background. The 'No labels' / 'No Milestone' text is small (about 12px). The gear icons are small, about 16px. The 'Create Issue' button has white text on a medium blue, which looks borderline for contrast.",
-          "justification": "Placeholders and secondary text look likely to fail the 4.5:1 contrast ratio in dark mode (WCAG 1.4.3). The gear-icon targets for setting labels and assignees are small (WCAG 2.5.8), and labels shown only as placeholders reduce accessibility. A focus indicator is visible on the Title field."
+          "evidence": "Placeholder text ('Title', 'Leave a comment') and the secondary sidebar text ('No labels') are grey on a dark background with low contrast. The gear icons are small (about 16px). White text on the light-blue 'Create Issue' button looks low in contrast. The Title field has no visible label.",
+          "justification": "Several elements look likely to fail WCAG 1.4.3 and 1.4.11 contrast, and the target size of the gear icons is borderline under 2.5.8. Relying on placeholders instead of labels hurts screen-reader users and users with memory difficulties."
         }
       ],
       "strengths": [
-        "A familiar two-column layout, consistent with GitHub, that groups content (left) and metadata (right) logically",
-        "The title field is focused automatically, and the full editor (toolbar, Preview, file upload) is on one screen",
-        "Clear repository context: the active 'Issues' tab with its counter and the breadcrumb 'judge-demo / web-shop'"
+        "A familiar two-column issue form that matches GitHub conventions, with all metadata on one page",
+        "The title field has focus on load and the 'Create Issue' button is clearly placed",
+        "Clear location context: repo breadcrumb and active Issues tab with counter"
       ],
       "recommendations": [
         {
           "priority": "high",
           "dimension": "error_prevention",
-          "recommendation": "Mark the Title field as required (for example a visible label 'Title *'). Disable the 'Create Issue' button, or show a validation message inline, while the title is empty."
+          "recommendation": "Add a persistent visible 'Title' label with a required asterisk. Disable 'Create Issue', or show an inline message, while the title is empty."
         },
         {
           "priority": "high",
-          "dimension": "language_clarity",
-          "recommendation": "Change the body placeholder from 'Leave a comment' to 'Describe the issue (Markdown supported)'. Add persistent visible labels above the Title and Description fields."
-        },
-        {
-          "priority": "medium",
           "dimension": "accessibility",
-          "recommendation": "Increase the contrast of the placeholder and secondary text ('No labels', 'No Milestone') to at least 4.5:1. Make the whole Labels/Milestone/Assignees header clickable so targets are at least 24×24 px."
+          "recommendation": "Increase the contrast of placeholder text, the sidebar empty-state text and the primary button (aim for at least 4.5:1). Enlarge the gear-icon targets to at least 24×24px."
         },
         {
           "priority": "medium",
-          "dimension": "system_status",
-          "recommendation": "Add a page heading 'New Issue', or extend the breadcrumb to 'judge-demo / web-shop / Issues / New', so the current step is clear."
+          "dimension": "efficiency",
+          "recommendation": "Make the sidebar headers ('Labels', etc.) fully clickable and add an explicit 'Add label' affordance instead of relying on the gear icon alone."
         },
         {
           "priority": "low",
-          "dimension": "minimalism",
-          "recommendation": "Move the 'No Branch/Tag Specified' selector lower in the sidebar or hide it under advanced options. Hide the footer performance metrics outside debug mode."
+          "dimension": "language_clarity",
+          "recommendation": "Change the 'Leave a comment' placeholder to 'Describe the issue…', add a tooltip explaining 'No Branch/Tag Specified', and make the empty-state capitalisation consistent."
+        },
+        {
+          "priority": "low",
+          "dimension": "system_status",
+          "recommendation": "Add a 'New issue' page heading above the form."
         }
       ]
     },
@@ -174,82 +174,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The main form column (Title input at top, Write/Preview editor, dashed 'Drop files here to upload' zone, blue 'Create Issue' button bottom-right) is clearly separated from the right metadata sidebar (Labels, Milestone, Projects, Assignees, each with a divider). The avatar beside the form uses a comment-thread layout.",
-          "justification": "The layout follows a clear F-pattern: title first, then body, then the primary action. Grouping is clear. Two minor flaws: there is no page heading such as 'New Issue', and the 'Create Issue' button is a fairly muted blue that does not stand out much on the dark background."
+          "evidence": "The form uses a clear two-column layout: title, editor, upload area and the blue 'Create Issue' button sit in the main column, with a metadata sidebar (Labels, Milestone, Projects, Assignees) on the right. The Title field is focused at the top.",
+          "justification": "The layout follows a clear F-pattern and the primary action stands out. There is no page heading such as 'New Issue', and in the dark theme the sidebar sections look about as heavy as the main form."
         },
         {
           "id": "consistency",
           "score": 5,
-          "evidence": "The repo header, tab bar (Code, Issues 4, Pull Requests…), Watch/Star/Fork buttons with counters, the markdown toolbar and the sidebar with gear icons all match the rest of Gitea. The layout mirrors GitHub's new-issue page.",
-          "justification": "Components, icons and naming match the rest of the app and common Git platform conventions, so users coming from GitHub or GitLab will recognise the page right away."
+          "evidence": "The Write/Preview tabs, markdown toolbar, sidebar with gear icons and 'Create Issue' button match GitHub/Gitea conventions. Repo tabs and icons match the rest of the app.",
+          "justification": "This is the standard Git-platform issue form pattern, and components are used consistently."
         },
         {
           "id": "system_status",
-          "score": 4,
-          "evidence": "The 'Issues' tab is underlined, bold and shows the counter '4'. The breadcrumb 'judge-demo / web-shop' is visible. The Write tab is active. The sidebar shows the current state: 'No labels', 'No Milestone', 'No Assignees'.",
-          "justification": "The user's location and the empty metadata state are clear. However, nothing on the page says 'New issue', so the mode is only implied by the empty form (the URL shows it, the page does not)."
+          "score": 3,
+          "evidence": "The 'Issues 4' tab is underlined and the 'judge-demo / web-shop' breadcrumb is visible, but the page has no 'New Issue' heading. The sidebar shows its current state ('No labels', 'No Milestone').",
+          "justification": "Users know which repo and section they are in, but nothing explicitly says this is a new-issue form. Fix: add a 'New Issue' heading or breadcrumb segment."
         },
         {
           "id": "language_clarity",
           "score": 3,
-          "evidence": "The description placeholder reads 'Leave a comment' even though this is the issue body. The title has only a 'Title' placeholder and no persistent label. 'No Branch/Tag Specified' is unexplained jargon at the top of the sidebar. Inconsistent capitalisation: 'No labels'/'No projects' vs 'No Milestone'/'No Assignees'.",
-          "justification": "Most labels are short and clear, but 'Leave a comment' is misleading for an issue description, and the branch/tag selector has no explanation of what it is for, which may confuse non-technical reporters."
+          "evidence": "The description placeholder says 'Leave a comment', which fits replies better than a new issue description. Capitalisation is inconsistent ('No labels' vs 'No Milestone' / 'No Assignees'). 'No Branch/Tag Specified' assumes Git knowledge. Toolbar icons have no visible labels.",
+          "justification": "Most labels are clear, but the description placeholder is misleading and the capitalisation is inconsistent. Fix: use 'Describe the issue…' and sentence case throughout."
         },
         {
           "id": "error_prevention",
-          "score": 3,
-          "evidence": "The Title field has no required marker and no persistent label; it relies only on placeholder text. There is no hint about the expected content or template. The Preview tab is available before submitting.",
-          "justification": "Preview helps users check formatting, and creating an issue can be undone. However, the required title is not marked, and once the user types, the placeholder disappears and the field has no visible label left."
+          "score": 2,
+          "evidence": "The Title field relies only on the placeholder 'Title' and has no required marker. 'Create Issue' looks active even though the title is empty. There is no format hint or template guidance.",
+          "justification": "Users get no warning that the title is required, and the placeholder disappears once they start typing. Fix: add a persistent 'Title *' label, mark it as required, and disable the button or validate inline."
         },
         {
           "id": "efficiency",
           "score": 3,
-          "evidence": "Labels are set through a small gear icon next to 'Labels' in the sidebar, with no visible 'Add label' text or button. The markdown toolbar, the @mention button and drag-and-drop upload are available.",
-          "justification": "Title and description are fast to fill in. But adding a label, which is part of the typical task, depends on finding a small, unlabeled gear icon. That is a recall/discovery cost, and it is not obvious that the icon is a setter rather than settings."
+          "evidence": "Labels can only be added through a small gear icon next to 'Labels' in the sidebar. The markdown toolbar, @-mention and drag-and-drop upload are available. The title field is autofocused.",
+          "justification": "Creating an issue takes few steps, but the label task depends on spotting a small gear icon with no text affordance. Fix: make the whole 'Labels' row clickable, or add an 'Add labels' link."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The form is uncluttered with plenty of whitespace. The footer shows developer details ('Version: 28.3.0 Page: 10ms Template: 5ms'). The sidebar shows four empty metadata sections plus a branch selector.",
-          "justification": "The content is clean and well focused. The only minor noise is the technical footer and the less relevant branch/tag selector that every user sees."
+          "evidence": "The form is clean with lots of whitespace. The footer shows developer details ('Page: 11ms Template: 4ms'), and the empty area below the form is unused.",
+          "justification": "There is little clutter. The diagnostic footer is the only minor noise."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "Placeholder text ('Title', 'Leave a comment') is dim grey on a near-black background. Toolbar icons (H1, B, I, link, etc.) and the sidebar gear icons are small, about 16–20 px. The Title field shows a blue focus outline. Sidebar secondary text ('No labels') is small.",
-          "justification": "The focus indicator is visible and body text is legible. However, placeholder contrast appears to fall below 4.5:1, the inputs have no visible labels, and the icon-only controls are small targets close to the WCAG 2.5.8 minimum, with meaning carried only by the icon."
+          "evidence": "Placeholders ('Title', 'Leave a comment') are low-contrast grey on the dark background. The gear icons are about 16px, which is a small target. The white text on the light-blue 'Create Issue' button looks borderline. The toolbar is icon-only, and the input borders are faint.",
+          "justification": "Placeholders are used as labels, several targets are small, and some contrast looks below 4.5:1. Fix: add visible labels, increase contrast and enlarge the gear targets."
         }
       ],
       "strengths": [
-        "Clear two-column layout with the main content on the left and metadata on the right, matching familiar Git platform conventions",
-        "Strong consistency with the rest of Gitea's navigation, with an active Issues tab and counter that show where the user is",
-        "Rich editing support (markdown toolbar, Write/Preview tabs, drag-and-drop upload) that helps users write good issues"
+        "Familiar Git-platform issue layout with the metadata sidebar kept separate from the content",
+        "Rich markdown editor with Write/Preview tabs and drag-and-drop file upload",
+        "Clear primary action and active Issues tab"
       ],
       "recommendations": [
+        {
+          "priority": "high",
+          "dimension": "error_prevention",
+          "recommendation": "Add a persistent visible 'Title' label with a required marker, and validate inline or disable 'Create Issue' until a title is entered."
+        },
         {
           "priority": "high",
           "dimension": "efficiency",
-          "recommendation": "Make label assignment easier to find: replace or pair the gear icon next to 'Labels' with a clickable 'Add labels' text link or button, and make the whole section header clickable."
-        },
-        {
-          "priority": "high",
-          "dimension": "error_prevention",
-          "recommendation": "Add visible, persistent labels above the inputs ('Title *', 'Description') and mark the title as required, instead of relying on placeholders that disappear when the user types."
-        },
-        {
-          "priority": "medium",
-          "dimension": "language_clarity",
-          "recommendation": "Change the body placeholder from 'Leave a comment' to something like 'Describe the issue: steps to reproduce, expected vs actual behaviour', and add a tooltip or helper text for 'No Branch/Tag Specified'."
+          "recommendation": "Make the Labels (and other sidebar) headers fully clickable with an explicit 'Add labels' affordance instead of a small gear icon only."
         },
         {
           "priority": "medium",
           "dimension": "accessibility",
-          "recommendation": "Raise the contrast of placeholder and secondary sidebar text to at least 4.5:1, enlarge the toolbar and gear icons to at least 24×24 px targets, and give icon-only buttons accessible names and tooltips."
+          "recommendation": "Raise contrast for placeholders, input borders and the primary button text to meet WCAG 1.4.3/1.4.11, and enlarge the sidebar gear targets to at least 24×24px."
+        },
+        {
+          "priority": "medium",
+          "dimension": "system_status",
+          "recommendation": "Add a 'New Issue' page heading so the form's purpose is explicit."
         },
         {
           "priority": "low",
-          "dimension": "system_status",
-          "recommendation": "Add a page heading such as 'New Issue' above the form so the current mode is clear without reading the URL."
+          "dimension": "language_clarity",
+          "recommendation": "Change the description placeholder to 'Describe the issue…' and use consistent capitalisation in the sidebar empty states."
         }
       ]
     },
@@ -259,82 +259,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The two-column layout has the main form on the left (Title, Write/Preview editor, Drop files area, a blue 'Create Issue' button at the bottom right) and a metadata sidebar on the right (Labels, Milestone, Projects, Assignees) split by dividers. The Title field sits at the top and has focus.",
-          "justification": "The layout is clear and follows F-pattern reading order. The form is grouped well. There is no page heading such as 'New Issue', and the sidebar's metadata sections have little visual weight. That is a minor issue."
+          "evidence": "The two-column layout puts the main form on the left (Title, Write/Preview editor, upload zone, blue 'Create Issue' button at the bottom right) and the metadata sidebar on the right (Labels, Milestone, Projects, Assignees, separated by dividers).",
+          "justification": "The grouping is clear and follows the F-pattern, and the primary action stands out. There is no page heading such as 'New Issue', and the Title field looks no more important than the description area, so the hierarchy has small gaps."
         },
         {
           "id": "consistency",
           "score": 5,
-          "evidence": "The repo tabs, the Watch/Star/Fork buttons, the markdown toolbar and the gear icons next to Labels/Milestone/Projects/Assignees all follow GitHub-like conventions. The component styling matches the rest of the dark theme.",
-          "justification": "The view matches Git platform conventions closely, and its components are consistent with the rest of the app."
+          "evidence": "The repo header, the tab bar with 'Issues 4' active, and the gear icons on every sidebar section look like the rest of Gitea and match GitHub's new-issue layout (Write/Preview tabs, a markdown toolbar, a metadata sidebar).",
+          "justification": "Components, icons and naming are the same everywhere on the page and follow Git platform conventions."
         },
         {
           "id": "system_status",
-          "score": 4,
-          "evidence": "The 'Issues 4' tab is underlined as active and the breadcrumb 'judge-demo / web-shop' is visible. The sidebar shows states like 'No labels', 'No Milestone' and 'No Assignees'. The page has no 'New Issue' title.",
-          "justification": "Location and the metadata state are clear. Without a heading, the user has to infer that this is a creation form from the fields alone."
+          "score": 3,
+          "evidence": "The 'Issues' tab is underlined and the 'judge-demo / web-shop' breadcrumb is visible. The sidebar shows the current state ('No labels', 'No Milestone', 'No Assignees'). There is no 'New Issue' title or breadcrumb step.",
+          "justification": "The user knows which repo and section they are in, but nothing names this as the issue-creation page. The empty sidebar states are shown clearly."
         },
         {
           "id": "language_clarity",
           "score": 4,
-          "evidence": "The labels 'Title', 'Leave a comment', 'Drop files here to upload' and 'Create Issue' are clear. 'No Branch/Tag Specified' is jargon whose purpose isn't explained. 'Leave a comment' is a confusing placeholder for an issue description.",
-          "justification": "Most of the wording is understandable. The description placeholder should say 'Description', and the branch selector needs some context."
+          "evidence": "The labels 'Title', 'Leave a comment', 'Drop files here to upload' and 'Create Issue' are plain. 'No Branch/Tag Specified' is jargon, and its purpose on an issue is unclear. 'Leave a comment' is an odd placeholder for an issue description.",
+          "justification": "Most labels are clear. A few wordings could confuse newcomers."
         },
         {
           "id": "error_prevention",
           "score": 3,
-          "evidence": "The Title field is required, but it has no asterisk or 'required' label, and its only label is placeholder text that disappears when the user types. The 'Create Issue' button looks enabled even though the title is empty. There's no hint about label requirements or templates.",
-          "justification": "Users may only find out the title is required after they submit. Placeholder-only labels also make it hard to check what each field is after it has been filled in. Fix: add a persistent 'Title *' label and disable the button until a title is entered, or validate inline."
+          "evidence": "The Title field is the only input that must be filled in, but it only shows the placeholder 'Title', with no asterisk or 'required' label. The 'Create Issue' button already looks enabled while the title is empty. No format hints are shown.",
+          "justification": "Users can't see what is required until they submit, and once they start typing the placeholder disappears, so the field loses its label. Fix: add a persistent 'Title *' label and disable the button or validate inline."
         },
         {
           "id": "efficiency",
-          "score": 4,
-          "evidence": "The Title field is focused automatically. All the metadata (Labels, Milestone, Assignees) is in the sidebar on the same page, and the markdown toolbar has shortcuts like @mention and reference. Labels can only be edited through a small gear icon, and there is no visible hint that clicking opens a picker.",
-          "justification": "The whole task can be done on one screen in a few steps. Setting a label depends on finding the small gear icon, which slows the task down a little."
+          "score": 3,
+          "evidence": "Labels are changed through a small gear icon at 1328,241. The text 'No labels' does not look clickable. The markdown toolbar and Preview tab are easy to reach.",
+          "justification": "Adding a label, which is part of the typical task, requires finding a small, unlabeled gear icon. That is not obvious and slows the task down. Fix: make the whole section header or 'No labels' clickable, or add an 'Add label' link."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The form is clean with lots of whitespace. The footer shows 'Page: 10ms Template: 5ms', which is technical noise. The branch selector stands out at the top of the sidebar even though most users won't need it.",
-          "justification": "Overall the design is minimal, with only small amounts of unnecessary detail."
+          "evidence": "The form is compact and has a clean dark theme. The toolbar has 16 icons, and the right sidebar uses its space well. The lower half of the viewport is empty.",
+          "justification": "There is very little clutter. The toolbar is dense but standard for a markdown editor."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "Placeholder text ('Title', 'Leave a comment') is dim grey on a dark background and looks low-contrast. The sidebar values 'No labels' and 'No Milestone' are in small text. The gear icons are about 16px targets. The white text on the light-blue 'Create Issue' button has borderline contrast. The Title field shows a blue focus ring.",
-          "justification": "The focus indicator is visible, but the faint placeholder labels and small icon targets may fail WCAG 1.4.3 and 2.5.8. Fix: use visible labels with sufficient contrast and make the gear controls into larger clickable section headers."
+          "evidence": "The grey placeholders ('Title', 'Leave a comment') and the grey footer text sit on a dark background with low contrast. The sidebar gear icons are about 16px, which is close to the WCAG 2.5.8 minimum target size of 24px. The title field shows a visible blue focus border. The 'Create Issue' button pairs white text with a mid-blue background, so its contrast is borderline.",
+          "justification": "Several elements look like they fall below contrast and target-size guidance. The focus indicator is a positive. Fix: raise placeholder contrast, add visible labels and make the gear targets larger."
         }
       ],
       "strengths": [
-        "Everything for the task (title, description, labels and other metadata) is on one screen in a clear two-column layout",
-        "The view follows familiar GitHub-style conventions for issue creation and the markdown editor",
-        "The Title field is focused automatically and has a visible focus ring"
+        "A familiar GitHub-like layout: the form and metadata sidebar make issue creation easy to recognise.",
+        "A full markdown editor with a Write/Preview toggle and a drag-and-drop upload zone.",
+        "A clear primary 'Create Issue' button and a visible focus state on the Title field."
       ],
       "recommendations": [
         {
           "priority": "high",
           "dimension": "error_prevention",
-          "recommendation": "Add a persistent 'Title' label with a required marker (*) and validate inline, or disable 'Create Issue' until a title is entered."
+          "recommendation": "Add a persistent visible label 'Title' with a required marker, and validate it inline or disable 'Create Issue' until a title is entered."
+        },
+        {
+          "priority": "high",
+          "dimension": "efficiency",
+          "recommendation": "Make the Labels, Milestone, Projects and Assignees headers or their 'No …' text clickable, or add explicit 'Add label' actions, instead of relying on small gear icons."
         },
         {
           "priority": "medium",
           "dimension": "accessibility",
-          "recommendation": "Increase the contrast of placeholder and sidebar text, and make whole Labels/Milestone/Assignees headers clickable so the targets are larger than the ~16px gear icons."
+          "recommendation": "Raise placeholder and secondary text contrast to at least 4.5:1 and enlarge the gear icon targets to 24×24px or more."
         },
         {
           "priority": "medium",
+          "dimension": "system_status",
+          "recommendation": "Add a page heading or breadcrumb step 'New Issue' above the form."
+        },
+        {
+          "priority": "low",
           "dimension": "language_clarity",
-          "recommendation": "Change the editor placeholder from 'Leave a comment' to 'Describe the issue…' and add a tooltip or helper text to 'No Branch/Tag Specified'."
-        },
-        {
-          "priority": "low",
-          "dimension": "visual_hierarchy",
-          "recommendation": "Add a 'New Issue' page heading above the form so the purpose of the page is clear right away."
-        },
-        {
-          "priority": "low",
-          "dimension": "minimalism",
-          "recommendation": "Hide the technical render timings (Page/Template ms) in the footer for regular users."
+          "recommendation": "Change the placeholder 'Leave a comment' to 'Describe the issue' and add a tooltip explaining the 'No Branch/Tag Specified' selector."
         }
       ]
     }

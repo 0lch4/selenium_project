@@ -26,18 +26,18 @@ def seed(admin: GiteaApi) -> str:
     full = f"{DEMO_USER}/{DEMO_REPO}"
     if api.get(f"/repos/{full}").status_code == 404:
         api.post("/user/repos", json={"name": DEMO_REPO, "auto_init": True, "default_branch": "main",
-                                      "description": "Sklep internetowy – projekt demonstracyjny"})
-        for path, text in {"src/app.py": "print('shop')\n", "docs/INSTALL.md": "# Instalacja\n"}.items():
+                                      "description": "Online shop – demo project"})
+        for path, text in {"src/app.py": "print('shop')\n", "docs/INSTALL.md": "# Installation\n"}.items():
             api.post(f"/repos/{full}/contents/{path}",
-                     json={"content": base64.b64encode(text.encode()).decode(), "message": f"Dodaj {path}"})
+                     json={"content": base64.b64encode(text.encode()).decode(), "message": f"Add {path}"})
         for name, color in [("bug", "#e11d21"), ("enhancement", "#0e8a16"), ("question", "#1d76db")]:
             api.create_label(DEMO_USER, DEMO_REPO, name, color)
         labels = {l["name"]: l["id"] for l in api.get(f"/repos/{full}/labels").json()}
-        issues = [("Koszyk nie zapamiętuje produktów po wylogowaniu", "bug"),
-                  ("Dodać płatność BLIK", "enhancement"),
-                  ("Błąd 500 przy pustym wyszukiwaniu", "bug"),
-                  ("Jak skonfigurować SMTP?", "question"),
-                  ("Tryb ciemny w panelu klienta", "enhancement")]
+        issues = [("Cart does not keep products after logout", "bug"),
+                  ("Add BLIK payment", "enhancement"),
+                  ("Error 500 on empty search", "bug"),
+                  ("How to configure SMTP?", "question"),
+                  ("Dark mode in the customer panel", "enhancement")]
         for i, (title, label) in enumerate(issues):
             n = api.post(f"/repos/{full}/issues", json={"title": title, "labels": [labels[label]]}).json()["number"]
             if i == 3:
@@ -48,16 +48,16 @@ def seed(admin: GiteaApi) -> str:
 def views(full: str) -> list[dict]:
     return [
         {"id": "login", "path": "/user/login", "auth": False,
-         "purpose": "Logowanie do aplikacji", "task": "Zaloguj się nazwą użytkownika i hasłem"},
+         "purpose": "Sign in to the application", "task": "Sign in with a username and password"},
         {"id": "repo_home", "path": f"/{full}", "auth": True,
-         "purpose": "Strona główna repozytorium (pliki, README, nawigacja repo)",
-         "task": "Odnajdź plik docs/INSTALL.md i sprawdź ostatni commit"},
+         "purpose": "Repository home page (files, README, repository navigation)",
+         "task": "Find the docs/INSTALL.md file and check the latest commit"},
         {"id": "issues_list", "path": f"/{full}/issues", "auth": True,
-         "purpose": "Lista zgłoszeń z filtrami i etykietami",
-         "task": "Znajdź otwarte zgłoszenia oznaczone jako bug"},
+         "purpose": "Issue list with filters and labels",
+         "task": "Find open issues labelled bug"},
         {"id": "new_issue", "path": f"/{full}/issues/new", "auth": True,
-         "purpose": "Formularz nowego zgłoszenia",
-         "task": "Utwórz zgłoszenie z tytułem, opisem i etykietą"},
+         "purpose": "New issue form",
+         "task": "Create an issue with a title, description and label"},
     ]
 
 

@@ -17,11 +17,11 @@
       "consistency": {
         "scores": [
           4,
-          5,
+          4,
           4
         ],
         "median": 4,
-        "spread": 1
+        "spread": 0
       },
       "system_status": {
         "scores": [
@@ -34,12 +34,12 @@
       },
       "language_clarity": {
         "scores": [
-          3,
+          4,
           3,
           3
         ],
         "median": 3,
-        "spread": 0
+        "spread": 1
       },
       "error_prevention": {
         "scores": [
@@ -89,82 +89,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The repo title 'judge-demo / web-shop' is at the top left, with the tab bar (Code active) under it. The file table (docs, src, README.md) sits in the main column and the Description/Languages sidebar is on the right. The blue 'Code' button is the only filled primary button. Below the short README, about a third of the viewport is empty.",
-          "justification": "There is a clear F-pattern and well-grouped sections with consistent spacing. Minor issues: the commit summary row and the folder rows look very similar, and the toolbar row (branch, compare icon, Go to file, Add File, Code) is dense."
+          "evidence": "Repo title 'judge-demo / web-shop' at top left, tab bar below, then a commits/branch/tags summary bar, the latest-commit row, the file list (docs, src, README.md) and the README panel. The sidebar on the right holds Description, stats and Languages. The blue 'Code' button is the only filled primary control.",
+          "justification": "The layout follows a clear F-pattern and related items are grouped well. The file list and latest commit are easy to find. Small issue: the latest-commit row looks almost the same as the file rows below it, and the lower third of the page is empty, so the README panel ends abruptly."
         },
         {
           "id": "consistency",
           "score": 4,
-          "evidence": "The layout follows GitHub/Git platform conventions: counters next to Issues 4, Watching 1, Star 0 and Fork 0, a commits/branch/tags strip, and a latest-commit header with the hash 4e567b03fd. Icons are used consistently in the tabs and sidebar. Kbd hints 'T' and 'S' appear in the search fields.",
-          "justification": "The view is highly consistent with platform standards. The 'Escape' button in the README header is an unusual control that breaks the pattern of icon actions such as the pencil next to it."
+          "evidence": "The tabs (Code, Issues 4, Pull Requests, Actions…) follow GitHub/GitLab conventions, as do the Watch/Star/Fork buttons with counters and the folder/file icons. The README header has an 'Escape' button next to the edit pencil.",
+          "justification": "Components, icons and counter badges are used consistently and match Git platform conventions. The 'Escape' button is not a standard control on README panels, and its bordered-text style differs from the icon-only edit button next to it."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The 'Code' tab is underlined and bold. The branch selector shows 'main'. The repo path appears as a breadcrumb. Counters show 3 Commits, 1 Branch, 0 Tags and Issues 4. The latest commit 'Dodaj docs/INSTALL.md' is shown with author and hash. Every time column reads 'now'.",
-          "justification": "Location and repo state are very clear, and the latest commit is directly visible, which supports the task. The relative time 'now' gives no exact timestamp in the visible state."
+          "evidence": "The 'Code' tab is active (bold with an underline). The branch selector shows 'main'. The latest commit shows hash 3708f923a3, message 'Add docs/INSTALL.md' and 'now'. Counters: 3 Commits, 1 Branch, 0 Tags, Issues 4, Watching 1.",
+          "justification": "Location and repository state are clearly shown. Every timestamp reads 'now', which does not separate the commits from each other. A relative time with an absolute date (e.g. on hover) cannot be confirmed from the screenshot."
         },
         {
           "id": "language_clarity",
-          "score": 3,
-          "evidence": "The 'Escape' button above the README has no explanatory label. The icon-only button next to the 'main' branch selector has no visible text. 'Manage Topics' is clear. The labels mix Polish content with English UI, which is the user's data.",
-          "justification": "Most labels are standard and understandable. 'Escape' is jargon: it toggles escaping of ambiguous characters, and users will not understand what it does. The unlabeled compare icon also requires recall."
+          "score": 4,
+          "evidence": "Labels such as 'Go to file', 'Add File', '3 Commits', 'Manage Topics' and 'Search code...' are clear. The 'Escape' button in the README header has no visible explanation.",
+          "justification": "Most labels are short and clear. 'Escape' is jargon: it is unclear whether it escapes Unicode characters or closes something, and users may avoid it or click it by mistake."
         },
         {
           "id": "error_prevention",
           "score": 4,
-          "evidence": "The view is mostly read-only navigation. Destructive actions are absent from the main area, and Settings is separated to the far right of the tab bar. 'Add File' is a dropdown rather than a direct action.",
-          "justification": "There is low risk on this view. The only unclear action is the 'Escape' toggle, which could change the README rendering unexpectedly, but it is not destructive."
+          "evidence": "The page has mostly read-only content. Settings sits separately on the far right of the tab bar. 'Add File' and the edit pencil open separate flows. The unlabeled icon button next to the branch selector (compare/PR) has no text.",
+          "justification": "There are few chances to make an error on this view, and destructive settings are kept apart. Icon-only buttons (the compare icon next to 'main', the RSS icon) could lead to accidental navigation. The impact is low."
         },
         {
           "id": "efficiency",
           "score": 5,
-          "evidence": "The 'docs' folder is visible at the first level. 'Go to file' has a T shortcut and 'Search code...' has an S shortcut. The latest commit message 'Dodaj docs/INSTALL.md' and the '3 Commits' link are visible above the file list.",
-          "justification": "The task takes 1–2 clicks: docs → INSTALL.md, or Go to file. The last commit is already visible without any navigation, and keyboard shortcuts are shown."
+          "evidence": "The 'docs' folder appears directly in the list, and its last-commit message 'Add docs/INSTALL.md' names the file. 'Go to file' has a T shortcut hint and 'Search code...' has an S hint. The latest commit hash is shown at the top of the list and can be clicked.",
+          "justification": "The task takes one or two clicks: open docs and then INSTALL.md, or use Go to file. The latest commit is visible right away. Keyboard shortcut hints support recognition over recall."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The sidebar shows Readme, 26 KiB, 0 Stars, 1 Watchers, 0 Forks and the language bar. The footer shows 'Page: 20ms Template: 5ms'. The RSS icon button sits next to Watching.",
-          "justification": "The design is clean overall. Some low-value metadata (render times in the footer, zero counters) adds a little noise but does not compete with the main content."
+          "evidence": "The sidebar lists Readme, 26 KiB, 0 Stars, 1 Watchers, 0 Forks and a Languages bar. The header has Watch, Star and Fork counters plus an RSS button. The footer shows 'Page: 13ms Template: 3ms'.",
+          "justification": "The design is clean overall. Some information is repeated: star, watcher and fork counts appear in both the header buttons and the sidebar. The page render timings in the footer are developer noise for end users."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "In the dark theme, the commit messages in the middle column ('Dodaj src/app.py', 'Initial commit') and the 'now' timestamps use mid-grey on near-black. 'Manage Topics' and the counter badges (e.g. '0' in Star/Fork) are small and low-contrast. The compare icon button and the pencil edit button have no text labels. The 'T' and 'S' kbd hints are tiny.",
-          "justification": "The main text is legible, but the secondary grey text and small badges look close to or below the WCAG 1.4.3 minimum. Icon-only buttons depend on accessible names that cannot be verified from the screenshot. Target sizes look acceptable (around 30px)."
+          "evidence": "Dark theme. Commit messages in the file list ('Add docs/INSTALL.md', 'Initial commit') and the 'now' timestamps are mid-grey on near-black. Counter badges ('4', '1', '0') are small grey-on-grey. Control borders (Go to file, branch selector) are low-contrast dark grey. The compare and RSS icon buttons have no text labels.",
+          "justification": "Main text is readable, but secondary text, badges and input/button borders appear to be near the minimum contrast thresholds (WCAG 1.4.3 / 1.4.11). Small counter badges and icon-only buttons make the page harder to use for low-vision users. Focus indicators cannot be assessed from a static screenshot."
         }
       ],
       "strengths": [
-        "The latest commit (author, hash, message 'Dodaj docs/INSTALL.md') appears directly above the file list, so the task needs almost no navigation",
-        "It follows familiar Git platform conventions: tab bar with counters, branch selector, and a commits/branches/tags strip",
-        "Shortcuts for efficiency are shown: 'Go to file' (T) and 'Search code' (S)"
+        "The file list shows each item's last commit message, and the latest commit (hash, author, message) sits right above it. This makes the typical task fast.",
+        "The repository navigation follows familiar Git platform conventions: an active Code tab, counters, a branch selector, and Watch/Star/Fork buttons.",
+        "'Go to file' (T) and 'Search code' (S) show visible keyboard shortcut hints, which speeds up navigation."
       ],
       "recommendations": [
         {
+          "priority": "high",
+          "dimension": "accessibility",
+          "recommendation": "Increase contrast for secondary text (commit messages, timestamps), counter badges and control borders in the dark theme to at least 4.5:1 for text and 3:1 for UI component boundaries."
+        },
+        {
+          "priority": "medium",
+          "dimension": "language_clarity",
+          "recommendation": "Replace the bare 'Escape' button in the README header with a descriptive label or tooltip (e.g. 'Show escaped characters'), or hide it unless ambiguous characters are actually present."
+        },
+        {
           "priority": "medium",
           "dimension": "accessibility",
-          "recommendation": "Increase the contrast of secondary grey text (commit messages, 'now' timestamps, 'Manage Topics', counter badges) to at least 4.5:1 against the dark background."
-        },
-        {
-          "priority": "medium",
-          "dimension": "language_clarity",
-          "recommendation": "Replace the 'Escape' button label with a descriptive one (e.g. 'Show escaped characters') or add an icon with a visible tooltip/explanation."
-        },
-        {
-          "priority": "medium",
-          "dimension": "language_clarity",
-          "recommendation": "Add a visible text label or tooltip to the icon-only compare button next to the branch selector (e.g. 'Compare')."
+          "recommendation": "Add visible text labels or tooltips and aria-labels to the icon-only buttons (the compare icon next to the branch selector, RSS, the README edit pencil)."
         },
         {
           "priority": "low",
           "dimension": "system_status",
-          "recommendation": "Show absolute dates next to or instead of the relative 'now' (e.g. on the latest commit row) so the last commit time is unambiguous."
+          "recommendation": "Visually set the latest-commit row apart from the file rows (e.g. a 'Latest commit' label or a tinted background), and show absolute dates alongside relative times like 'now'."
         },
         {
           "priority": "low",
           "dimension": "minimalism",
-          "recommendation": "Hide developer-oriented footer metrics (Page/Template render time) for regular users."
+          "recommendation": "Remove the star, watcher and fork counts that duplicate the header buttons from the sidebar, and hide the page/template render timings from regular users."
         }
       ]
     },
@@ -174,77 +174,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The repo title 'judge-demo / web-shop' sits top-left, with the tab bar (Code active) underneath. The file list (docs, src, README.md) is in the main column with a summary bar (3 Commits / 1 Branch / 0 Tags) above it. Metadata is in a right sidebar. The blue 'Code' button is the main call to action. The bottom ~140 px of the viewport are empty.",
-          "justification": "The F-pattern layout and grouping are clear and the file tree is easy to find. The latest-commit row (avatar, hash, message, 'now') is set apart from the file rows, but only slightly. There are small issues: the low-contrast commit-message column is placed far from the file names, and the action buttons (RSS, Watching, Star, Fork) have little visual separation from each other."
+          "evidence": "The repo title 'judge-demo / web-shop' sits top-left, with the tab bar (Code active) below it. The latest-commit bar (judge-demo, 3708f923a3, 'Add docs/INSTALL.md', now) sits directly above the file list (docs, src, README.md). The sidebar on the right holds the description, stats and languages. The blue 'Code' button is the only filled primary button.",
+          "justification": "The F-pattern layout works well. Grouping is clear: commit stats bar, then toolbar, then latest commit, then files, then README. The commit message column is placed far from the file names (starting around x=457), which leaves a wide gap that weakens the visual link between a row's name and its message. Spacing is otherwise even."
         },
         {
           "id": "consistency",
-          "score": 5,
-          "evidence": "The tab icons (Code, Issues, Pull Requests, Actions…) follow GitHub/GitLab conventions. Counters appear in grey badges on Issues 4, Watching 1, Star 0 and Fork 0. Dropdown carets are used the same way on main, Add File, Code and +. Folder icons are blue and the README has an info icon.",
-          "justification": "Components, icons and naming are consistent within the page and match established Git-platform conventions, so users coming from GitHub will recognise everything."
+          "score": 4,
+          "evidence": "The tabs (Code, Issues, Pull Requests, Actions, ...), the Watch/Star/Fork buttons with counters, the branch selector 'main', 'Go to file' with a T shortcut, and the green 'Code' clone button follow GitHub/GitLab conventions. Icons are used the same way across tabs and sidebar items.",
+          "justification": "The page matches Git platform standards closely. One small inconsistency: the README header has a text button 'Escape' next to an icon-only pencil edit button, so the same header mixes two action styles. The commit-to-branch compare button next to 'main' is icon-only, while similar toolbar actions have text labels."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The 'Code' tab is underlined and bold. The breadcrumb 'judge-demo / web-shop' is shown and the current branch 'main' is in the branch selector. The latest commit row shows 4e567b03fd 'Dodaj docs/INSTALL.md' with the time 'now'. The Issues counter shows 4.",
-          "justification": "It is clear where the user is and what state the repo is in. The latest commit is shown right away, which directly supports the task. Minor issue: the relative time 'now' is vague, with no absolute date visible (it may only appear on hover)."
+          "evidence": "The 'Code' tab is underlined and bold. The breadcrumb shows 'judge-demo / web-shop'. Counters are visible: '3 Commits', '1 Branch', '0 Tags', Issues '4', Watching '1', Star '0', Fork '0'. The latest commit bar shows the hash 3708f923a3 and 'now'.",
+          "justification": "Location and repository state are clear. Timestamps use only the relative value 'now', with no absolute date shown. That is fine for a fresh repo but gives little precision when you check the latest commit."
         },
         {
           "id": "language_clarity",
           "score": 3,
-          "evidence": "Standard labels are used: 'Go to file', 'Add File', 'Search code...', 'Manage Topics'. The README header has a button labelled 'Escape'. The UI is in English, but the commit messages and description are in Polish ('Dodaj docs/INSTALL.md', 'Sklep internetowy…').",
-          "justification": "Most labels are clear. The 'Escape' button (which toggles escaping of ambiguous Unicode characters) is cryptic and could be mistaken for a close/cancel action. Unlabelled icon buttons (RSS, the compare icon next to 'main', the pencil) rely on icons alone. The mixed UI and content languages are a content issue rather than a UI flaw."
+          "evidence": "The README header has a button labelled 'Escape'. Other labels are plain: 'Go to file', 'Add File', 'Manage Topics', 'Watching'. The sidebar shows '26 KiB'.",
+          "justification": "Most labels are clear. 'Escape' is jargon (it escapes ambiguous Unicode characters), and its meaning isn't obvious on a simple README. Users could mistake it for a close or cancel action. Fix: rename it to something like 'Show escaped characters', or add a tooltip or warning text that explains why it appears."
         },
         {
           "id": "error_prevention",
           "score": 4,
-          "evidence": "The view is mainly read-only. The only edit actions, the pencil icon on the README and 'Add File', start new flows rather than doing anything immediately. No destructive actions are exposed in the main area, and Settings is kept apart at the right of the tab bar.",
-          "justification": "There is little risk of error on this view. The ambiguous 'Escape' button and the bare pencil icon could still be clicked by mistake, but neither is destructive."
+          "evidence": "No destructive actions are exposed in the main area. 'Settings' is set apart on the far right of the tab bar. 'Add File' and 'Code' are dropdowns, so a click doesn't immediately commit to an action.",
+          "justification": "This view is read-only, so there is little risk of error. Settings is separated from the content tabs. Confirmation behaviour can't be assessed from the screenshot. The ambiguous 'Escape' toggle could cause brief confusion but is harmless."
         },
         {
           "id": "efficiency",
           "score": 5,
-          "evidence": "'Go to file' has a 'T' shortcut hint and 'Search code...' has an 'S' shortcut hint. The 'docs' folder is visible in the first row and its last commit message reads 'Dodaj docs/INSTALL.md'. The latest commit hash link and '3 Commits' are one click away.",
-          "justification": "The task can be done in 1–2 clicks: open docs to reach INSTALL.md, or read the latest commit right on the page. Keyboard shortcuts are shown to support recognition rather than recall."
+          "evidence": "The 'docs' folder is in the file list, and its last commit message 'Add docs/INSTALL.md' is shown inline. The latest commit bar at the top shows 'Add docs/INSTALL.md' with a clickable hash. 'Go to file' has a T keyboard shortcut, and 'Search code...' has an S shortcut.",
+          "justification": "The task takes very few steps. The latest commit is visible right away, and docs/INSTALL.md is one click away through 'docs' or the 'Go to file' search. The keyboard shortcuts are shown visibly, which supports recognition over recall."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The sidebar shows Readme, 26 KiB, 0 Stars, 1 Watchers, 0 Forks and a Languages bar showing Python 100%. Star/Fork/Watch counters are repeated in both the header and the sidebar. The footer shows 'Page: 20ms Template: 5ms'.",
-          "justification": "Overall the layout is clean, but there is some redundancy: social counters appear twice, and the footer shows developer timing data. These add a little noise without hurting the task."
+          "evidence": "The page is compact and uncluttered. The sidebar has Description, Manage Topics, Readme, 26 KiB, 0 Stars, 1 Watchers, 0 Forks and Languages. The Stars, Watchers and Forks counts repeat the header buttons Star 0, Fork 0 and Watching 1. The footer shows 'Page: 13ms Template: 3ms'.",
+          "justification": "Density suits the task. There is a little redundancy: social counts appear both in the header and in the sidebar, and the footer shows render timing, which is developer-facing noise."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "In dark theme, grey commit-message text such as 'Dodaj src/app.py' and the 'now' timestamps are low-contrast on the dark background. Small grey counter badges (Issues '4', Fork '0') appear. The RSS and compare buttons are icon-only. The kbd hints 'T' and 'S' are tiny, and row text is about 13–14 px.",
-          "justification": "Contrast of the main text is fine, but secondary grey text and the badges look close to or below the 4.5:1 ratio WCAG requires for normal text. Icon-only buttons have no visible text label (an accessible name can't be checked from a screenshot), and some targets, such as the pencil icon and badges, are small, though probably at least 24 px. Focus visibility cannot be assessed from a static screenshot."
+          "evidence": "Secondary grey text on the dark background is low contrast: commit messages 'Add src/app.py' and 'Initial commit', 'now' timestamps, the 'Manage Topics' label, and the 'Go to file' and 'Search code...' placeholders. Control borders such as the 'Escape' button and toolbar buttons are very faint. Small keyboard-hint badges read 'T' and 'S'. The README.md icon (blue info circle) differs from the folder icons by colour and shape.",
+          "justification": "Primary text is legible and most targets look like they are 24px or larger. Several grey-on-dark texts and thin borders look borderline for WCAG 1.4.3 (4.5:1 text contrast) and 1.4.11 (3:1 for control boundaries). Fix: lighten the secondary text colour and increase the contrast of control borders in the dark theme. Focus visibility (2.4.7) can't be assessed from a static screenshot."
         }
       ],
       "strengths": [
-        "The latest commit (hash, author, message, time) is shown prominently above the file list, so the 'check last commit' part of the task is answered right away.",
-        "Efficient navigation aids: 'Go to file' with a 'T' shortcut, code search with an 'S' shortcut, and a branch selector, all near the file tree.",
-        "Consistent, GitHub-like layout: tabs with counters, a clearly marked active 'Code' tab, and a breadcrumb title."
+        "The latest commit (author, hash, message, time) is shown prominently right above the file list, so checking it takes no extra clicks.",
+        "Navigation follows familiar Git platform conventions: tabs with counters, a branch selector, Watch/Star/Fork, and a 'Go to file' search with a keyboard shortcut.",
+        "The layout is clean, with clear grouping of repo stats, toolbar, files, README and metadata sidebar."
       ],
       "recommendations": [
         {
           "priority": "high",
           "dimension": "accessibility",
-          "recommendation": "Make the grey secondary text (commit messages, 'now' timestamps, counter badges) lighter in dark theme so it reaches at least 4.5:1 contrast. Make sure the icon-only buttons (RSS, compare, pencil) have visible tooltips and accessible names."
+          "recommendation": "Raise the contrast of secondary text (commit messages, timestamps, placeholders, 'Manage Topics') and of control borders in the dark theme, so they meet WCAG 1.4.3 (4.5:1) and 1.4.11 (3:1)."
         },
         {
           "priority": "medium",
           "dimension": "language_clarity",
-          "recommendation": "Rename the 'Escape' button in the README header to something descriptive, such as 'Escape ambiguous characters' or 'Show hidden Unicode', or add an explanatory tooltip so it isn't read as a close/cancel action."
+          "recommendation": "Replace the ambiguous 'Escape' button in the README header with a descriptive label such as 'Show escaped characters', or add a tooltip or notice explaining why it appears."
         },
         {
           "priority": "medium",
           "dimension": "system_status",
-          "recommendation": "Show the absolute commit date next to (or instead of) the relative 'now' in the latest-commit row, so users can check exactly when the last commit was made."
+          "recommendation": "Show absolute timestamps next to, or on hover over, relative times like 'now' in the latest commit bar, so users can confirm exactly when the latest commit happened."
+        },
+        {
+          "priority": "low",
+          "dimension": "visual_hierarchy",
+          "recommendation": "Narrow the gap between file names and commit messages, or add row hover highlighting, to strengthen the visual link within each file row."
         },
         {
           "priority": "low",
           "dimension": "minimalism",
-          "recommendation": "Remove the duplicate Stars/Watchers/Forks counters from the sidebar (they are already in the header buttons). Hide the developer timing info ('Page: 20ms Template: 5ms') from regular users."
+          "recommendation": "Remove the duplicate Stars/Watchers/Forks counts from the sidebar (they are already in the header buttons), and consider hiding the page render timings from the footer for non-admin users."
         }
       ]
     },
@@ -254,82 +259,82 @@
         {
           "id": "visual_hierarchy",
           "score": 4,
-          "evidence": "The repo title 'judge-demo / web-shop' sits top-left, with the tab bar (Code active) below it. The file list (docs, src, README.md), with the latest-commit row 'judge-demo 4e567b03fd Dodaj docs/INSTALL.md … now' above it, takes up the main column. Metadata (Description, Stars, Languages) is in a right sidebar. The blue 'Code' button is the only filled button.",
-          "justification": "The F-pattern layout is clear and related items are grouped well. The file table and the latest commit are easy to find. A minor issue: the commit row looks almost the same as the file rows below it, so the commit summary doesn't stand out. The lower ~40% of the viewport is empty, which is fine for a small repo."
+          "evidence": "The repo title 'judge-demo / web-shop' sits top left, with the tab bar (Code active) below it. The file list (docs, src, README.md) is the main content, and the latest-commit row (judge-demo, 3708f923a3, 'Add docs/INSTALL.md', now) sits on top of it. The right sidebar has Description, stats and Languages. The blue 'Code' button is the only filled primary control. The bottom third of the viewport is empty.",
+          "justification": "Grouping and alignment are clean and follow the F-pattern. The latest commit and the docs folder are both easy to find. The commit row looks a lot like the file rows, so it stands out only slightly, and the 3 Commits / 1 Branch / 0 Tags bar takes up a full-width row with little content. These are minor issues."
         },
         {
           "id": "consistency",
           "score": 4,
-          "evidence": "The tab bar and the Watching/Star/Fork buttons with counters follow GitHub/Gitea conventions. Icons appear next to every tab and every sidebar stat. The UI is in English, but the repo content ('Dodaj docs/INSTALL.md', 'Sklep internetowy') is in Polish. The README header has a stray 'Escape' button.",
-          "justification": "Components and icons are used consistently and match Git platform conventions, so users of other platforms will feel at home. The 'Escape' button is the only element that looks out of place next to the edit pencil icon. The mixed languages come from user content, not the UI."
+          "evidence": "The layout follows GitHub/GitLab conventions: Watch/Star/Fork with counters, Code/Issues/Pull Requests tabs, a branch selector, Go to file, Add File, and a Code clone button. Icons are used the same way in the tabs and sidebar. Some labels use title case ('Pull Requests', 'Add File') and others use sentence case ('Go to file', 'Manage Topics' vs 'Search code...').",
+          "justification": "The page is very consistent with Git platform standards and within itself. Only small inconsistencies in label case."
         },
         {
           "id": "system_status",
           "score": 4,
-          "evidence": "The 'Code' tab is underlined and bold. The breadcrumb reads 'judge-demo / web-shop'. The branch selector shows 'main'. Counters are shown for Issues (4), Commits (3), Branch (1), Tags (0) and Watching (1). Commit times all read 'now'.",
-          "justification": "Location and object state are clear. However, 'now' as a relative time is vague, with no visible absolute date. Also, only part of the commit hash is shown in the latest-commit row, so 'check the latest commit' only partly succeeds without a click."
+          "evidence": "The 'Code' tab is underlined as active. The breadcrumb shows judge-demo / web-shop, the branch selector shows 'main', and the Issues tab shows a counter of 4. Watching 1, Star 0 and Fork 0 have counters. Every commit time reads 'now'.",
+          "justification": "Location and object state are clear. Relative times like 'now' don't give the exact time of the latest commit unless you hover. The short hash 3708f923a3 is visible."
         },
         {
           "id": "language_clarity",
           "score": 3,
-          "evidence": "The README header has a button labelled 'Escape' next to the edit pencil. Other labels ('Go to file', 'Add File', 'Search code…', 'Manage Topics') are clear. One icon-only button next to the branch selector (a compare/PR icon) has no text.",
-          "justification": "Most labels are plain and clear. 'Escape' is jargon (it toggles escaping of ambiguous Unicode characters) and can be confused with the Esc key or 'close'. The icon-only compare button next to 'main' is also unclear without a tooltip. Fix: rename it to 'Show escaped characters' or similar, and add text or a visible label to the compare button."
+          "evidence": "There is an 'Escape' button in the README header next to the edit pencil. The unlabelled icon button next to the 'main' branch selector has no visible text. 'Manage Topics' sits as plain text in the sidebar with no explanation.",
+          "justification": "Most labels are clear. 'Escape' is jargon (it toggles escaping of ambiguous Unicode characters) and could be read as a close or cancel action. The icon-only compare button needs prior knowledge. Fix: rename it to something like 'Show hidden characters', add a tooltip or explanatory text, and give the compare icon a visible label."
         },
         {
           "id": "error_prevention",
           "score": 4,
-          "evidence": "Destructive actions are not visible in this view (Settings is a separate tab). 'Add File' is a dropdown rather than a direct action. The branch context 'main' is always shown, so users know which branch they're editing.",
-          "justification": "The view is mostly read-only and has little risk of error. Showing the branch helps avoid editing the wrong branch. A minor issue is that the edit pencil on README has no label, so it isn't clear that it starts an edit on main."
+          "evidence": "There are no destructive actions on the page. 'Settings' is separated to the far right of the tab bar. 'Add File' and 'Code' are dropdowns, so they need a second step before anything happens.",
+          "justification": "A read-only overview has little risk of error, and the potentially risky areas are tucked away. There isn't much else on this page to judge."
         },
         {
           "id": "efficiency",
           "score": 5,
-          "evidence": "The 'docs' folder is in the top row, and its last-commit message 'Dodaj docs/INSTALL.md' is shown inline. A 'Go to file' input has a 'T' shortcut hint, and 'Search code…' has an 'S' shortcut hint. The latest commit hash link '4e567b03fd' and '3 Commits' are one click away.",
-          "justification": "The task takes 1–2 clicks: docs → INSTALL.md, or type in 'Go to file'. The latest commit is visible right away, without any navigation. Visible keyboard shortcut hints support recognition over recall."
+          "evidence": "The latest commit message, hash and time show at the top of the file list without any clicks. The 'docs' folder row reads 'Add docs/INSTALL.md'. 'Go to file' has a T keyboard shortcut and 'Search code...' has an S shortcut.",
+          "justification": "The task takes at most 1–2 clicks (docs → INSTALL.md, or Go to file). The latest commit can be checked right away, and keyboard shortcuts are shown."
         },
         {
           "id": "minimalism",
           "score": 4,
-          "evidence": "The sidebar shows Description, Topics, Readme, 26 KiB, Stars, Watchers, Forks and Languages. The tab bar has 10 items (Code, Issues, Pull Requests, Actions, Packages, Projects, Releases, Wiki, Activity, Settings), including Packages, Projects and Wiki, which seem unused here. There is an RSS button in the header.",
-          "justification": "The design is clean and typical of a Git host. Tabs for features that look empty (Actions, Packages, Projects, Wiki) and the RSS icon add some noise, but they don't distract from the task."
+          "evidence": "The dark interface is uncluttered. The sidebar shows a short set of stats (26 KiB, 0 Stars, 1 Watchers, 0 Forks). The footer shows technical render times (Page: 13ms Template: 3ms). The Stars/Watchers/Forks stats repeat the counters in the header buttons.",
+          "justification": "The page is generally lean. The repeated counters and developer-oriented footer metrics add small amounts of noise."
         },
         {
           "id": "accessibility",
           "score": 3,
-          "evidence": "In the dark theme, secondary text is grey on near-black: 'now' timestamps, commit messages in the file table, 'Manage Topics', and footer text such as 'Powered by Gitea'. The 'S' and 'T' shortcut badges are small and low-contrast. The compare icon button next to 'main', the pencil and the RSS buttons are icon-only. Body text is about 14px.",
-          "justification": "Main text contrast looks fine, but the grey secondary text and the small shortcut badges may fall near or below the 4.5:1 ratio WCAG 1.4.3 requires. Small icon-only controls rely on recognising the icon. Focus visibility can't be judged from a static screenshot. Fix: make secondary text and badges lighter, and add visible labels or tooltips to the icon buttons."
+          "evidence": "The theme is dark. Secondary text such as the commit messages in the file list, the 'now' timestamps, the 'Go to file' placeholder and the footer is mid-grey on a dark grey background. Counter badges (1, 0, 4) are small and low-contrast. The blue folder icons and links depend partly on colour. The compare and RSS icon buttons have no text.",
+          "justification": "Main text is readable, but several secondary elements look close to or below the 4.5:1 contrast ratio, and the small badges and icon-only controls are harder for low-vision users. Fix: raise the contrast of muted text and badges, and add visible labels or tooltips to icon-only buttons. Focus states can't be judged from a static screenshot."
         }
       ],
       "strengths": [
-        "The latest-commit row and the per-file last-commit messages are visible right away, so the 'check the latest commit' task needs almost no navigation.",
-        "'Go to file' and 'Search code…' have visible keyboard shortcut hints (T, S), which make finding files like docs/INSTALL.md efficient.",
-        "The layout follows Git platform conventions (tab bar with counters, branch selector, Star/Fork/Watch buttons), and the Code tab is clearly marked as active."
+        "The latest commit (author, hash, message, time) is shown at the top of the file list, so you can check it without clicking.",
+        "The layout follows Git platform conventions: tabs, branch selector, Watch/Star/Fork and the Code clone button are all where users expect them.",
+        "Go to file (T) and Search code (S) are fast ways to find a file and show their keyboard shortcuts."
       ],
       "recommendations": [
         {
           "priority": "high",
           "dimension": "accessibility",
-          "recommendation": "Make the grey secondary text lighter (timestamps, commit messages in the file table, 'Manage Topics', footer) and the shortcut badges ('T', 'S') too, so they reach at least 4.5:1 contrast against the dark background."
+          "recommendation": "Raise the contrast of muted grey text (commit messages, timestamps, placeholders, counter badges) to at least 4.5:1 on the dark background."
         },
         {
           "priority": "medium",
           "dimension": "language_clarity",
-          "recommendation": "Rename the 'Escape' button in the README header to something descriptive, such as 'Show escaped characters', or hide it when the file has no ambiguous characters."
+          "recommendation": "Rename the 'Escape' button in the README header to something descriptive like 'Show hidden characters', or add an explanatory tooltip."
         },
         {
           "priority": "medium",
-          "dimension": "system_status",
-          "recommendation": "Show an absolute date or tooltip next to relative times like 'now', and make the latest-commit row look different from the file rows (e.g. a tinted header background) so it reads as the repo's latest commit."
+          "dimension": "language_clarity",
+          "recommendation": "Add a visible label or tooltip to the icon-only compare button next to the branch selector and to the RSS button."
         },
         {
           "priority": "low",
-          "dimension": "accessibility",
-          "recommendation": "Add visible text labels or accessible names to the icon-only buttons (compare button next to the branch selector, README edit pencil, RSS) and make sure their targets are at least 24×24 px."
+          "dimension": "system_status",
+          "recommendation": "Show the absolute date next to relative times like 'now', or on hover, so the time of the latest commit can be checked precisely."
         },
         {
           "priority": "low",
           "dimension": "minimalism",
-          "recommendation": "Hide repo tabs for features that aren't used (Packages, Projects, Wiki, Actions) or collapse them under a 'More' menu to cut navigation noise."
+          "recommendation": "Remove the Stars/Watchers/Forks stats from the sidebar, since the header buttons already show those counts, and hide the render-time metrics in the footer for normal users."
         }
       ]
     }
