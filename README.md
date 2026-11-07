@@ -48,3 +48,10 @@ Backend selection (`--backend` or `JUDGE_BACKEND`): `auto` (default) uses `api` 
 when `ANTHROPIC_API_KEY` is set, otherwise `cli` – headless Claude Code (`claude -p`) with the
 logged-in Claude Code account. `CLAUDE_BIN` points to the executable if it is not on `PATH`
 (the VS Code extension binary is detected automatically). `JUDGE_MODEL` overrides the model.
+
+## Live demo
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\demo.ps1            # Gitea + 4 Selenium tests (visible browser) + judge of one view
+powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -SkipJudge
+```
+The demo writes to `reports/demo.html` and `reports/demo_judge/` and never touches the committed results.
