@@ -3,12 +3,12 @@ Priorytet określa ważność funkcji dla użytkownika i wynikające z niej ryzy
 które wyznacza intensywność testowania (testowanie oparte na ryzyku).
 
 {\small
-\begin{longtable}{p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.070\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.190\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.340\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.110\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.290\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{ID} & \textbf{Funkcja} & \textbf{Opis} & \textbf{MoSCoW} & \textbf{Uzasadnienie} \\
 \midrule
 \endhead
-F01 & Rejestracja konta & Założenie konta przez formularz \texttt{/user/sign\_up} z walidacją nazwy, e-maila i hasła (min. 8 znaków). & Must & Wejście każdego nowego użytkownika do systemu. \\
+F01 & Rejestracja konta & Założenie konta przez formularz \texttt{/\allowbreak{}user/\allowbreak{}sign\_up} z walidacją nazwy, e-maila i hasła (min. 8 znaków). & Must & Wejście każdego nowego użytkownika do systemu. \\
 F02 & Logowanie i wylogowanie & Uwierzytelnienie nazwą/e-mailem i hasłem, sesja w ciasteczku, wylogowanie z menu użytkownika. & Must & Warunek wstępny niemal wszystkich pozostałych funkcji. \\
 F03 & Zarządzanie repozytoriami & Tworzenie (publiczne/prywatne, inicjalizacja README), edycja ustawień i usuwanie repozytoriów. & Must & Podstawowy obiekt domeny aplikacji. \\
 F04 & Przeglądanie kodu i historii & Lista plików, podgląd README, historia commitów, gałęzie. & Must & Główny sposób korzystania z repozytorium. \\

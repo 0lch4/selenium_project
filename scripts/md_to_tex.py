@@ -25,24 +25,42 @@ def escape(text: str) -> str:
     return out
 
 
+BOLD_ON, BOLD_OFF = "\x01", "\x02"
+
+
 def inline(text: str) -> str:
+    # bold first: a bold span may contain inline code, so it cannot be handled per part
+    text = re.sub(r"\*\*(.+?)\*\*", BOLD_ON + r"\1" + BOLD_OFF, text)
     parts = re.split(r"(`[^`]+`)", text)
     res = []
     for p in parts:
         if p.startswith("`") and p.endswith("`"):
-            res.append(r"\texttt{" + escape(p[1:-1]) + "}")
+            # allow line breaks after slashes so long paths fit in narrow table cells
+            res.append(r"\texttt{" + escape(p[1:-1]).replace("/", r"/\allowbreak{}") + "}")
         else:
             p = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", p)
-            p = escape(p)
-            p = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", p)
-            res.append(p)
-    return "".join(res)
+            res.append(escape(p))
+    return "".join(res).replace(BOLD_ON, r"\textbf{").replace(BOLD_OFF, "}")
+
+
+# Column widths for tables whose content is uneven across columns, keyed by the header row
+WIDTHS = {
+    ("ID", "Funkcja", "Opis", "MoSCoW", "Uzasadnienie"): [0.07, 0.19, 0.34, 0.11, 0.29],
+    ("ID", "Tytuł", "Priorytet", "Technika", "Poziom", "Funkcje", "Automatyzacja", "Wynik"):
+        [0.09, 0.19, 0.09, 0.15, 0.11, 0.11, 0.12, 0.14],
+    ("ID", "Tytuł", "Wykryty przez", "Ważność", "Priorytet", "Status"): [0.09, 0.45, 0.13, 0.1, 0.1, 0.13],
+    ("ID", "Wynik", "Czas [s]", "Uwagi"): [0.1, 0.24, 0.09, 0.57],
+    ("Grupa", "Wykonania", "Zaliczone", "Niezaliczone", "Oczekiwane niepowodzenie (xfail)", "Czas [s]"):
+        [0.3, 0.12, 0.12, 0.13, 0.21, 0.12],
+}
 
 
 def table(rows: list[list[str]], small: bool = False, widths: list[float] | None = None) -> str:
     """A longtable; `widths` are column width fractions (summing to 1)."""
     header, body = rows[0], rows[1:]
     n = len(header)
+    if widths is None:
+        widths = WIDTHS.get(tuple(h.strip() for h in header))
     if widths is None:
         if n == 2:
             widths = [0.27, 0.73]
@@ -53,7 +71,9 @@ def table(rows: list[list[str]], small: bool = False, widths: list[float] | None
         else:
             widths = [1 / n] * n
     # column width minus the inter-column padding so the table fits within the margins
-    spec = "".join(rf"p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}" for w in widths)
+    # ragged-right cells: justified text in narrow columns leaves wide gaps between words
+    spec = "".join(rf">{{\raggedright\arraybackslash}}p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}"
+                   for w in widths)
     size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n > 8 else r"\small"
     lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
              " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\", r"\midrule", r"\endhead"]
@@ -91,7 +111,8 @@ def convert(md: str, skip_until: str | None = None, stop_at: str | None = None,
         if m:
             depth = len(m.group(1)) + level_offset
             cmd = {2: r"\subsection", 3: r"\subsubsection", 4: r"\paragraph"}.get(depth, r"\paragraph")
-            out.append(cmd + "{" + inline(m.group(2)) + "}")
+            # keep a heading together with the start of its content
+            out.append(r"\needspace{8\baselineskip}" + cmd + "{" + inline(m.group(2)) + "}")
         elif line.strip() in ("", "---"):
             continue
         else:

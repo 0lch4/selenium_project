@@ -1,6 +1,6 @@
-\subsection{Podsumowanie}
+\needspace{8\baselineskip}\subsection{Podsumowanie}
 {\small
-\begin{longtable}{p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}p{\dimexpr 0.167\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.300\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.210\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Grupa} & \textbf{Wykonania} & \textbf{Zaliczone} & \textbf{Niezaliczone} & \textbf{Oczekiwane niepowodzenie (xfail)} & \textbf{Czas [s]} \\
 \midrule
@@ -27,9 +27,9 @@ przypadek testowy nie spełnia oczekiwanego rezultatu, a automat raportuje to ja
 
 niepowodzeniem, co sygnalizuje konieczność aktualizacji oczekiwań i retestu.
 
-\subsection{Wyniki per przypadek testowy}
+\needspace{8\baselineskip}\subsection{Wyniki per przypadek testowy}
 {\small
-\begin{longtable}{p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.100\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.240\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.090\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.570\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{ID} & \textbf{Wynik} & \textbf{Czas [s]} & \textbf{Uwagi} \\
 \midrule
@@ -59,9 +59,9 @@ TC-NF05 & Zaliczony (2/2) & 8,25 & Chrome, Edge \\
 \bottomrule
 \end{longtable}
 }
-\subsection{Wydajność – TC-NF01 (Locust, 20 użytkowników, narastanie 5/s, 30 s)}
+\needspace{8\baselineskip}\subsection{Wydajność – TC-NF01 (Locust, 20 użytkowników, narastanie 5/s, 30 s)}
 {\small
-\begin{longtable}{p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Żądanie} & \textbf{p50 [ms]} & \textbf{p95 [ms]} & \textbf{żądania/s} \\
 \midrule
@@ -75,18 +75,18 @@ WEB /explore/repos & 3 & 6 & 2,2 \\
 \bottomrule
 \end{longtable}
 }
-\subsection{Czas ładowania stron – TC-NF02 (mediana z 3 pomiarów, \texttt{loadEventEnd})}
+\needspace{8\baselineskip}\subsection{Czas ładowania stron – TC-NF02 (mediana z 3 pomiarów, \texttt{loadEventEnd})}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Strona} & \textbf{Czas [ms]} \\
 \midrule
 \endhead
-\texttt{/} & 24,6 \\
-\texttt{/explore/repos} & 22,9 \\
-\texttt{/\{owner\}/\{repo\}} & 40,4 \\
-\texttt{/\{owner\}/\{repo\}/issues} & 35,1 \\
-\texttt{/user/settings} & 23,9 \\
+\texttt{/\allowbreak{}} & 24,6 \\
+\texttt{/\allowbreak{}explore/\allowbreak{}repos} & 22,9 \\
+\texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}} & 40,4 \\
+\texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}/\allowbreak{}issues} & 35,1 \\
+\texttt{/\allowbreak{}user/\allowbreak{}settings} & 23,9 \\
 \bottomrule
 \end{longtable}
 }

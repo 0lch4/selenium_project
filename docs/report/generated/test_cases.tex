@@ -1,7 +1,7 @@
-\subsection{Przypadki funkcjonalne}
-\subsubsection{TC-F01 – Rejestracja konta poprawnymi danymi}
+\needspace{8\baselineskip}\subsection{Przypadki funkcjonalne}
+\needspace{8\baselineskip}\subsubsection{TC-F01 – Rejestracja konta poprawnymi danymi}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -16,23 +16,23 @@ Powiązane funkcje & F01 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/user/sign\_up} & Widoczny formularz z polami: nazwa, e-mail, hasło, powtórz hasło \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_up} & Widoczny formularz z polami: nazwa, e-mail, hasło, powtórz hasło \\
 2 & Wypełnij pola danymi testowymi & Pola przyjmują wartości, brak komunikatów walidacji \\
 3 & Kliknij „Register Account” & Przekierowanie na stronę główną; w nawigacji awatar z nazwą nowego użytkownika \\
-4 & Sprawdź \texttt{GET /api/v1/users/<nazwa>} & HTTP 200 \\
+4 & Sprawdź \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}users/\allowbreak{}<nazwa>} & HTTP 200 \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: konto istnieje i jest aktywne, użytkownik zalogowany; po teście konto usunięte przez administratora.
 
-\subsubsection{TC-F02 – Walidacja minimalnej długości hasła przy rejestracji}
+\needspace{8\baselineskip}\subsubsection{TC-F02 – Walidacja minimalnej długości hasła przy rejestracji}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -47,22 +47,22 @@ Powiązane funkcje & F01 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/user/sign\_up}, wypełnij formularz hasłem 7-znakowym, wyślij & Komunikat „Password length cannot be less than 8 characters.”; brak przekierowania \\
-2 & Sprawdź \texttt{GET /api/v1/users/<nazwa>} & HTTP 404 – konto nie powstało \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}sign\_up}, wypełnij formularz hasłem 7-znakowym, wyślij & Komunikat „Password length cannot be less than 8 characters.”; brak przekierowania \\
+2 & Sprawdź \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}users/\allowbreak{}<nazwa>} & HTTP 404 – konto nie powstało \\
 3 & Powtórz krok 1 z hasłem 8-znakowym (nowa nazwa) & Konto utworzone, użytkownik zalogowany (awatar w nawigacji) \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: istnieje wyłącznie konto z hasłem 8-znakowym; usunięte po teście.
 
-\subsubsection{TC-F03 – Logowanie poprawnymi danymi}
+\needspace{8\baselineskip}\subsubsection{TC-F03 – Logowanie poprawnymi danymi}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -77,22 +77,22 @@ Powiązane funkcje & F02 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/user/login} & Formularz z polami nazwy i hasła \\
-2 & Wpisz poprawną nazwę i hasło, kliknij „Sign In” & Przekierowanie na \texttt{/} \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}login} & Formularz z polami nazwy i hasła \\
+2 & Wpisz poprawną nazwę i hasło, kliknij „Sign In” & Przekierowanie na \texttt{/\allowbreak{}} \\
 3 & Sprawdź nawigację & Awatar z tytułem równym nazwie użytkownika \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: aktywna sesja użytkownika testowego.
 
-\subsubsection{TC-F04 – Odrzucenie logowania z błędnym hasłem}
+\needspace{8\baselineskip}\subsubsection{TC-F04 – Odrzucenie logowania z błędnym hasłem}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -107,22 +107,22 @@ Powiązane funkcje & F02 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/user/login} & Formularz logowania \\
+1 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}login} & Formularz logowania \\
 2 & Wpisz poprawną nazwę i błędne hasło, wyślij & Komunikat „Username or password is incorrect.” \\
-3 & Sprawdź URL i nawigację & URL zawiera \texttt{/user/login}; brak awatara (użytkownik niezalogowany) \\
+3 & Sprawdź URL i nawigację & URL zawiera \texttt{/\allowbreak{}user/\allowbreak{}login}; brak awatara (użytkownik niezalogowany) \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: brak sesji; konto nie zostało zablokowane.
 
-\subsubsection{TC-F05 – Utworzenie repozytorium z plikiem README}
+\needspace{8\baselineskip}\subsubsection{TC-F05 – Utworzenie repozytorium z plikiem README}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -137,24 +137,24 @@ Powiązane funkcje & F03, F04 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/repo/create} & Formularz nowego repozytorium \\
-2 & Podaj nazwę i opis, zaznacz „Initialize Repository”, kliknij „Create Repository” & Przekierowanie na \texttt{/<użytkownik>/<nazwa>} \\
+1 & Otwórz \texttt{/\allowbreak{}repo/\allowbreak{}create} & Formularz nowego repozytorium \\
+2 & Podaj nazwę i opis, zaznacz „Initialize Repository”, kliknij „Create Repository” & Przekierowanie na \texttt{/\allowbreak{}<użytkownik>/\allowbreak{}<nazwa>} \\
 3 & Sprawdź listę plików & Lista zawiera \texttt{README.md} \\
 4 & Sprawdź sekcję README & Zawiera nazwę repo i opis \\
-5 & \texttt{GET /api/v1/repos/<użytkownik>/<nazwa>} & \texttt{description} = opis, \texttt{private} = false \\
+5 & \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}repos/\allowbreak{}<użytkownik>/\allowbreak{}<nazwa>} & \texttt{description} = opis, \texttt{private} = false \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: repozytorium istnieje z jednym commitem; usunięte po teście.
 
-\subsubsection{TC-F06 – Odrzucenie duplikatu nazwy repozytorium}
+\needspace{8\baselineskip}\subsubsection{TC-F06 – Odrzucenie duplikatu nazwy repozytorium}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -169,22 +169,22 @@ Powiązane funkcje & F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/repo/create}, podaj nazwę X, wyślij & Komunikat „The repository name is already used.” \\
-2 & Sprawdź URL & Pozostaje \texttt{/repo/create} \\
-3 & \texttt{GET /api/v1/user/repos} & Nazwa X występuje dokładnie raz \\
+1 & Otwórz \texttt{/\allowbreak{}repo/\allowbreak{}create}, podaj nazwę X, wyślij & Komunikat „The repository name is already used.” \\
+2 & Sprawdź URL & Pozostaje \texttt{/\allowbreak{}repo/\allowbreak{}create} \\
+3 & \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}user/\allowbreak{}repos} & Nazwa X występuje dokładnie raz \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: stan repozytoriów użytkownika bez zmian.
 
-\subsubsection{TC-F07 – Utworzenie zgłoszenia z etykietą}
+\needspace{8\baselineskip}\subsubsection{TC-F07 – Utworzenie zgłoszenia z etykietą}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -199,24 +199,24 @@ Powiązane funkcje & F05, F09 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/<repo>/issues/new} & Formularz z polem tytułu, opisem i panelem bocznym \\
+1 & Otwórz \texttt{/\allowbreak{}<repo>/\allowbreak{}issues/\allowbreak{}new} & Formularz z polem tytułu, opisem i panelem bocznym \\
 2 & Wpisz tytuł i opis & Wartości widoczne w polach \\
 3 & W panelu „Labels” wybierz \texttt{bug}, zamknij listę & Etykieta \texttt{bug} widoczna w panelu \\
-4 & Kliknij „Create Issue” & Przekierowanie na \texttt{/<repo>/issues/<n>}; tytuł i etykieta \texttt{bug} widoczne \\
-5 & \texttt{GET /api/v1/repos/<repo>/issues/<n>} & \texttt{state} = open, \texttt{labels} = [\texttt{bug}] \\
+4 & Kliknij „Create Issue” & Przekierowanie na \texttt{/\allowbreak{}<repo>/\allowbreak{}issues/\allowbreak{}<n>}; tytuł i etykieta \texttt{bug} widoczne \\
+5 & \texttt{GET /\allowbreak{}api/\allowbreak{}v1/\allowbreak{}repos/\allowbreak{}<repo>/\allowbreak{}issues/\allowbreak{}<n>} & \texttt{state} = open, \texttt{labels} = [\texttt{bug}] \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: w repo istnieje 1 otwarte zgłoszenie z etykietą \texttt{bug}.
 
-\subsubsection{TC-F08 – Komentarz, zamknięcie i ponowne otwarcie zgłoszenia}
+\needspace{8\baselineskip}\subsubsection{TC-F08 – Komentarz, zamknięcie i ponowne otwarcie zgłoszenia}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -231,7 +231,7 @@ Powiązane funkcje & F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -240,15 +240,15 @@ Powiązane funkcje & F05 \\
 2 & Dodaj komentarz „Bug confirmed” & Komentarz widoczny na osi czasu; stan nadal open \\
 3 & Wpisz „Fixed” i kliknij „Close with Comment” & Stan w API = closed; przycisk zmienia się na „Reopen Issue” \\
 4 & Kliknij „Reopen Issue” & Stan w API = open \\
-5 & \texttt{GET .../issues/<n>/comments} & Dokładnie 2 komentarze w kolejności: „Bug confirmed”, „Fixed” \\
+5 & \texttt{GET .../\allowbreak{}issues/\allowbreak{}<n>/\allowbreak{}comments} & Dokładnie 2 komentarze w kolejności: „Bug confirmed”, „Fixed” \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: zgłoszenie otwarte, 2 komentarze, 2 zdarzenia zmiany stanu na osi czasu.
 
-\subsubsection{TC-F09 – Edycja pliku w edytorze przeglądarkowym i commit}
+\needspace{8\baselineskip}\subsubsection{TC-F09 – Edycja pliku w edytorze przeglądarkowym i commit}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -263,24 +263,24 @@ Powiązane funkcje & F08, F04 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/<repo>/\_edit/main/README.md} & Edytor kodu z bieżącą treścią pliku \\
+1 & Otwórz \texttt{/\allowbreak{}<repo>/\allowbreak{}\_edit/\allowbreak{}main/\allowbreak{}README.md} & Edytor kodu z bieżącą treścią pliku \\
 2 & Zaznacz całą treść i zastąp nową & Edytor zawiera wyłącznie nową treść \\
-3 & Wpisz opis commita, wybierz „Commit directly”, kliknij „Commit Changes” & Przekierowanie do widoku pliku \texttt{/src/branch/main/...} \\
-4 & \texttt{GET .../contents/README.md} & Zdekodowana treść = nowa treść \\
-5 & \texttt{GET .../commits?limit=1} & Wiadomość ostatniego commita = podany opis \\
+3 & Wpisz opis commita, wybierz „Commit directly”, kliknij „Commit Changes” & Przekierowanie do widoku pliku \texttt{/\allowbreak{}src/\allowbreak{}branch/\allowbreak{}main/\allowbreak{}...} \\
+4 & \texttt{GET .../\allowbreak{}contents/\allowbreak{}README.md} & Zdekodowana treść = nowa treść \\
+5 & \texttt{GET .../\allowbreak{}commits?limit=1} & Wiadomość ostatniego commita = podany opis \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: gałąź \texttt{main} ma nowy commit ze zmienionym README.
 
-\subsubsection{TC-F10 – Utworzenie i scalenie pull requesta}
+\needspace{8\baselineskip}\subsubsection{TC-F10 – Utworzenie i scalenie pull requesta}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -295,24 +295,24 @@ Powiązane funkcje & F06 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/<repo>/compare/main...feature-x} & Diff z 1 zmienionym plikiem, przycisk „New Pull Request” \\
-2 & Kliknij „New Pull Request”, wpisz tytuł, „Create Pull Request” & Przekierowanie na \texttt{/<repo>/pulls/<n>} \\
+1 & Otwórz \texttt{/\allowbreak{}<repo>/\allowbreak{}compare/\allowbreak{}main...feature-x} & Diff z 1 zmienionym plikiem, przycisk „New Pull Request” \\
+2 & Kliknij „New Pull Request”, wpisz tytuł, „Create Pull Request” & Przekierowanie na \texttt{/\allowbreak{}<repo>/\allowbreak{}pulls/\allowbreak{}<n>} \\
 3 & Kliknij „Create merge commit” i potwierdź & Etykieta stanu „Merged” \\
-4 & \texttt{GET .../pulls/<n>} & \texttt{merged} = true \\
-5 & \texttt{GET .../contents/feature.txt?ref=main} & HTTP 200 – plik w \texttt{main} \\
+4 & \texttt{GET .../\allowbreak{}pulls/\allowbreak{}<n>} & \texttt{merged} = true \\
+5 & \texttt{GET .../\allowbreak{}contents/\allowbreak{}feature.txt?ref=main} & HTTP 200 – plik w \texttt{main} \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: PR scalony i zamknięty, \texttt{main} zawiera \texttt{feature.txt}.
 
-\subsubsection{TC-F11 – Wyszukiwanie repozytorium po nazwie}
+\needspace{8\baselineskip}\subsubsection{TC-F11 – Wyszukiwanie repozytorium po nazwie}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -327,12 +327,12 @@ Powiązane funkcje & F10 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Otwórz \texttt{/explore/repos} & Pole wyszukiwania i lista repozytoriów \\
+1 & Otwórz \texttt{/\allowbreak{}explore/\allowbreak{}repos} & Pole wyszukiwania i lista repozytoriów \\
 2 & Wpisz frazę \texttt{szukaj-<losowy>}, Enter & URL zawiera \texttt{q=} \\
 3 & Odczytaj wyniki & Repo pasujące jest na liście, repo niepasujące – nie \\
 \bottomrule
@@ -340,9 +340,9 @@ Powiązane funkcje & F10 \\
 }
 Warunki końcowe: brak zmian danych (oba repo usunięte po teście).
 
-\subsubsection{TC-F12 – Wylogowanie blokuje dostęp do ustawień konta}
+\needspace{8\baselineskip}\subsubsection{TC-F12 – Wylogowanie blokuje dostęp do ustawień konta}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -357,21 +357,21 @@ Powiązane funkcje & F02, F07 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
 1 & Otwórz menu awatara, kliknij „Sign Out” & W nawigacji link „Sign In”, brak awatara \\
-2 & Otwórz \texttt{/user/settings} & Przekierowanie na \texttt{/user/login?redirect\_to=\%2Fuser\%2Fsettings} \\
+2 & Otwórz \texttt{/\allowbreak{}user/\allowbreak{}settings} & Przekierowanie na \texttt{/\allowbreak{}user/\allowbreak{}login?redirect\_to=\%2Fuser\%2Fsettings} \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: brak aktywnej sesji.
 
-\subsubsection{TC-F13 – CRUD repozytorium przez REST API}
+\needspace{8\baselineskip}\subsubsection{TC-F13 – CRUD repozytorium przez REST API}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -386,24 +386,24 @@ Powiązane funkcje & F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & \texttt{POST /user/repos} z opisem „v1” & 201; \texttt{full\_name} = \texttt{<user>/<nazwa>} \\
-2 & \texttt{GET /repos/<user>/<nazwa>} & 200; \texttt{description} = „v1” \\
+1 & \texttt{POST /\allowbreak{}user/\allowbreak{}repos} z opisem „v1” & 201; \texttt{full\_name} = \texttt{<user>/\allowbreak{}<nazwa>} \\
+2 & \texttt{GET /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 200; \texttt{description} = „v1” \\
 3 & \texttt{PATCH} z \texttt{description} „v2”, \texttt{has\_wiki} false & 200; pola zaktualizowane \\
-4 & \texttt{DELETE /repos/<user>/<nazwa>} & 204 \\
-5 & \texttt{GET /repos/<user>/<nazwa>} & 404 \\
+4 & \texttt{DELETE /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 204 \\
+5 & \texttt{GET /\allowbreak{}repos/\allowbreak{}<user>/\allowbreak{}<nazwa>} & 404 \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: repozytorium nie istnieje.
 
-\subsubsection{TC-F14 – Widoczność repozytorium wg roli (tablica decyzyjna)}
+\needspace{8\baselineskip}\subsubsection{TC-F14 – Widoczność repozytorium wg roli (tablica decyzyjna)}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -420,33 +420,33 @@ Powiązane funkcje & F07 \\
 Tablica decyzyjna (6 reguł, każda to osobne wykonanie):
 
 {\small
-\begin{longtable}{p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.143\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Reguła} & \textbf{R1} & \textbf{R2} & \textbf{R3} & \textbf{R4} & \textbf{R5} & \textbf{R6} \\
 \midrule
 \endhead
 Repo prywatne & N & N & N & T & T & T \\
 Rola & właściciel & inny & anonim & właściciel & inny & anonim \\
-**Oczekiwany kod \texttt{GET /repos/...}** & 200 & 200 & 200 & 200 & \textbf{404} & \textbf{404} \\
+\textbf{Oczekiwany kod \texttt{GET /\allowbreak{}repos/\allowbreak{}...}} & 200 & 200 & 200 & 200 & \textbf{404} & \textbf{404} \\
 \bottomrule
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
 1 & Utwórz repo o widoczności z reguły & 201 \\
-2 & Wykonaj \texttt{GET /repos/<repo>} jako rola z reguły & Kod zgodny z tablicą \\
+2 & Wykonaj \texttt{GET /\allowbreak{}repos/\allowbreak{}<repo>} jako rola z reguły & Kod zgodny z tablicą \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: repozytorium usunięte; repo prywatne nie ujawniło swojego istnienia (404, nie 403).
 
-\subsubsection{TC-F15 – Nadanie i odebranie dostępu kolaboratorowi}
+\needspace{8\baselineskip}\subsubsection{TC-F15 – Nadanie i odebranie dostępu kolaboratorowi}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -461,24 +461,24 @@ Powiązane funkcje & F07 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & Drugi użytkownik: \texttt{GET /repos/<repo>} & 404 \\
-2 & Właściciel: \texttt{PUT /repos/<repo>/collaborators/<drugi>} z \texttt{permission: write} & 204 \\
-3 & Drugi użytkownik: \texttt{GET /repos/<repo>} & 200 \\
-4 & Drugi użytkownik: \texttt{POST /repos/<repo>/issues} & 201 – uprawnienie zapisu działa \\
-5 & Właściciel: \texttt{DELETE .../collaborators/<drugi>}; drugi: \texttt{GET} & 404 \\
+1 & Drugi użytkownik: \texttt{GET /\allowbreak{}repos/\allowbreak{}<repo>} & 404 \\
+2 & Właściciel: \texttt{PUT /\allowbreak{}repos/\allowbreak{}<repo>/\allowbreak{}collaborators/\allowbreak{}<drugi>} z \texttt{permission: write} & 204 \\
+3 & Drugi użytkownik: \texttt{GET /\allowbreak{}repos/\allowbreak{}<repo>} & 200 \\
+4 & Drugi użytkownik: \texttt{POST /\allowbreak{}repos/\allowbreak{}<repo>/\allowbreak{}issues} & 201 – uprawnienie zapisu działa \\
+5 & Właściciel: \texttt{DELETE .../\allowbreak{}collaborators/\allowbreak{}<drugi>}; drugi: \texttt{GET} & 404 \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: drugi użytkownik nie ma dostępu; repo usunięte.
 
-\subsubsection{TC-F16 – Licznik postępu kamienia milowego}
+\needspace{8\baselineskip}\subsubsection{TC-F16 – Licznik postępu kamienia milowego}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -493,23 +493,23 @@ Powiązane funkcje & F09, F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
 1 & Utwórz milestone i 2 zgłoszenia z \texttt{milestone} & 201 dla każdego \\
-2 & \texttt{GET /milestones/<id>} & \texttt{open\_issues} = 2, \texttt{closed\_issues} = 0 \\
+2 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_issues} = 2, \texttt{closed\_issues} = 0 \\
 3 & Zamknij jedno zgłoszenie (\texttt{PATCH state=closed}) & 201 \\
-4 & \texttt{GET /milestones/<id>} & \texttt{open\_issues} = 1, \texttt{closed\_issues} = 1 \\
+4 & \texttt{GET /\allowbreak{}milestones/\allowbreak{}<id>} & \texttt{open\_issues} = 1, \texttt{closed\_issues} = 1 \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: milestone z postępem 50\%.
 
-\subsubsection{TC-F17 – Uwierzytelnianie tokenem API}
+\needspace{8\baselineskip}\subsubsection{TC-F17 – Uwierzytelnianie tokenem API}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -524,25 +524,25 @@ Powiązane funkcje & F12 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & \texttt{POST /users/<user>/tokens} & 201, zwrócony \texttt{sha1} \\
-2 & \texttt{GET /user} z tokenem poprawnym & 200 \\
-3 & \texttt{GET /user} bez nagłówka \texttt{Authorization} & 401 \\
-4 & \texttt{GET /user} z tokenem \texttt{000\dots{}0} & 401 \\
-5 & Usuń token, \texttt{GET /user} z usuniętym tokenem & 401 \\
+1 & \texttt{POST /\allowbreak{}users/\allowbreak{}<user>/\allowbreak{}tokens} & 201, zwrócony \texttt{sha1} \\
+2 & \texttt{GET /\allowbreak{}user} z tokenem poprawnym & 200 \\
+3 & \texttt{GET /\allowbreak{}user} bez nagłówka \texttt{Authorization} & 401 \\
+4 & \texttt{GET /\allowbreak{}user} z tokenem \texttt{000\dots{}0} & 401 \\
+5 & Usuń token, \texttt{GET /\allowbreak{}user} z usuniętym tokenem & 401 \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: token usunięty.
 
-\subsection{Przypadki niefunkcjonalne (ISO/IEC 25010:2023)}
-\subsubsection{TC-NF01 – Czas odpowiedzi pod obciążeniem}
+\needspace{8\baselineskip}\subsection{Przypadki niefunkcjonalne (ISO/IEC 25010:2023)}
+\needspace{8\baselineskip}\subsubsection{TC-NF01 – Czas odpowiedzi pod obciążeniem}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -558,24 +558,24 @@ Powiązane funkcje & F04, F05, F10 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
 1 & Przygotuj dane testowe przez API & Repo i 20 zgłoszeń utworzone \\
-2 & Uruchom Locust w trybie headless z profilem \texttt{perf/locustfile.py} & Wygenerowany \texttt{reports/perf/locust\_stats.csv} \\
+2 & Uruchom Locust w trybie headless z profilem \texttt{perf/\allowbreak{}locustfile.py} & Wygenerowany \texttt{reports/\allowbreak{}perf/\allowbreak{}locust\_stats.csv} \\
 3 & Odczytaj statystyki zagregowane & Odsetek błędów = 0\% \\
 4 & Odczytaj przepustowość & $\geq$ 10 żądań/s \\
 5 & Odczytaj 95. percentyl każdego typu żądania & p95 < 500 ms dla każdego \\
 \bottomrule
 \end{longtable}
 }
-Warunki końcowe: dane wydajnościowe zapisane w \texttt{reports/perf/summary.json}; repo usunięte.
+Warunki końcowe: dane wydajnościowe zapisane w \texttt{reports/\allowbreak{}perf/\allowbreak{}summary.json}; repo usunięte.
 
-\subsubsection{TC-NF02 – Czas ładowania kluczowych stron}
+\needspace{8\baselineskip}\subsubsection{TC-NF02 – Czas ładowania kluczowych stron}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -585,13 +585,13 @@ Charakterystyka & Wydajność $\rightarrow$ zachowanie w czasie \\
 Technika & Pomiar z użyciem Navigation Timing API (mediana z 3 próbek) \\
 Typ testu & Niefunkcjonalny – wydajnościowy \\
 Poziom testu & Testowanie systemowe (Selenium) \\
-Warunki wstępne / dane & Zalogowany użytkownik, repo testowe; strony: \texttt{/}, \texttt{/explore/repos}, repo, lista zgłoszeń, \texttt{/user/settings} \\
+Warunki wstępne / dane & Zalogowany użytkownik, repo testowe; strony: \texttt{/\allowbreak{}}, \texttt{/\allowbreak{}explore/\allowbreak{}repos}, repo, lista zgłoszeń, \texttt{/\allowbreak{}user/\allowbreak{}settings} \\
 Powiązane funkcje & F02, F04, F05, F10 \\
 \bottomrule
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
@@ -602,11 +602,11 @@ Powiązane funkcje & F02, F04, F05, F10 \\
 \bottomrule
 \end{longtable}
 }
-Warunki końcowe: wyniki w \texttt{reports/page\_load.json}.
+Warunki końcowe: wyniki w \texttt{reports/\allowbreak{}page\_load.json}.
 
-\subsubsection{TC-NF03 – Zgodność kluczowych widoków z WCAG 2.1 AA}
+\needspace{8\baselineskip}\subsubsection{TC-NF03 – Zgodność kluczowych widoków z WCAG 2.1 AA}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -622,23 +622,23 @@ Powiązane funkcje & F01, F02, F04, F05 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
 1 & Otwórz widoki anonimowe i uruchom axe & Raport naruszeń dla każdego widoku \\
 2 & Zaloguj się, otwórz widoki wymagające sesji i uruchom axe & Raport naruszeń dla każdego widoku \\
-3 & Zapisz podsumowanie do \texttt{reports/axe.json} & Plik zawiera id, wpływ i liczbę węzłów \\
+3 & Zapisz podsumowanie do \texttt{reports/\allowbreak{}axe.json} & Plik zawiera id, wpływ i liczbę węzłów \\
 4 & Sprawdź naruszenia o wpływie \texttt{critical} & Brak naruszeń krytycznych \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: raport dostępności zapisany. \textbf{Wynik: niezaliczony – DEF-02} (w automatyzacji oznaczony jako znany defekt, \texttt{xfail}).
 
-\subsubsection{TC-NF04 – Podstawowe zabezpieczenia aplikacji webowej}
+\needspace{8\baselineskip}\subsubsection{TC-NF04 – Podstawowe zabezpieczenia aplikacji webowej}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -648,30 +648,30 @@ Charakterystyka & Bezpieczeństwo (Security) $\rightarrow$ poufność, integraln
 Technika & Testowanie oparte na liście kontrolnej (OWASP ASVS: V3 sesje, V4 kontrola dostępu, V14 nagłówki) \\
 Typ testu & Niefunkcjonalny – bezpieczeństwa \\
 Poziom testu & Testowanie systemowe (HTTP) \\
-Warunki wstępne / dane & Użytkownik testowy; obca domena \texttt{http://evil.example} \\
+Warunki wstępne / dane & Użytkownik testowy; obca domena \texttt{http:/\allowbreak{}/\allowbreak{}evil.example} \\
 Powiązane funkcje & F02, F07 \\
 \bottomrule
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
 \endhead
-1 & \texttt{GET /user/login}, sprawdź nagłówki & \texttt{X-Content-Type-Options: nosniff}, \texttt{X-Frame-Options: SAMEORIGIN} lub \texttt{DENY} \\
+1 & \texttt{GET /\allowbreak{}user/\allowbreak{}login}, sprawdź nagłówki & \texttt{X-Content-Type-Options: nosniff}, \texttt{X-Frame-Options: SAMEORIGIN} lub \texttt{DENY} \\
 2 & Zaloguj się, sprawdź \texttt{Set-Cookie} ciasteczka sesji & \texttt{HttpOnly} i \texttt{SameSite=Lax} \\
-3 & Jako zalogowany wyślij \texttt{POST /repo/create} z \texttt{Origin: evil.example}, \texttt{Sec-Fetch-Site: cross-site} & 403; repo nie powstało \\
-4 & Wyślij \texttt{POST /user/login} cross-site & 403 (\textbf{faktycznie 303 – DEF-01, oznaczony jako xfail}) \\
+3 & Jako zalogowany wyślij \texttt{POST /\allowbreak{}repo/\allowbreak{}create} z \texttt{Origin: evil.example}, \texttt{Sec-Fetch-Site: cross-site} & 403; repo nie powstało \\
+4 & Wyślij \texttt{POST /\allowbreak{}user/\allowbreak{}login} cross-site & 403 (\textbf{faktycznie 303 – DEF-01, oznaczony jako xfail}) \\
 5 & Anonimowo \texttt{GET} strony i surowego pliku repo prywatnego & 404 dla obu \\
 \bottomrule
 \end{longtable}
 }
 Warunki końcowe: brak utworzonych zasobów.
 
-\subsubsection{TC-NF05 – Kompatybilność przeglądarek}
+\needspace{8\baselineskip}\subsubsection{TC-NF05 – Kompatybilność przeglądarek}
 {\small
-\begin{longtable}{p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Pole} & \textbf{Wartość} \\
 \midrule
@@ -687,7 +687,7 @@ Powiązane funkcje & F02, F03 \\
 \end{longtable}
 }
 {\small
-\begin{longtable}{p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.050\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.480\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.470\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{\#} & \textbf{Krok} & \textbf{Oczekiwany rezultat} \\
 \midrule
