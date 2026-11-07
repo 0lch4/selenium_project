@@ -1,4 +1,4 @@
-"""TC-F07..TC-F12: issues, edytor plików, pull requesty, wyszukiwanie, wylogowanie (Selenium)."""
+"""TC-F07..TC-F12: issues, file editor, pull requests, search, logout (Selenium)."""
 import base64
 
 import pytest

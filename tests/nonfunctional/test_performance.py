@@ -1,4 +1,4 @@
-"""TC-NF01, TC-NF02: wydajność (ISO/IEC 25010 - Performance efficiency / time behaviour)."""
+"""TC-NF01, TC-NF02: performance efficiency / time behaviour (ISO/IEC 25010)."""
 import csv
 import json
 import os
@@ -17,7 +17,7 @@ pytestmark = pytest.mark.nonfunctional
 ROOT = Path(__file__).resolve().parents[2]
 REPORTS = ROOT / "reports"
 
-# Parametry profilu obciążenia i kryteria akceptacji
+# Load profile parameters and acceptance criteria
 USERS, SPAWN_RATE, DURATION = 20, 5, os.getenv("PERF_DURATION", "30s")
 P95_LIMIT_MS, MIN_RPS, MAX_ERROR_RATE = 500, 10, 0.0
 PAGE_LOAD_LIMIT_MS = 2000
@@ -55,7 +55,7 @@ def test_api_response_time_under_load(user, user_api):
     (out / "summary.json").write_text(json.dumps(summary, indent=2))
 
     assert requests_n > 0
-    assert error_rate <= MAX_ERROR_RATE, f"błędy: {error_rate:.1%}"
+    assert error_rate <= MAX_ERROR_RATE, f"error rate: {error_rate:.1%}"
     assert float(total["Requests/s"]) >= MIN_RPS
     slow = {n: s["p95"] for n, s in summary.items() if s["p95"] > P95_LIMIT_MS}
     assert not slow, f"p95 > {P95_LIMIT_MS} ms: {slow}"
@@ -83,4 +83,4 @@ def test_page_load_time(driver, user, repo):
     REPORTS.mkdir(exist_ok=True)
     (REPORTS / "page_load.json").write_text(json.dumps(results, indent=2))
     slow = {p: t for p, t in results.items() if t > PAGE_LOAD_LIMIT_MS}
-    assert not slow, f"strony wolniejsze niż {PAGE_LOAD_LIMIT_MS} ms: {slow}"
+    assert not slow, f"pages slower than {PAGE_LOAD_LIMIT_MS} ms: {slow}"

@@ -1,4 +1,4 @@
-"""TC-F13..TC-F17: testy funkcjonalne na poziomie REST API Gitea."""
+"""TC-F13..TC-F17: functional tests at the Gitea REST API level."""
 import pytest
 
 from support.api import GiteaApi, unique
@@ -27,7 +27,7 @@ def test_repository_crud(user_api, user):
     assert user_api.get(f"/repos/{full}").status_code == 404
 
 
-# Tablica decyzyjna: widoczność repo x rola żądającego -> oczekiwany kod HTTP
+# Decision table: repo visibility x requester role -> expected HTTP status
 ACCESS_TABLE = [
     ("public", "owner", 200),
     ("public", "other", 200),
@@ -100,7 +100,7 @@ def test_milestone_progress_follows_issue_state(user_api, repo):
 @pytest.mark.feature("F12")
 @pytest.mark.parametrize("auth, expected", [
     ("valid", 200), ("none", 401), ("invalid", 401), ("revoked", 401),
-], ids=["poprawny", "brak", "bledny", "uniewazniony"])
+], ids=["valid", "missing", "invalid", "revoked"])
 def test_api_token_authentication(user, auth, expected):
     basic = GiteaApi(user["username"], user["password"])
     token_name = unique("tok")
