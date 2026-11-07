@@ -51,7 +51,7 @@ class PullPage(BasePage):
 
     def merge(self) -> None:
         self.visible(self.MERGE_FORM)
-        # pierwszy klik rozwija formularz, drugi zatwierdza merge
+        # the first click expands the form, the second confirms the merge
         self.click(self.MERGE_BUTTON)
         self.wait.until(lambda d: len(d.find_elements(*self.MERGE_BUTTON)) >= 1)
         buttons = self.driver.find_elements(*self.MERGE_BUTTON)
@@ -69,7 +69,7 @@ class ExplorePage(BasePage):
     RESULT_LINKS = (By.CSS_SELECTOR, ".item-title a.name")
 
     def search(self, query: str) -> list[str]:
-        """Zwraca pełne nazwy (owner/repo) znalezionych repozytoriów."""
+        """Returns full names (owner/repo) of the repositories found."""
         self.type(self.SEARCH, query)
         self.find(self.SEARCH).send_keys(Keys.ENTER)
         self.wait.until(EC.url_contains("q="))

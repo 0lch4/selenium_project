@@ -1,4 +1,4 @@
-"""TC-NF03..TC-NF05: dostępność, bezpieczeństwo, kompatybilność (ISO/IEC 25010)."""
+"""TC-NF03..TC-NF05: accessibility, security, compatibility (ISO/IEC 25010)."""
 import json
 from pathlib import Path
 
@@ -53,7 +53,7 @@ def test_accessibility_wcag_aa(driver, user, repo):
 
     critical = {p: [v["id"] for v in vs if v["impact"] == "critical"] for p, vs in summary.items()}
     critical = {p: ids for p, ids in critical.items() if ids}
-    assert not critical, f"naruszenia krytyczne WCAG: {critical}"
+    assert not critical, f"critical WCAG violations: {critical}"
 
 
 @pytest.mark.tc("TC-NF04")
@@ -86,7 +86,7 @@ class TestSecurity:
         assert r.status_code == 403
         assert user_api.get(f"/repos/{user['username']}/{name}").status_code == 404
 
-    @pytest.mark.xfail(strict=True, reason="DEF-01: logowanie akceptuje żądanie cross-site (login CSRF)")
+    @pytest.mark.xfail(strict=True, reason="DEF-01: login accepts a cross-site request (login CSRF)")
     def test_cross_origin_login_is_rejected(self, user):
         r = requests.post(config.BASE_URL + "/user/login",
                           headers={"Origin": "http://evil.example", "Sec-Fetch-Site": "cross-site"},

@@ -1,4 +1,4 @@
-"""Testy dymne środowiska - potwierdzają gotowość przedmiotu testów przed kampanią."""
+"""Environment smoke tests - confirm the test object is ready before the campaign."""
 import pytest
 
 from pages.base_page import BasePage

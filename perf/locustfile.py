@@ -1,4 +1,4 @@
-"""Profil obciążenia dla TC-NF01: typowe operacje odczytu zalogowanego użytkownika."""
+"""Load profile for TC-NF01: typical read operations of a logged-in user."""
 import os
 
 from locust import HttpUser, between, task

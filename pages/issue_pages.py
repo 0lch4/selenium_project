@@ -18,7 +18,7 @@ class NewIssuePage(BasePage):
         self.click(self.LABELS_DROPDOWN)
         self.click((By.XPATH, f"//input[@name='label_ids']/following-sibling::div"
                               f"//div[contains(@class,'menu')]//*[contains(@class,'item')][.//*[normalize-space()='{name}']]"))
-        # zamknięcie listy zatwierdza wybór etykiet
+        # closing the dropdown commits the label selection
         self.click(self.TITLE)
 
     def create(self, title: str, body: str = "", label: str | None = None):
@@ -59,6 +59,6 @@ class IssuePage(BasePage):
             self.type(self.COMMENT_BOX, comment)
         button = self.wait.until(EC.element_to_be_clickable(self.STATUS_BUTTON))
         button.click()
-        # formularz jest wysyłany fetch-em, po czym strona się przeładowuje
+        # the form is submitted via fetch, then the page reloads
         self.wait.until(EC.staleness_of(button))
         self.visible(self.STATUS_BUTTON)
