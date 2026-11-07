@@ -6,3 +6,4 @@
 - [x] Testy API TC-F13–F17 (PR #15)
 - [x] Testy niefunkcjonalne TC-NF01–NF05, rejestr defektów (DEF-01, DEF-02)
 - [x] LLM-as-a-Judge: capture 4 widoków, rubryka 8 wymiarów, judge (dry-run OK; ocena wymaga ANTHROPIC_API_KEY)
+- [x] CI/CD: GitHub Actions (funkcjonalne zielone; NF z continue-on-error przez DEF-02)

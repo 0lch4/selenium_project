@@ -1,0 +1,60 @@
+name: Testy automatyczne
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  functional:
+    name: Funkcjonalne (UI Selenium + API)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Uruchom Gitea (przedmiot testów)
+        run: bash scripts/bootstrap.sh
+      - run: pip install -r requirements.txt
+      - name: Testy funkcjonalne
+        run: >
+          pytest -m "not nonfunctional"
+          --junitxml=reports/junit-functional.xml
+          --html=reports/functional.html --self-contained-html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: raport-funkcjonalne
+          path: reports/
+
+  nonfunctional:
+    name: Niefunkcjonalne (ISO/IEC 25010)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # TC-NF03 wykrywa rzeczywisty defekt DEF-02 (WCAG) - job raportuje wynik, ale nie blokuje merge
+    continue-on-error: true
+    env:
+      PERF_DURATION: 15s
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Uruchom Gitea (przedmiot testów)
+        run: bash scripts/bootstrap.sh
+      - run: pip install -r requirements.txt
+      - name: Testy niefunkcjonalne
+        run: >
+          pytest -m nonfunctional -k "not edge"
+          --junitxml=reports/junit-nonfunctional.xml
+          --html=reports/nonfunctional.html --self-contained-html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: raport-niefunkcjonalne
+          path: reports/
