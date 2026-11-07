@@ -47,12 +47,13 @@ def inline(text: str) -> str:
 WIDTHS = {
     ("ID", "Funkcja", "Opis", "MoSCoW", "Uzasadnienie"): [0.07, 0.19, 0.34, 0.11, 0.29],
     ("ID", "Tytuł", "Priorytet", "Technika", "Poziom", "Funkcje", "Automatyzacja", "Wynik"):
-        [0.09, 0.19, 0.09, 0.15, 0.11, 0.11, 0.12, 0.14],
+        [0.08, 0.18, 0.09, 0.15, 0.11, 0.11, 0.14, 0.14],
     ("ID", "Tytuł", "Wykryty przez", "Ważność", "Priorytet", "Status"): [0.09, 0.45, 0.13, 0.1, 0.1, 0.13],
     ("ID", "Wynik", "Czas [s]", "Uwagi"): [0.1, 0.24, 0.09, 0.57],
     ("Grupa", "Wykonania", "Zaliczone", "Niezaliczone", "Oczekiwane niepowodzenie (xfail)", "Czas [s]"):
         [0.3, 0.12, 0.12, 0.13, 0.21, 0.12],
 }
+SHORT_TABLE = 12  # rows; longer tables use longtable and may break across pages
 
 
 def table(rows: list[list[str]], small: bool = False, widths: list[float] | None = None) -> str:
@@ -75,10 +76,15 @@ def table(rows: list[list[str]], small: bool = False, widths: list[float] | None
     spec = "".join(rf">{{\raggedright\arraybackslash}}p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}"
                    for w in widths)
     size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n >= 8 else r"\small"
-    lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
-             " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\", r"\midrule", r"\endhead"]
-    lines += [" & ".join(inline(c) for c in r) + r" \\" for r in body]
-    lines += [r"\bottomrule", r"\end{longtable}", "}"]
+    head = " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\"
+    rows_tex = [" & ".join(inline(c) for c in r) + r" \\" for r in body]
+    if len(body) <= SHORT_TABLE:
+        # short tables never break: a longtable right after a heading at a page break prints
+        # its header above the heading
+        return "\n".join([r"{" + size, r"\par\smallskip\noindent\begin{tabular}{" + spec + "}", r"\toprule",
+                          head, r"\midrule", *rows_tex, r"\bottomrule", r"\end{tabular}\par\smallskip", "}"])
+    lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule", head, r"\midrule", r"\endhead",
+             *rows_tex, r"\bottomrule", r"\end{longtable}", "}"]
     return "\n".join(lines)
 
 

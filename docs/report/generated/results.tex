@@ -1,17 +1,16 @@
 \needspace{8\baselineskip}\subsection{Podsumowanie}
 {\small
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.300\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.210\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.300\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.130\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.210\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.120\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Grupa} & \textbf{Wykonania} & \textbf{Zaliczone} & \textbf{Niezaliczone} & \textbf{Oczekiwane niepowodzenie (xfail)} & \textbf{Czas [s]} \\
 \midrule
-\endhead
 Testy dymne & 2 & 2 & 0 & 0 & 3,3 \\
 UI Selenium (TC-F01–F12) & 13 & 13 & 0 & 0 & 52,3 \\
 API (TC-F13–F17) & 13 & 13 & 0 & 0 & 4,2 \\
 Niefunkcjonalne (TC-NF01–NF05) & 10 & 8 & 0 & 2 & 49,2 \\
 \textbf{Razem} & \textbf{38} & \textbf{36} & \textbf{0} & \textbf{2} & \textbf{109,9} \\
 \bottomrule
-\end{longtable}
+\end{tabular}\par\smallskip
 }
 Wykonania > przypadków testowych, bo część przypadków jest sparametryzowana
 
@@ -61,11 +60,10 @@ TC-NF05 & Zaliczony (2/2) & 8,25 & Chrome, Edge \\
 }
 \needspace{8\baselineskip}\subsection{Wydajność – TC-NF01 (Locust, 20 użytkowników, narastanie 5/s, 30 s)}
 {\small
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.250\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Żądanie} & \textbf{p50 [ms]} & \textbf{p95 [ms]} & \textbf{żądania/s} \\
 \midrule
-\endhead
 API repo & 14 & 23 & 5,1 \\
 API issues & 23 & 31 & 4,9 \\
 API search & 15 & 22 & 2,8 \\
@@ -73,20 +71,19 @@ WEB /\{owner\}/\{repo\} & 22 & 42 & 4,0 \\
 WEB /explore/repos & 3 & 6 & 2,2 \\
 \textbf{Zagregowane} & \textbf{20} & \textbf{32} & \textbf{19,0} \\
 \bottomrule
-\end{longtable}
+\end{tabular}\par\smallskip
 }
 \needspace{8\baselineskip}\subsection{Czas ładowania stron – TC-NF02 (mediana z 3 pomiarów, \texttt{loadEventEnd})}
 {\small
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.270\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.730\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Strona} & \textbf{Czas [ms]} \\
 \midrule
-\endhead
 \texttt{/\allowbreak{}} & 24,6 \\
 \texttt{/\allowbreak{}explore/\allowbreak{}repos} & 22,9 \\
 \texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}} & 40,4 \\
 \texttt{/\allowbreak{}\{owner\}/\allowbreak{}\{repo\}/\allowbreak{}issues} & 35,1 \\
 \texttt{/\allowbreak{}user/\allowbreak{}settings} & 23,9 \\
 \bottomrule
-\end{longtable}
+\end{tabular}\par\smallskip
 }
