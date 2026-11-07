@@ -6,6 +6,10 @@
 .EXAMPLE
   powershell -ExecutionPolicy Bypass -File scripts\demo.ps1
   powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -SkipJudge
+  powershell -ExecutionPolicy Bypass -File scripts\demo.ps1 -Distro Ubuntu
+
+  Docker reachable from Windows (Docker Desktop) is used directly; otherwise Gitea is
+  started with Docker inside the WSL distro given by -Distro.
 #>
 param(
     [switch]$SkipJudge,
@@ -19,10 +23,30 @@ $python = Join-Path $root ".venv\Scripts\python.exe"
 
 function Step($text) { Write-Host "`n=== $text ===" -ForegroundColor Cyan }
 
-Step "1/4 Starting Gitea 28.3.0 (Docker in WSL: $Distro)"
-$wslRoot = (wsl -d $Distro -- wslpath -a ($root -replace '\\', '/')).Trim()
-wsl -d $Distro -- bash -lc "cd '$wslRoot' && bash scripts/bootstrap.sh"
-if ($LASTEXITCODE -ne 0) { throw "bootstrap failed" }
+$nativeDocker = $false
+if (Get-Command docker -ErrorAction SilentlyContinue) {
+    # stderr of a native command is a terminating error under "Stop" in Windows PowerShell 5.1
+    cmd /c "docker info >nul 2>&1"
+    $nativeDocker = ($LASTEXITCODE -eq 0)
+}
+
+if ($nativeDocker) {
+    # Docker Desktop (or another engine) reachable directly from Windows
+    Step "1/4 Starting Gitea 28.3.0 (Docker on Windows)"
+    docker compose up -d --wait
+    if ($LASTEXITCODE -ne 0) { throw "docker compose failed" }
+    $admins = docker compose exec -T -u git gitea gitea admin user list --admin
+    if (-not ($admins -match "\badmin\b")) {
+        docker compose exec -T -u git gitea gitea admin user create --admin --username admin `
+            --password "Admin123!pass" --email admin@example.com --must-change-password=false
+        if ($LASTEXITCODE -ne 0) { throw "admin creation failed" }
+    }
+} else {
+    Step "1/4 Starting Gitea 28.3.0 (Docker in WSL: $Distro)"
+    $wslRoot = (wsl -d $Distro -- wslpath -a ($root -replace '\\', '/')).Trim()
+    wsl -d $Distro -- bash -lc "cd '$wslRoot' && bash scripts/bootstrap.sh"
+    if ($LASTEXITCODE -ne 0) { throw "bootstrap failed - is Docker running in WSL distro '$Distro'? (-Distro <name>)" }
+}
 
 Step "2/4 Selenium UI tests in a visible browser"
 $env:HEADLESS = "0"
