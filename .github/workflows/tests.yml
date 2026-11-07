@@ -35,8 +35,6 @@ jobs:
     name: Non-functional (ISO/IEC 25010)
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    # TC-NF03 detects the real defect DEF-02 (WCAG) - the job reports it but does not block merging
-    continue-on-error: true
     env:
       PERF_DURATION: 15s
     steps:

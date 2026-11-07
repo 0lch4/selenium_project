@@ -267,8 +267,8 @@ Actions (Ubuntu, Chrome). Zrzut ekranu stanu końcowego każdego testu UI zapisy
 
 \begin{figure}[H]\centering
 \includegraphics[width=0.85\linewidth]{github_actions_run.png}
-\caption{Przebieg GitHub Actions: job funkcjonalny zaliczony; job niefunkcjonalny niezaliczony
-przez TC-NF03 (DEF-02) -- oznaczony \texttt{continue-on-error}, więc przebieg ma status \emph{Success}.}
+\caption{Przebieg GitHub Actions: oba joby zakończone statusem \emph{Success}; znane defekty
+DEF-01 i DEF-02 raportowane jako \texttt{xfail}.}
 \end{figure}
 
 \begin{figure}[H]\centering
@@ -422,8 +422,8 @@ z obiektywnym testem TC-NF03 (axe-core) -- oba wskazują obszar dostępności ja
 \subsection{Podsumowanie}
 Zaprojektowano 22 przypadki testowe (17 funkcjonalnych, 5 niefunkcjonalnych) i wszystkie
 zautomatyzowano; 12 przypadków wykorzystuje Selenium WebDriver. Wykonano 38 testów
-(parametryzacja): 36 zaliczonych, 1 niezaliczony (TC-NF03, DEF-02) i 1 oczekiwane niepowodzenie
-(DEF-01). Pełny przebieg trwa około 110~s, a pipeline CI uruchamia testy przy każdym pull requeście.
+(parametryzacja): 36 zaliczonych i 2 oczekiwane niepowodzenia (\texttt{xfail}) odpowiadające
+potwierdzonym defektom: TC-NF03 (DEF-02) i jedna kontrola TC-NF04 (DEF-01). Pełny przebieg trwa około 110~s, a pipeline CI uruchamia testy przy każdym pull requeście.
 
 \subsection{Pokrycie}
 \begin{itemize}

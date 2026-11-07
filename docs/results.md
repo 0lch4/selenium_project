@@ -12,12 +12,17 @@
 | Testy dymne | 2 | 2 | 0 | 0 | 3,3 |
 | UI Selenium (TC-F01–F12) | 13 | 13 | 0 | 0 | 52,3 |
 | API (TC-F13–F17) | 13 | 13 | 0 | 0 | 4,2 |
-| Niefunkcjonalne (TC-NF01–NF05) | 10 | 8 | 1 | 1 | 49,2 |
-| **Razem** | **38** | **36** | **1** | **1** | **109,9** |
+| Niefunkcjonalne (TC-NF01–NF05) | 10 | 8 | 0 | 2 | 49,2 |
+| **Razem** | **38** | **36** | **0** | **2** | **109,9** |
 
 Wykonania > przypadków testowych, bo część przypadków jest sparametryzowana
 (TC-F02: 2 wartości brzegowe, TC-F14: 6 reguł tablicy decyzyjnej, TC-F17: 4 warianty tokena,
 TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
+
+Oba wykonania oznaczone jako *xfail* to potwierdzone defekty przedmiotu testów (DEF-01, DEF-02):
+przypadek testowy nie spełnia oczekiwanego rezultatu, a automat raportuje to jako znany defekt
+(`xfail(strict=True)`). Po naprawie defektu test zmieni wynik na *XPASS* i przebieg zakończy się
+niepowodzeniem, co sygnalizuje konieczność aktualizacji oczekiwań i retestu.
 
 ## Wyniki per przypadek testowy
 
@@ -42,7 +47,7 @@ TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
 | TC-F17 | Zaliczony (4/4) | 0,34 | |
 | TC-NF01 | Zaliczony | 32,00 | p95 zagregowane 32 ms (limit 500 ms), 19,0 żądań/s, 0% błędów |
 | TC-NF02 | Zaliczony | 4,17 | mediany 23–40 ms (limit 2000 ms) |
-| TC-NF03 | **Niezaliczony** | 4,32 | DEF-02 – krytyczne naruszenia WCAG na 5/5 widokach |
+| TC-NF03 | **Niezaliczony** (xfail) | 4,32 | DEF-02 – krytyczne naruszenia WCAG na 5/5 widokach (znany defekt) |
 | TC-NF04 | Zaliczony (4/4) + 1 xfail | 0,49 | DEF-01 – login CSRF (znany defekt) |
 | TC-NF05 | Zaliczony (2/2) | 8,25 | Chrome, Edge |
 
@@ -69,8 +74,8 @@ TC-NF04: 5 kontroli, TC-NF05: 2 przeglądarki).
 
 ## CI (GitHub Actions)
 
-Run #1 (PR #18): job funkcjonalny zaliczony (1 min 9 s), job niefunkcjonalny niezaliczony wyłącznie
-przez TC-NF03 (DEF-02) – job ma `continue-on-error`, więc całość ma status *Success*.
+Oba joby (funkcjonalny i niefunkcjonalny) kończą się statusem *Success*; znane defekty DEF-01
+i DEF-02 są raportowane jako *xfail*, więc nie blokują pipeline'u, a ich naprawa zostanie wykryta.
 
 ## Defekty
 
