@@ -1,7 +1,9 @@
 import base64
+import os
 from pathlib import Path
 
 import pytest
+import pytest_html
 
 from pages.login_page import LoginPage
 from support import config
@@ -9,6 +11,7 @@ from support.api import GiteaApi
 from support.driver import make_driver
 
 REPORTS = Path(__file__).parent / "reports"
+SCREENSHOTS_ALL = os.getenv("SCREENSHOTS", "failed") == "all"
 
 
 @pytest.fixture(scope="session")
@@ -64,10 +67,13 @@ def logged_in(driver, user):
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Zrzut ekranu przy niepowodzeniu testu UI (dołączany do raportu HTML)."""
+    """Zrzut ekranu testu UI dołączany do raportu HTML.
+
+    Domyślnie tylko przy niepowodzeniu; SCREENSHOTS=all zapisuje zrzut stanu końcowego każdego testu.
+    """
     outcome = yield
     rep = outcome.get_result()
-    if rep.when != "call" or not rep.failed:
+    if rep.when != "call" or not (rep.failed or SCREENSHOTS_ALL):
         return
     drv = item.funcargs.get("driver") or item.funcargs.get("logged_in")
     if drv is None:
@@ -76,9 +82,6 @@ def pytest_runtest_makereport(item, call):
     shots.mkdir(parents=True, exist_ok=True)
     path = shots / f"{item.name}.png"
     drv.save_screenshot(str(path))
-    html = item.config.pluginmanager.getplugin("html")
-    if html:
-        extras = getattr(rep, "extras", [])
-        b64 = base64.b64encode(path.read_bytes()).decode()
-        extras.append(html.extras.png(b64))
-        rep.extras = extras
+    extras = getattr(rep, "extras", [])
+    extras.append(pytest_html.extras.png(base64.b64encode(path.read_bytes()).decode()))
+    rep.extras = extras
