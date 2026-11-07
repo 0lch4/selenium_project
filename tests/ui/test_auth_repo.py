@@ -1,7 +1,6 @@
 """TC-F01..TC-F06: registration, login and repository creation (Selenium)."""
 import pytest
 
-from pages.base_page import BasePage
 from pages.login_page import LoginPage, RegisterPage
 from pages.repo_pages import NewRepoPage, RepoPage
 from support import config

@@ -2,6 +2,7 @@ services:
   gitea:
     image: gitea/gitea:28.3.0
     container_name: gitea-sut
+    restart: unless-stopped
     environment:
       USER_UID: "1000"
       USER_GID: "1000"
