@@ -1,4 +1,4 @@
-"""TC-F01..TC-F06: rejestracja, logowanie i zakładanie repozytoriów (Selenium)."""
+"""TC-F01..TC-F06: registration, login and repository creation (Selenium)."""
 import pytest
 
 from pages.base_page import BasePage
@@ -26,7 +26,7 @@ def test_register_with_valid_data(driver, admin_api):
 
 @pytest.mark.tc("TC-F02")
 @pytest.mark.feature("F01")
-@pytest.mark.parametrize("length, accepted", [(7, False), (8, True)], ids=["7-znakow", "8-znakow"])
+@pytest.mark.parametrize("length, accepted", [(7, False), (8, True)], ids=["7-chars", "8-chars"])
 def test_register_password_length_boundary(driver, admin_api, length, accepted):
     username = unique("bva")
     password = ("Ab1!" * 3)[:length]

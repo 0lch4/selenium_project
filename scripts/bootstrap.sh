@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uruchamia Gitea i tworzy konto administratora używane przez testy.
+# Starts Gitea and creates the administrator account used by the tests.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -10,7 +10,7 @@ ADMIN_EMAIL="${GITEA_ADMIN_EMAIL:-admin@example.com}"
 docker compose up -d --wait
 
 if docker compose exec -T -u git gitea gitea admin user list --admin | grep -qw "$ADMIN_USER"; then
-  echo "Admin '$ADMIN_USER' już istnieje"
+  echo "Admin '$ADMIN_USER' already exists"
 else
   docker compose exec -T -u git gitea gitea admin user create \
     --admin --username "$ADMIN_USER" --password "$ADMIN_PASS" \

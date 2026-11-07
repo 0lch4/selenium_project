@@ -17,13 +17,13 @@ SCREENSHOTS_ALL = os.getenv("SCREENSHOTS", "failed") == "all"
 @pytest.fixture(scope="session")
 def admin_api() -> GiteaApi:
     api = GiteaApi(config.ADMIN_USER, config.ADMIN_PASS)
-    assert api.get("/version").ok, "Gitea niedostępna - uruchom scripts/bootstrap.sh"
+    assert api.get("/version").ok, "Gitea is not reachable - run scripts/bootstrap.sh"
     return api
 
 
 @pytest.fixture(scope="session")
 def user(admin_api):
-    """Wspólny użytkownik testowy na całą sesję (usuwany na końcu)."""
+    """Shared test user for the whole session (deleted at the end)."""
     u = admin_api.create_user()
     yield u
     admin_api.delete_user(u["username"])
@@ -31,7 +31,7 @@ def user(admin_api):
 
 @pytest.fixture
 def fresh_user(admin_api):
-    """Osobny użytkownik dla testów modyfikujących stan konta."""
+    """Dedicated user for tests that change account state."""
     u = admin_api.create_user()
     yield u
     admin_api.delete_user(u["username"])
@@ -67,9 +67,9 @@ def logged_in(driver, user):
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
-    """Zrzut ekranu testu UI dołączany do raportu HTML.
+    """Screenshot of a UI test attached to the HTML report.
 
-    Domyślnie tylko przy niepowodzeniu; SCREENSHOTS=all zapisuje zrzut stanu końcowego każdego testu.
+    By default only on failure; SCREENSHOTS=all saves the final state of every test.
     """
     outcome = yield
     rep = outcome.get_result()

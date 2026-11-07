@@ -15,7 +15,7 @@ class NewRepoPage(BasePage):
     def _set_checkbox(self, loc, value: bool) -> None:
         box = self.find(loc)
         if box.is_selected() != value:
-            # checkboxy Fomantic UI są ukryte - klikamy etykietę-rodzica
+            # Fomantic UI checkboxes are hidden - click the parent label
             box.find_element(By.XPATH, "..").click()
 
     def create(self, name: str, description: str = "", private: bool = False,

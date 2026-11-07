@@ -1,4 +1,4 @@
-"""Cienki klient REST API Gitea używany do przygotowania danych testowych i testów API."""
+"""Thin Gitea REST API client used for test data setup and API tests."""
 import uuid
 
 import requests
@@ -40,7 +40,7 @@ class GiteaApi:
     def delete(self, path, **kw):
         return self.request("DELETE", path, **kw)
 
-    # --- operacje administracyjne / przygotowanie danych ---
+    # --- administration / test data setup ---
 
     def create_user(self, username: str | None = None, password: str = "Test123!pass") -> dict:
         username = username or unique("user")

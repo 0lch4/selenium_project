@@ -1,7 +1,7 @@
-"""Kopiuje reprezentatywne zrzuty z wykonania testów do docs/report/img i robi zrzuty
-raportu pytest-html oraz przebiegu GitHub Actions (repozytorium publiczne - bez logowania).
+"""Copies representative test screenshots to docs/report/img and takes screenshots of the
+pytest-html report and a GitHub Actions run (public repository - no login needed).
 
-Uruchomienie (po `SCREENSHOTS=all pytest --html=reports/report.html ...`):
+Usage (after `SCREENSHOTS=all pytest --html=reports/report.html ...`):
     python scripts/capture_report_images.py [URL_RUNU_ACTIONS]
 """
 import shutil
@@ -18,7 +18,7 @@ SHOTS = ROOT / "reports" / "screenshots"
 IMG = ROOT / "docs" / "report" / "img"
 SELECTED = {
     "test_login_with_wrong_password_is_rejected.png": "tc_f04_login_error.png",
-    "test_register_password_length_boundary[7-znakow].png": "tc_f02_password_7.png",
+    "test_register_password_length_boundary[7-chars].png": "tc_f02_password_7.png",
     "test_create_repository_with_readme.png": "tc_f05_repo_readme.png",
     "test_create_issue_with_label.png": "tc_f07_issue_label.png",
     "test_create_and_merge_pull_request.png": "tc_f10_pr_merged.png",

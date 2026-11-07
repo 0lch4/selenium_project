@@ -1,7 +1,9 @@
-"""Etap 1 LLM-as-a-Judge: przygotowanie danych i zrzuty ekranu ocenianych widoków.
+"""LLM-as-a-Judge, step 1: seed demo data and take screenshots of the evaluated views.
 
-Uruchomienie:  python -m llm_judge.capture
-Wynik:         llm_judge/screenshots/<widok>.png + views.json (kontekst dla sędziego)
+Usage:   python -m llm_judge.capture
+Output:  llm_judge/screenshots/<view>.png + views.json (context for the judge)
+
+The seeded content and view descriptions are intentionally in Polish (a Polish web-shop project).
 """
 import base64
 import json
@@ -17,7 +19,7 @@ DEMO_USER, DEMO_PASS, DEMO_REPO = "judge-demo", "Judge123!pass", "web-shop"
 
 
 def seed(admin: GiteaApi) -> str:
-    """Tworzy stały, realistyczny zestaw danych, żeby zrzuty były powtarzalne."""
+    """Creates a fixed, realistic data set so that the screenshots are reproducible."""
     if admin.get(f"/users/{DEMO_USER}").status_code == 404:
         admin.create_user(DEMO_USER, DEMO_PASS)
     api = GiteaApi(DEMO_USER, DEMO_PASS)
@@ -65,7 +67,7 @@ def main() -> None:
     driver = make_driver("chrome")
     try:
         meta, logged_in = [], False
-        # najpierw widoki anonimowe, potem wymagające zalogowania
+        # anonymous views first, then the ones that need a session
         for v in sorted(views(full), key=lambda v: v["auth"]):
             if v["auth"] and not logged_in:
                 page = LoginPage(driver).open().login(DEMO_USER, DEMO_PASS)
@@ -77,7 +79,7 @@ def main() -> None:
             driver.save_screenshot(str(png))
             meta.append({**v, "url": config.BASE_URL + v["path"], "screenshot": png.name,
                          "viewport": list(config.WINDOW_SIZE)})
-            print(f"zapisano {png}")
+            print(f"saved {png}")
         (OUT / "views.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
     finally:
         driver.quit()
