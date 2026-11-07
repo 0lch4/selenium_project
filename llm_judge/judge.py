@@ -183,7 +183,13 @@ def write_summary(aggregates: list[dict], details: dict[str, list[JudgeVerdict]]
 
 def resolve_backend(choice: str) -> str:
     if choice == "auto":
-        return "api" if os.getenv("ANTHROPIC_API_KEY") else "cli"
+        key = os.getenv("ANTHROPIC_API_KEY", "")
+        # a Claude Code OAuth token (claude setup-token) is not accepted by the Messages API
+        if key.startswith("sk-ant-oat"):
+            os.environ.setdefault("CLAUDE_CODE_OAUTH_TOKEN", key)
+            del os.environ["ANTHROPIC_API_KEY"]
+            return "cli"
+        return "api" if key else "cli"
     return choice
 
 
