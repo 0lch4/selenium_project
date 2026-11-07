@@ -1,36 +1,34 @@
 Backend \texttt{cli}, model \texttt{claude-opus-5-5}, 3 przebiegi na widok. Komórki: mediana ($\pm$ rozrzut = max $-$ min z przebiegów).
 
 {\small
-\begin{longtable}{p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Wymiar} & \textbf{login} & \textbf{repo\_home} & \textbf{issues\_list} & \textbf{new\_issue} \\
 \midrule
-\endhead
-\texttt{visual\_hierarchy} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) \\
+\texttt{visual\_\allowbreak{}hierarchy} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) \\
 \texttt{consistency} & 4 ($\pm$1) & 4 ($\pm$0) & 5 ($\pm$0) & 5 ($\pm$1) \\
-\texttt{system\_status} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$1) \\
-\texttt{language\_clarity} & 4 ($\pm$0) & 3 ($\pm$1) & 4 ($\pm$0) & 4 ($\pm$1) \\
-\texttt{error\_prevention} & 3 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$1) \\
+\texttt{system\_\allowbreak{}status} & 4 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$1) \\
+\texttt{language\_\allowbreak{}clarity} & 4 ($\pm$0) & 3 ($\pm$1) & 4 ($\pm$0) & 4 ($\pm$1) \\
+\texttt{error\_\allowbreak{}prevention} & 3 ($\pm$0) & 4 ($\pm$0) & 4 ($\pm$0) & 3 ($\pm$1) \\
 \texttt{efficiency} & 4 ($\pm$1) & 5 ($\pm$0) & 4 ($\pm$1) & 3 ($\pm$1) \\
 \texttt{minimalism} & 4 ($\pm$0) & 4 ($\pm$0) & 5 ($\pm$1) & 4 ($\pm$0) \\
 \texttt{accessibility} & 3 ($\pm$0) & 3 ($\pm$0) & 3 ($\pm$0) & 3 ($\pm$0) \\
 \textbf{średnia median} & \textbf{3.75} & \textbf{3.88} & \textbf{4.12} & \textbf{3.62} \\
 \textbf{werdykt} & \textbf{PASS} & \textbf{PASS} & \textbf{PASS} & \textbf{PASS} \\
 \bottomrule
-\end{longtable}
+\end{tabular}\par\smallskip
 }
 {\renewcommand{\arraystretch}{1.2}
 {\small
-\begin{longtable}{p{\dimexpr 0.150\linewidth-2\tabcolsep\relax}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}p{\dimexpr 0.650\linewidth-2\tabcolsep\relax}}
+\par\smallskip\noindent\begin{tabular}{>{\raggedright\arraybackslash}p{\dimexpr 0.150\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.200\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.650\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Widok} & \textbf{Wymiar} & \textbf{Rekomendacja (wysoki priorytet, przebieg 1)} \\
 \midrule
-\endhead
 login & \texttt{accessibility} & Make unfocused input borders lighter so they reach at least 3:1 against the dark background. Darken the button blue, or check that its white text reaches 4.5:1. \\
 repo\_home & \texttt{accessibility} & Increase contrast for secondary text (commit messages, timestamps), counter badges and control borders in the dark theme to at least 4.5:1 for text and 3:1 for UI component boundaries. \\
 issues\_list & \texttt{accessibility} & Raise the contrast of secondary metadata text, the search placeholder and the white-on-green label text to at least 4.5:1. Enlarge the row checkboxes, or their hit area, to 24$\times$24px. \\
-new\_issue & \texttt{error\_prevention} & Add a persistent visible 'Title' label with a required asterisk. Disable 'Create Issue', or show an inline message, while the title is empty. \\
+new\_issue & \texttt{error\_\allowbreak{}prevention} & Add a persistent visible 'Title' label with a required asterisk. Disable 'Create Issue', or show an inline message, while the title is empty. \\
 new\_issue & \texttt{accessibility} & Increase the contrast of placeholder text, the sidebar empty-state text and the primary button (aim for at least 4.5:1). Enlarge the gear-icon targets to at least 24$\times$24px. \\
 \bottomrule
-\end{longtable}
+\end{tabular}\par\smallskip
 }}

@@ -25,24 +25,44 @@ def escape(text: str) -> str:
     return out
 
 
+BOLD_ON, BOLD_OFF = "\x01", "\x02"
+
+
 def inline(text: str) -> str:
+    # bold first: a bold span may contain inline code, so it cannot be handled per part
+    text = re.sub(r"\*\*(.+?)\*\*", BOLD_ON + r"\1" + BOLD_OFF, text)
     parts = re.split(r"(`[^`]+`)", text)
     res = []
     for p in parts:
         if p.startswith("`") and p.endswith("`"):
-            res.append(r"\texttt{" + escape(p[1:-1]) + "}")
+            # allow line breaks after slashes, underscores and :: so long paths and test ids fit
+            code = escape(p[1:-1]).replace("/", r"/\allowbreak{}").replace(r"\_", r"\_\allowbreak{}")
+            res.append(r"\texttt{" + code.replace("::", r"::\allowbreak{}") + "}")
         else:
             p = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", p)
-            p = escape(p)
-            p = re.sub(r"\*\*(.+?)\*\*", r"\\textbf{\1}", p)
-            res.append(p)
-    return "".join(res)
+            res.append(re.sub(r"\*([^*\s][^*]*?)\*", r"\\emph{\1}", escape(p)))
+    return "".join(res).replace(BOLD_ON, r"\textbf{").replace(BOLD_OFF, "}")
+
+
+# Column widths for tables whose content is uneven across columns, keyed by the header row
+WIDTHS = {
+    ("ID", "Funkcja", "Opis", "MoSCoW", "Uzasadnienie"): [0.07, 0.19, 0.34, 0.11, 0.29],
+    ("ID", "Tytuł", "Priorytet", "Technika", "Poziom", "Funkcje", "Automatyzacja", "Wynik"):
+        [0.08, 0.18, 0.09, 0.15, 0.11, 0.11, 0.14, 0.14],
+    ("ID", "Tytuł", "Wykryty przez", "Ważność", "Priorytet", "Status"): [0.1, 0.41, 0.13, 0.11, 0.12, 0.13],
+    ("ID", "Wynik", "Czas [s]", "Uwagi"): [0.12, 0.23, 0.09, 0.56],
+    ("Grupa", "Wykonania", "Zaliczone", "Niezaliczone", "Oczekiwane niepowodzenie (xfail)", "Czas [s]"):
+        [0.25, 0.13, 0.13, 0.15, 0.21, 0.13],
+}
+SHORT_TABLE = 12  # rows; longer tables use longtable and may break across pages
 
 
 def table(rows: list[list[str]], small: bool = False, widths: list[float] | None = None) -> str:
     """A longtable; `widths` are column width fractions (summing to 1)."""
     header, body = rows[0], rows[1:]
     n = len(header)
+    if widths is None:
+        widths = WIDTHS.get(tuple(h.strip() for h in header))
     if widths is None:
         if n == 2:
             widths = [0.27, 0.73]
@@ -53,12 +73,19 @@ def table(rows: list[list[str]], small: bool = False, widths: list[float] | None
         else:
             widths = [1 / n] * n
     # column width minus the inter-column padding so the table fits within the margins
-    spec = "".join(rf"p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}" for w in widths)
-    size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n > 8 else r"\small"
-    lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule",
-             " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\", r"\midrule", r"\endhead"]
-    lines += [" & ".join(inline(c) for c in r) + r" \\" for r in body]
-    lines += [r"\bottomrule", r"\end{longtable}", "}"]
+    # ragged-right cells: justified text in narrow columns leaves wide gaps between words
+    spec = "".join(rf">{{\raggedright\arraybackslash}}p{{\dimexpr {w:.3f}\linewidth-2\tabcolsep\relax}}"
+                   for w in widths)
+    size = r"\scriptsize\setlength{\tabcolsep}{3pt}" if small or n >= 8 else r"\small"
+    head = " & ".join(r"\textbf{" + inline(h) + "}" for h in header) + r" \\"
+    rows_tex = [" & ".join(inline(c) for c in r) + r" \\" for r in body]
+    if len(body) <= SHORT_TABLE:
+        # short tables never break: a longtable right after a heading at a page break prints
+        # its header above the heading
+        return "\n".join([r"{" + size, r"\par\smallskip\noindent\begin{tabular}{" + spec + "}", r"\toprule",
+                          head, r"\midrule", *rows_tex, r"\bottomrule", r"\end{tabular}\par\smallskip", "}"])
+    lines = [r"{" + size, r"\begin{longtable}{" + spec + "}", r"\toprule", head, r"\midrule", r"\endhead",
+             *rows_tex, r"\bottomrule", r"\end{longtable}", "}"]
     return "\n".join(lines)
 
 
@@ -67,34 +94,59 @@ def convert(md: str, skip_until: str | None = None, stop_at: str | None = None,
     lines = md.splitlines()
     if skip_until:
         lines = lines[next(i for i, l in enumerate(lines) if l.startswith(skip_until)):]
-    out, rows, para = [], [], []
+    out, rows, para, items = [], [], [], []
 
     def flush():
-        nonlocal rows, para
+        nonlocal rows, para, items
         if rows:
             out.append(table([r for r in rows if not re.fullmatch(r"[\s|:-]+", "|".join(r))]))
             rows = []
         if para:
             out.append(inline(" ".join(para)) + "\n")
             para = []
+        if items:
+            out.append("\\begin{itemize}\n" + "\n".join(r"\item " + inline(i) for i in items) +
+                       "\n\\end{itemize}\n")
+            items = []
 
     for line in lines:
         if stop_at and line.startswith(stop_at):
             break
         if line.startswith("|"):
-            if para:
+            if para or items:
                 flush()
             rows.append([c.strip() for c in line.strip().strip("|").split("|")])
             continue
-        flush()
+        if rows:
+            flush()
+        bullet = re.match(r"^\s*[-*] (.*)", line)
+        if bullet:
+            if para:
+                flush()
+            items.append(bullet.group(1).strip())
+            continue
+        if items and line.startswith("  ") and line.strip():
+            items[-1] += " " + line.strip()  # continuation line of a list item
+            continue
         m = re.match(r"^(#+) (.*)", line)
+        if m or not line.strip() or line.strip() == "---":
+            flush()
         if m:
             depth = len(m.group(1)) + level_offset
-            cmd = {2: r"\subsection", 3: r"\subsubsection", 4: r"\paragraph"}.get(depth, r"\paragraph")
-            out.append(cmd + "{" + inline(m.group(2)) + "}")
+            title = inline(m.group(2))
+            cmd = {2: r"\subsection", 3: r"\subsubsection"}.get(depth)
+            # keep a heading together with the start of its content; deeper levels become a bold
+            # line of their own (\paragraph is run-in and a following longtable jumps ahead of it)
+            # a heading directly after another one: reserve room for both so neither is orphaned
+            if out and out[-1].startswith(r"\needspace{8"):
+                out[-1] = out[-1].replace(r"\needspace{8", r"\needspace{16", 1)
+            out.append(r"\needspace{8\baselineskip}" +
+                       (cmd + "{" + title + "}" if cmd else r"\par\medskip\noindent\textbf{" + title + r"}\par"))
         elif line.strip() in ("", "---"):
             continue
         else:
+            if items:
+                flush()
             para.append(line.strip())
     flush()
     return "\n".join(out) + "\n"
