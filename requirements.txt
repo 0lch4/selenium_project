@@ -5,3 +5,4 @@ requests==2.32.3
 locust==2.32.4
 anthropic==2.6.0
 pydantic==2.10.4
+python-dotenv==1.0.1

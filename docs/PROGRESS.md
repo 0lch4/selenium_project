@@ -9,3 +9,4 @@
 - [x] CI/CD: GitHub Actions (funkcjonalne zielone; NF z continue-on-error przez DEF-02)
 - [x] Wykonanie: 38 wykonań – 36 passed, 1 failed (DEF-02), 1 xfail (DEF-01); zrzuty do raportu w docs/report/img
 - [x] Dokumentacja: funkcje MoSCoW, 22 przypadki testowe wg szablonu, macierz śledzenia
+- [x] LLM-as-a-Judge: cli backend (Claude Code) + .env config; real evaluation of 4 views x 3 runs – all PASS (3.75–4.0)
